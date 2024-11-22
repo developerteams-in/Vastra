@@ -40,70 +40,17 @@ class UserController extends BaseController
         $email = $this->request->getPost('email');
         $password = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
 
-        // Store the user data temporarily before OTP verification
+        // Store the user data
         $userModel->save([
             'username' => $name,
             'email'    => $email,
             'password' => $password,
-            'status'   => 'inactive', // User is inactive until OTP verification
+            'status'   => 'active', // User is now active
         ]);
 
-        // Store email in session for later use during OTP verification
-        session()->set('email', $email);
-
-        // Generate OTP (6-digit number)
-        $otp = rand(100000, 999999);
-        session()->set('otp', $otp);
-        session()->set('otp_time', time()); // Store OTP creation time
-
-        // Send OTP email
-        $this->sendOTPEmail($email, $otp);
-
-        // Redirect to OTP verification page
-        return redirect()->to('/verify-otp')->with('message', 'OTP sent to your email!');
+        session()->setFlashdata('success', 'Registration successful!');
+        return redirect()->to('/home'); // Redirect to home after registration
     }
 
-    private function sendOTPEmail($email, $otp)
-    {
-        $emailService = \Config\Services::email();
-        $emailService->setTo($email);
-        $emailService->setFrom('your-email@example.com', 'Your Site Name');
-        $emailService->setSubject('Your OTP for Registration');
-        $emailService->setMessage("Your OTP for registration is: $otp");
-
-        if (!$emailService->send()) {
-            session()->setFlashdata('error', 'Failed to send OTP email.');
-        }
-    }
-
-    public function verifyOTP()
-    {
-        helper(['form']);
-
-        if ($this->request->getMethod() == 'post') {
-            $otp = $this->request->getPost('otp');
-            $storedOtp = session()->get('otp');
-            $otpTime = session()->get('otp_time');
-            $currentTime = time();
-
-            // Check if OTP is valid and not expired (5 minutes expiry)
-            if ($otp == $storedOtp && ($currentTime - $otpTime) <= 300) {
-                $userModel = new UserModel();
-
-                // Get email from session and update status to active
-                $email = session()->get('email');
-                $userModel->where('email', $email)->set('status', 'active')->update();
-
-                session()->remove('otp'); // Clear OTP from session
-                session()->remove('email'); // Clear email from session
-                session()->setFlashdata('success', 'OTP verified successfully!');
-                return redirect()->to('/home'); // Redirect to home after successful OTP verification
-            } else {
-                session()->setFlashdata('error', 'Invalid or expired OTP.');
-                return redirect()->to('/verify-otp');
-            }
-        }
-
-        return view('verify_otp');
-    }
+    // OTP-related code removed
 }
