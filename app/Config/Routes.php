@@ -30,12 +30,23 @@ $routes->get('ladies', 'Ladies::showLadies');
 $routes->get('men', 'Men::showMen');
 $routes->get('kids', 'Kids::showKids');
 $routes->get('sport', 'Sport::showSport');
+$routes->get('user_list', 'User_list::showUser_list');
+// $routes->get('add_products', 'Add_products::showAdd_products');
+
 
 // Routes for user and admin dashboards
 $routes->get('/home', 'Home::index');
 $routes->get('/admin/dashboard', 'AdminController::dashboard'); // Admin dashboard route
 $routes->get('/user/dashboard', 'Home::dashboard'); // User dashboard route
 
+
+
+
+$routes->get('product/(:num)', 'ProductController::details/$1');
+$routes->get('/dashboard', 'DashboardController::dashboard');
+
+$routes->get('/add_products', 'ProductController::index'); // View add product page
+$routes->post('/addProduct', 'ProductController::addProduct'); // Handle product submission
 
 
 

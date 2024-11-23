@@ -62,6 +62,7 @@ class UserController extends BaseController
 
         return view('/edit_user', ['user' => $user]);
     }
+    
 }
 
     
