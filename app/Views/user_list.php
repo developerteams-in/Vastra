@@ -9,13 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js -->
 </head>
 <body>
-<?= $this->extend('layout') ?>
-<?= $this->section('content') ?>
 
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-12 col-md-3 col-lg-2 bg-light vh-50 d-flex flex-column p-3">
+        <div class="col-12 col-md-3 col-lg-2  vh-50 vh-md-100 d-flex flex-column p-3">
             <!-- Button to toggle sidebar on mobile -->
             <button class="btn btn-info d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-expanded="false" aria-controls="sidebarMenu">
                 Toggle Menu
@@ -24,9 +22,7 @@
             <div class="collapse d-md-block" id="sidebarMenu">
                 <h4 class="mb-4">Menu</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="/users/create" class="btn btn-success mb-3 fs-sm-5">Create New</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link active" href="/dashboard">Dashboard</a>
                     </li>
@@ -34,17 +30,23 @@
                         <a class="nav-link active" href="/user_list">User_List</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/add_products">Products</a>
+                    <a class="nav-link" href="/add_products">Product Entry</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-danger text-white mb-10" href="/logout">Exit</a>
+                    <li class="nav-item d-block d-sm-block d-md-none mt-5">
+                         <a class="nav-link btn btn-danger text-white" href="/logout">Exit</a>
+                     </li>
+
+                     <li class="nav-item d-none d-md-block position-fixed bottom-0  mb-5">
+                        <a class="nav-link btn btn-danger text-white" href="/logout">Exit</a>
                     </li>
                 </ul>
             </div>
         </div>
-
         <!-- Main Content -->
         <div class="col-12 col-md-9 col-lg-10 p-4">
+            
+                            <a href="/users/create" class="btn btn-success mb-3 fs-sm-5 ">Create New</a>
+                    
             <!-- Dashboard Header -->
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -85,7 +87,7 @@
     </div>
 </div>
 
-<?= $this->endSection() ?>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
