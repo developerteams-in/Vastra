@@ -24,10 +24,13 @@ class Home extends BaseController
     {
         return view('home');
     }
+
     public function admin()
     {
+        // This is where you can define the admin view
         return view('admin');
     }
+
     public function register()
     {
         return view('register');
@@ -55,6 +58,7 @@ class Home extends BaseController
             'username' => $name,
             'email'    => $email,
             'password' => $password,
+            'role'     => 'user' // Default role for new users
         ]);
 
         return redirect()->to('/register')->with('message', 'Registration successful!');
@@ -77,14 +81,18 @@ class Home extends BaseController
             // Set session data for the user
             session()->set('user', $user);
     
-            // Redirect to the homepage
-            return redirect()->to('/home'); // Change '/home' to '/' if your homepage is the root route.
+            // Check if the user is an admin and redirect accordingly
+            if ($user['role'] === 'admin') {
+                return redirect()->to('/dashboard'); // Admin dashboard
+            } else {
+                return redirect()->to('/home'); // Regular user dashboard
+            }
         } else {
             // Redirect back to the login page with an error message
             return redirect()->to('/login')->with('error', 'Invalid email or password');
         }
     }
-    
+
     public function dashboard()
     {
         $userModel = new UserModel();

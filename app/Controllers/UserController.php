@@ -51,6 +51,18 @@ class UserController extends BaseController
         session()->setFlashdata('success', 'Registration successful!');
         return redirect()->to('/home'); // Redirect to home after registration
     }
+    public function edit_user($id)
+    {
+        $userModel = new UserModel();
+        $user = $userModel->find($id);
 
-    // OTP-related code removed
+        if (!$user) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("User not found");
+        }
+
+        return view('/edit_user', ['user' => $user]);
+    }
 }
+
+    
+
