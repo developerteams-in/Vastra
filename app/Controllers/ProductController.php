@@ -12,6 +12,18 @@ class ProductController extends Controller
         // Load the add product form
         return view('add_products');
     }
+    public function listProducts()
+    {
+        $productModel = new \App\Models\ProductModel();
+    
+        // Fetch all products
+        $products = $productModel->findAll();
+    
+        // Pass products to the view
+        return view('product_list', ['products' => $products]);
+    }
+    
+
 
     public function addProduct()
     {

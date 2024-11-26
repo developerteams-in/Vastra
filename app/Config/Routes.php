@@ -51,3 +51,7 @@ $routes->post('/addProduct', 'ProductController::addProduct'); // Handle product
 
 
 
+$routes->get('/product_list', 'ProductController::listProducts');
+
+
+

@@ -32,6 +32,9 @@
                     <li class="nav-item">
                     <a class="nav-link" href="/add_products">Product Entry</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/product_list">Product List</a>
+                    </li>
                     <li class="nav-item d-block d-sm-block d-md-none mt-5">
                          <a class="nav-link btn btn-danger text-white" href="/logout">Exit</a>
                      </li>
