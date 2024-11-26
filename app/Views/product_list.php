@@ -73,9 +73,10 @@
                                         <td><?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?></td>
                                         <td><?= htmlspecialchars($product['productCategory'], ENT_QUOTES, 'UTF-8') ?></td>
                                         <td>
-                                            <img src="<?= htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8') ?>" 
-                                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                                 style="width: 100px; height: auto;">
+                                        <img src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>" 
+     alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+     style="width: 100px; height: auto;">
+
                                         </td>
                                         <td>
                                             <a href="/products/edit/<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8') ?>" 
