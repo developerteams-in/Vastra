@@ -74,12 +74,13 @@
                                         <td><?= htmlspecialchars($product['productCategory'], ENT_QUOTES, 'UTF-8') ?></td>
                                         <td>
                                         <img src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>" 
-     alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-     style="width: 100px; height: auto;">
+                                        alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                         style="width: 100px; height: auto;">
+
 
                                         </td>
                                         <td>
-                                            <a href="/products/edit/<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8') ?>" 
+                                            <a href="/products_list/edit/<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8') ?>" 
                                                class="btn btn-warning btn-sm">Edit</a>
                                             <a href="/products/delete/<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8') ?>" 
                                                class="btn btn-danger btn-sm"

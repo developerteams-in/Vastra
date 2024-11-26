@@ -12,17 +12,34 @@ class ProductController extends Controller
         // Load the add product form
         return view('add_products');
     }
-    public function listProducts()
+    
+
+    public function Products()
     {
-        $productModel = new \App\Models\ProductModel();
-    
-        // Fetch all products
-        $products = $productModel->findAll();
-    
-        // Pass products to the view
-        return view('product_list', ['products' => $products]);
+        $productModel = new ProductModel();
+
+        // Fetch products grouped by categories
+        $data = [
+            'newarrivals' => $productModel->where('productCategory', 'NewArrivals')->findAll(),
+            'kids' => $productModel->where('productCategory', 'KIDS')->findAll(),
+            'ladies' => $productModel->where('productCategory', 'LADIES')->findAll(),
+            'men' => $productModel->where('productCategory', 'MEN')->findAll(),
+            'sports' => $productModel->where('productCategory', 'SPORTS')->findAll(),
+        ];
+     
+        return view('/home', $data );
     }
-    
+
+    public function listProducts()
+{
+    $productModel = new ProductModel();
+
+    // Fetch all products from the database
+    $products = $productModel->findAll();
+
+    // Pass products data to the view
+    return view('product_list', ['products' => $products]);
+}
 
 
     public function addProduct()
@@ -36,19 +53,19 @@ class ProductController extends Controller
             'productDescription' => 'required|min_length[10]',
             'productPrice' => 'required|decimal',
             'productCategory' => 'required',
-            'productImage' => 'uploaded[productImage]|is_image[productImage]|max_size[productImage,2048]|mime_in[productImage,image/jpg,image/jpeg,image/png]',        ])) {
+            'productImage' => 'uploaded[productImage]|is_image[productImage]|max_size[productImage,1024]|mime_in[productImage,image/jpg,image/jpeg,image/png]',
+        ])) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
         // Handle image upload
         $file = $this->request->getFile('productImage');
-        if ($file->isValid() && !$file->hasMoved()) {
-            $newName = $file->getRandomName();
-            $file->move(ROOTPATH . 'public/uploads', $newName); // Save in public/uploads
-        } else {
-            return redirect()->back()->withInput()->with('error', 'Image upload failed');
-        }
-        
+if ($file->isValid() && !$file->hasMoved()) {
+    $newName = $file->getRandomName();
+    $file->move(ROOTPATH . 'public/uploads', $newName); // Save in public/uploads
+} else {
+    return redirect()->back()->withInput()->with('error', 'Image upload failed');
+}
 
         // Prepare product data
         $productData = [

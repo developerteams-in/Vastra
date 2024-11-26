@@ -83,6 +83,7 @@
                         <label for="productCategory" class="form-label">Product Category</label>
                         <select class="form-select" id="productCategory" name="productCategory" required>
                             <option value="" disabled selected>Select a category</option>
+                            <option value="newarrivals" <?= old('productCategory') === 'newarrivals' ? 'selected' : '' ?>>New Arrivals</option>
                             <option value="ladies" <?= old('productCategory') === 'ladies' ? 'selected' : '' ?>>Ladies</option>
                             <option value="men" <?= old('productCategory') === 'men' ? 'selected' : '' ?>>Men</option>
                             <option value="kids" <?= old('productCategory') === 'kids' ? 'selected' : '' ?>>Kids</option>

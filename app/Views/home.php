@@ -73,16 +73,23 @@
         <section class="py-4">
             <h2 class="text-left mb-4">NEW ARRIVALS</h2>
             <div class="scroll-container py-3">
-                <div class="product-cards d-flex gap-4">
-                    <!-- Product Card 1 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2024/08/24/05/02/woman-8993222_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
+         <div class="product-cards d-flex gap-4">
+                   <!-- Product Cards -->
+                   <?php if (!empty($newarrivals)): ?>
+                    <?php foreach ($newarrivals as $product): ?>
+                        <div class="card" style="width: 220px; height: 350px;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 style="object-fit: cover; height: 70%; width: 100%;">
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <div class="d-flex justify-content-center gap-1">
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
@@ -90,18 +97,36 @@
                                     <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2016/06/17/09/54/woman-1462985_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No products found in this category.</p>
+                <?php endif; ?>
+</div>
+</div>
+</section>
+<section class="py-4">
+<h2 class="text-left mb-4">KIDS</h2>
+<div class="scroll-container py-3">
+<div class="product-cards d-flex gap-4">
+<!-- Product Cards -->
+<!-- Product Cards -->
+<?php if (!empty($kids)): ?>
+                    <?php foreach ($kids as $product): ?>
+                        <div class="card" style="width: 220px; height: 350px;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 style="object-fit: cover; height: 70%; width: 100%;">
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <div class="d-flex justify-content-center gap-1">
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
@@ -109,290 +134,36 @@
                                     <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2022/02/04/12/49/woman-6992691_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
                             </div>
                         </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1515511624704-b8916dcc30ea?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTE1fHxmYXNoaW9ufGVufDB8fDB8fHww"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2020/10/23/16/50/woman-5679284_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 3 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2023/06/02/21/24/portrait-8036356_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 4 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2021/03/22/16/07/woman-6115105_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 5 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2019/08/07/07/05/woman-4390055_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="py-4">
-            <h2 class="text-left mb-4">KIDS</h2>
-            <div class="scroll-container py-3">
-                <div class="product-cards d-flex gap-4">
-                    <!-- Product Card 1 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2022/03/21/02/19/girl-7082139_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2021/04/12/17/31/child-6173408_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2021/08/11/11/54/kid-6538295_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2021/04/12/21/46/girl-6174060_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2021/08/13/13/11/kid-6543096_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 3 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2015/12/08/05/58/ice-skates-1082514_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 4 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2016/11/29/04/23/little-girl-1867297_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 5 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2021/09/13/05/34/kid-6620283_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No products found in this category.</p>
+                <?php endif; ?>
+</div>
+</div>
+</section>
         <section class="py-4">
             <h2 class="text-left mb-4">LADIES</h2>
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
-                    <!-- Product Card 1 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1563178406-4cdc2923acbc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGZhc2hpb24lMjBMQURJRVN8ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
+                   
+<!-- Product Cards -->
+<?php if (!empty($ladies)): ?>
+                    <?php foreach ($ladies as $product): ?>
+                        <div class="card" style="width: 220px; height: 350px;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 style="object-fit: cover; height: 70%; width: 100%;">
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <div class="d-flex justify-content-center gap-1">
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
@@ -400,157 +171,12 @@
                                     <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://plus.unsplash.com/premium_photo-1690034978688-dbdd03eab792?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGZhc2hpb24lMjBMQURJRVN8ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
                             </div>
                         </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                       <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1590770357970-ec6480b368c0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fGZhc2hpb24lMjBMQURJRVN8ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1608234808654-2a8875faa7fd?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGZhc2hpb24lMjBMQURJRVN8ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1593433824539-745a35f3f0b4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGZhc2hpb24lMjBMQURJRVN8ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1535979737658-bda006980c4f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZhc2hpb24lMjBMQURJRVN8ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 3 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZhc2hpb24lMjBMQURJRVN8ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 4 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1589156191108-c762ff4b96ab?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZmFzaGlvbiUyMExBRElFU3xlbnwwfHwwfHx8MA%3D%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 5 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1545291730-faff8ca1d4b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbiUyMExBRElFU3xlbnwwfHwwfHx8MA%3D%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No products found in this category.</p>
+                <?php endif; ?>
                 </div>
             </div>
         </section>
@@ -558,15 +184,22 @@
             <h2 class="text-left mb-4">MEN</h2>
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
-                    <!-- Product Card 1 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1618001789196-8b986847cd5e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzh8fGZhc2hpb24lMjBNRU58ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
+ <!-- Product Cards -->
+               <?php if (!empty($men)): ?>
+                    <?php foreach ($men as $product): ?>
+                        <div class="card" style="width: 220px; height: 350px;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 style="object-fit: cover; height: 70%; width: 100%;">
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <div class="d-flex justify-content-center gap-1">
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
@@ -574,138 +207,12 @@
                                     <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1634113755405-4c34d7abcbb7?q=80&w=3088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
                             </div>
                         </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1619603364904-c0498317e145?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fGZhc2hpb24lMjBNRU58ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://plus.unsplash.com/premium_photo-1727942421167-880ef66c0a68?q=80&w=3135&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 2 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1622519407650-3df9883f76a5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fGZhc2hpb24lMjBNRU58ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 3 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1611312449297-a69dc9c3987b?q=80&w=2216&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 4 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1618577326126-ef1b48c95ca2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGZhc2hpb24lMjBNRU58ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 5 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://images.unsplash.com/photo-1643858040625-3e806a9e5be3?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGZhc2hpb24lMjBNRU58ZW58MHx8MHx8fDA%3D"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No products found in this category.</p>
+                <?php endif; ?>
                 </div>
             </div>
         </section>

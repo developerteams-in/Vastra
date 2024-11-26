@@ -5,14 +5,14 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index'); 
 $routes->get('/register', 'Home::register');
 $routes->post('/register', 'Home::registerSubmit');
 $routes->get('/login', 'Home::login'); 
 $routes->post('/login', 'Home::loginSubmit');
 $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/logout', 'Home::logout');
-$routes->get('/home', 'Home::index'); // If your homepage is '/home'
+// $routes->get('/home', 'Home::index'); // If your homepage is '/home'
 
 
 $routes->get('/dashboard', 'Home::dashboard');
@@ -35,7 +35,7 @@ $routes->get('user_list', 'User_list::showUser_list');
 
 
 // Routes for user and admin dashboards
-$routes->get('/home', 'Home::index');
+// $routes->get('/home', 'Home::index');
 $routes->get('/admin/dashboard', 'AdminController::dashboard'); // Admin dashboard route
 $routes->get('/user/dashboard', 'Home::dashboard'); // User dashboard route
 
@@ -55,3 +55,4 @@ $routes->get('/product_list', 'ProductController::listProducts');
 
 
 
+$routes->get('/', 'ProductController::Products');

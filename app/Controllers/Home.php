@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\ProductModel;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 
@@ -20,11 +20,21 @@ class Home extends BaseController
         return redirect()->to('/login'); // Redirect to login page
     }
 
+    // public function index()
+    // {
+    //     return view('home');
+    // }
     public function index()
     {
-        return view('home');
-    }
+        // Initialize the ProductModel
+        $productModel = new ProductModel();
 
+        // Fetch all products from the database
+        $products = $productModel->findAll();
+
+        // Pass the products data to the view (home.php)
+        return view('/home', ['products' => $products]);
+    }
     public function admin()
     {
         // This is where you can define the admin view
@@ -85,7 +95,7 @@ class Home extends BaseController
             if ($user['role'] === 'admin') {
                 return redirect()->to('/dashboard'); // Admin dashboard
             } else {
-                return redirect()->to('/home'); // Regular user dashboard
+                return redirect()->to('/'); // Regular user dashboard
             }
         } else {
             // Redirect back to the login page with an error message
