@@ -28,7 +28,7 @@ $routes->get('/admin', 'Home::admin');
 // File: app/Config/Routes.php
 $routes->get('ladies', 'Ladies::showLadies');
 $routes->get('men', 'Men::showMen');
-$routes->get('kids', 'Kids::showKids');
+// $routes->get('kids', 'Kids::showKids');
 $routes->get('sport', 'Sport::showSport');
 $routes->get('user_list', 'User_list::showUser_list');
 // $routes->get('add_products', 'Add_products::showAdd_products');
@@ -56,3 +56,4 @@ $routes->get('/product_list', 'ProductController::listProducts');
 
 
 $routes->get('/', 'ProductController::Products');
+$routes->get('/kids', 'ProductController::kids'); //

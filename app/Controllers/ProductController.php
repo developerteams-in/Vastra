@@ -24,7 +24,7 @@ class ProductController extends Controller
             'kids' => $productModel->where('productCategory', 'KIDS')->findAll(),
             'ladies' => $productModel->where('productCategory', 'LADIES')->findAll(),
             'men' => $productModel->where('productCategory', 'MEN')->findAll(),
-            'sports' => $productModel->where('productCategory', 'SPORTS')->findAll(),
+            'sport' => $productModel->where('productCategory', 'SPORTS')->findAll(),
         ];
      
         return view('/home', $data );
@@ -83,5 +83,12 @@ if ($file->isValid() && !$file->hasMoved()) {
         } else {
             return redirect()->back()->withInput()->with('error', 'Failed to add product');
         }
+    }
+    public function kids()
+    {
+        $productModel = new ProductModel();
+        $kids = $productModel->where('productCategory', 'KIDS')->findAll(); // Fetch kids' products
+
+        return view('/kids', ['kids' => $kids]); // Pass the kids data to the view
     }
 }

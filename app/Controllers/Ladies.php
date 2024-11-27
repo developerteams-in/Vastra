@@ -1,11 +1,21 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\ProductModel;  // Import the ProductModel
+
 class Ladies extends BaseController
 {
     public function showLadies()
     {
-        // This will load the 'ladies.php' view file
-        return view('ladies');
+        // Instantiate the ProductModel
+        $productModel = new ProductModel();
+
+        // Fetch the men category products
+        $ladies = $productModel->where('productCategory', 'LADIES')->findAll();
+
+        // Pass the data to the view
+        return view('ladies', ['ladies' => $ladies]);
     }
 }
+
+

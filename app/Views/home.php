@@ -65,9 +65,6 @@
             <a href="#" class="btn btn-light btn-lg">Shop Now</a>
         </div>
     </header>
-
-
-    <!-- Featured Products -->
     <!-- Featured Products -->
     <div class="container bg-[#D0FFB2]">
         <section class="py-4">
@@ -213,8 +210,7 @@
                 <?php else: ?>
                     <p>No products found in this category.</p>
                 <?php endif; ?>
-                </div>
-            </div>
+             
         </section>
     </div>
     <h4 class="text-center py-3 mb-4">PARTNER</h4>

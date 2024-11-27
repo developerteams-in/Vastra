@@ -179,18 +179,25 @@
         <div class="row">
         <div class="container bg-[#D0FFB2]">
         <section class="py-4">
-            <h2 class="text-left mb-4">NEW ARRIVALS</h2>
+            <h2 class="text-left mb-4">MEN</h2>
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
-                    <!-- Product Card 1 -->
-                    <div class="card" style="width: 220px; height: 350px;">
-                        <img src="https://cdn.pixabay.com/photo/2022/12/17/12/03/fashion-7661610_1280.jpg"
-                            class="card-img-top img-fluid" alt="Modern Fit Cotton Shirt"
-                            style="object-fit: cover; height: 70%; width: 100%;">
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">Modern Fit Cotton Shirt</h5>
-                            <p class="card-text" style="font-size: 0.75rem;">₹1499</p>
-                            <div class="d-flex justify-content-center gap-1">
+ <!-- Product Cards -->
+               <?php if (!empty($men)): ?>
+                    <?php foreach ($men as $product): ?>
+                        <div class="card" style="width: 220px; height: 350px;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 style="object-fit: cover; height: 70%; width: 100%;">
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <div class="d-flex justify-content-center gap-1">
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
@@ -198,9 +205,15 @@
                                     <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
+                            </div>
                         </div>
-                    </div>
-
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No products found in this category.</p>
+                <?php endif; ?>
+             
+        </section>
+    </div>
                     <!-- Product Card 2 -->
                     <div class="card" style="width: 220px; height: 350px;">
                         <img src="https://images.unsplash.com/photo-1656695230389-01185e6fbff8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI5fHxtZW4lMjBmYXNoaW9ufGVufDB8fDB8fHww"
