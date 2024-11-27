@@ -91,4 +91,11 @@ if ($file->isValid() && !$file->hasMoved()) {
 
         return view('/kids', ['kids' => $kids]); // Pass the kids data to the view
     }
+    public function showSport()
+    {
+            $productModel = new ProductModel();
+            $sport = $productModel->where('productCategory', 'SPORTS')->findAll(); // Fetch kids' products
+            return view('/sport', ['sport' => $sport]); // Pass the kids data to the view
+        
+    }
 }

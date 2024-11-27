@@ -176,13 +176,13 @@
         <div class="row">
         <div class="container bg-[#D0FFB2]">
         <section class="py-4">
-            <h2 class="text-left mb-4">LADIES</h2>
+            <h2 class="text-left mb-4">SPORTS</h2>
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
                    
 <!-- Product Cards -->
 <?php if (!empty($sport)): ?>
-            <?php foreach ($sport as $product): ?>
+  <?php foreach ($sport as $product): ?>
                         <div class="card" style="width: 220px; height: 350px;">
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  

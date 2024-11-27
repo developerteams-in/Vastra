@@ -8,8 +8,8 @@ class Sport extends BaseController
     public function showSport()
     {
             $productModel = new ProductModel();
-            $sport = $productModel->where('productCategory', 'SPORTS')->findAll(); // Fetch kids' products
-            return view('/sport', ['sport' => $sport]); // Pass the kids data to the view
+            $sport = $productModel->where('productCategory', 'sport')->findAll(); // Fetch sport' products
+            return view('/sport', ['sport' => $sport]); // Pass the sport data to the view
         
     }
 }
