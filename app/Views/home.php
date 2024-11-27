@@ -70,7 +70,7 @@
         <section class="py-4">
             <h2 class="text-left mb-4">NEW ARRIVALS</h2>
             <div class="scroll-container py-3">
-         <div class="product-cards d-flex gap-4">
+               <div class="product-cards d-flex gap-4">
                    <!-- Product Cards -->
                    <?php if (!empty($newarrivals)): ?>
                     <?php foreach ($newarrivals as $product): ?>
