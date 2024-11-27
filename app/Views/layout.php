@@ -1,7 +1,6 @@
 <?php
     $user = session()->get('user');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Your existing styles */
         #searchForm {
             position: relative;
             top: 50%;
@@ -153,6 +153,28 @@
         .nav-item.dropdown:hover .dropdown-toggle {
             color: #dc3545; /* Change color of the dropdown button on hover */
         }
+
+        /* Mobile View Styles */
+        @media (max-width: 768px) {
+            /* Hide menu by default on mobile */
+            .navbar-collapse {
+                display: none;
+            }
+
+            .navbar-collapse.active {
+                display: block;
+            }
+
+            .navbar-toggler {
+                display: block;
+                cursor: pointer;
+            }
+
+            .navbar-toggler-icon {
+                background-color: transparent;
+                border: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -160,7 +182,7 @@
    <nav class="navbar navbar-expand-lg sticky-top bg-white">
         <div class="container">
             <a class="navbar-brand text-danger fw-bold fs-4" href="#">Vastra</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" id="menu-icon">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -201,9 +223,22 @@
             </div>
         </div>
     </nav>
+
     <div class="container mt-4">
         <?= $this->renderSection('content') ?>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Get elements
+        const menuIcon = document.getElementById('menu-icon');
+        const navbarCollapse = document.getElementById('navbarNav');
+
+        // Toggle the menu on mobile when the menu icon is clicked
+        menuIcon.addEventListener('click', () => {
+            navbarCollapse.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
