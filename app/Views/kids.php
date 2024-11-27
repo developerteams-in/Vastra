@@ -187,10 +187,13 @@
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                 style="object-fit: cover; height: 70%; width: 100%;">
+                                 style="object-fit: cover; height: 65%; width: 100%;">
                             <div class="card-body text-center p-2">
                                 <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
                                     <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
                                 </h5>
                                 <p class="card-text" style="font-size: 0.75rem;">
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
@@ -215,21 +218,22 @@
 </div>
 </div>
 
+<hr class="border-top border-1 border-success my-4 d-none d-sm-block">
+
   <!-- Partner Section -->
-  <h4 class="text-center py-3 mb-4">PARTNER</h4>
+  <h4 class="text-center  mb-4">PARTNER</h4>
     <div class="w-10 h-auto py-4 pb-5" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <img src="<?= base_url('images/logo.png') ?>" style="width: 75%;" alt="Logo">
+    <img src="<?= base_url('images/logo.png') ?>" style="width: 50%;" alt="Logo">
     </div>
   <!-- JavaScript -->
+  <hr class="border-top border-1 border-success my-4 d-none d-sm-block">
 
-  <header class="text-success text-center py-5"
-        style="background: url('https://images.unsplash.com/photo-1608825961330-74de870da2d0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjY5fHxtZW4lMjBmYXNoaW9ufGVufDB8fDB8fHww') no-repeat center center; background-size: cover; opacity: 0.7;">
-        <div class="container">
-        <h1 class="display-4 fw-bold" style="font-size:200px; float:left;opacity: 4; ">SHOP NOW</h1>
-            <p class="lead fw-bold" style="font-size:90px; float:right;opacity: 4;">|Explore Collections</p>
-        </div>
-    </header>
+<header class="text-center text-success  py-5 mb-12" style="height: 200px;">
+        <h1 class="display-4 fw-bold text-4xl sm:text-6xl md:text-8xl lg:text-9xl opacity-4 mb-4 sm:mb-0">SHOP NOW</h1>
+        <p class="lead fw-bold text-2xl sm:text-4xl md:text-6xl lg:text-7xl opacity-4">| Explore Collections</p>
+</header>
 
+<hr class="border-top border-1 border-success my-4 d-none d-sm-block">
 
     <!-- Footer -->
     <footer class="bg-white py-4">
