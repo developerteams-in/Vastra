@@ -94,8 +94,8 @@ if ($file->isValid() && !$file->hasMoved()) {
     public function showSport()
     {
             $productModel = new ProductModel();
-            $sport = $productModel->where('productCategory', 'SPORTS')->findAll(); // Fetch kids' products
-            return view('/sport', ['sport' => $sport]); // Pass the kids data to the view
+            $sport = $productModel->where('productCategory', 'SPORTS')->findAll(); // Fetch sport' products
+            return view('/sport', ['sport' => $sport]); // Pass the sport data to the view
         
     }
     public function edit($id)
