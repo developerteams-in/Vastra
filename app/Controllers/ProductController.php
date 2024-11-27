@@ -98,4 +98,61 @@ if ($file->isValid() && !$file->hasMoved()) {
             return view('/sport', ['sport' => $sport]); // Pass the kids data to the view
         
     }
+    public function edit($id)
+    {
+        // Load the product model
+        $productModel = new \App\Models\ProductModel();
+    
+        // Find the product by its ID
+        $product = $productModel->find($id);
+        if (!$product) {
+            // If the product does not exist, throw a 404 error
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Product with ID $id not found.");
+        }
+    
+        // Pass the product data to the view
+        return view('product_edit', ['product' => $product]);
+    }
+
+    public function update($id)
+{
+    $productModel = new ProductModel();
+
+    // Validate the form inputs
+    $validation = \Config\Services::validation();
+    if (!$this->validate([
+        'productName' => 'required|min_length[3]',
+        'productDescription' => 'required|min_length[10]',
+        'productPrice' => 'required|decimal',
+        'productCategory' => 'required',
+        'productImage' => 'is_image[productImage]|max_size[productImage,1024]|mime_in[productImage,image/jpg,image/jpeg,image/png]',
+    ])) {
+        return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+    }
+
+    // Handle the image upload
+    $file = $this->request->getFile('productImage');
+    if ($file && $file->isValid() && !$file->hasMoved()) {
+        $newName = $file->getRandomName();
+        $file->move(ROOTPATH . 'public/uploads', $newName);
+    } else {
+        $newName = $productModel->find($id)['productImage']; // Keep the old image
+    }
+
+    // Update the product data
+    $productData = [
+        'productName' => $this->request->getVar('productName'),
+        'productDescription' => $this->request->getVar('productDescription'),
+        'productPrice' => $this->request->getVar('productPrice'),
+        'productCategory' => $this->request->getVar('productCategory'),
+        'productImage' => $newName,
+    ];
+
+    if ($productModel->update($id, $productData)) {
+        return redirect()->to('/product_list')->with('message', 'Product updated successfully');
+    } else {
+        return redirect()->back()->withInput()->with('error', 'Failed to update product');
+    }
+}
+
 }

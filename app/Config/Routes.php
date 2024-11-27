@@ -59,3 +59,5 @@ $routes->get('/', 'ProductController::Products');
 $routes->get('/kids', 'ProductController::kids'); //
 
 
+$routes->get('products_list/edit/(:num)', 'ProductController::edit/$1');
+$routes->post('products_list/update/(:num)', 'ProductController::update/$1');

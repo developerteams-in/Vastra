@@ -60,8 +60,8 @@ Toggle Menu
 <?php endforeach; ?>
 </div>
 <?php endif; ?>
-
 <form action="/products_list/update/<?= $product['id'] ?>" method="post" enctype="multipart/form-data">
+
 <?= csrf_field() ?>
 
 <!-- Hidden field for product ID -->
