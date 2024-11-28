@@ -336,9 +336,6 @@
 <!-- popup code start here  -->
 
 <hr id="line-2">
-  <!-- Button to open the popup -->
-  <button class="open-popup-btn" onclick="togglePopup()">View Product</button>
-
   <div class="popup-overlay" id="popup">
     <div class="popup-content">
       <!-- Close Button -->
