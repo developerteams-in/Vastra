@@ -10,12 +10,12 @@ $routes->get('/register', 'Home::register');
 $routes->post('/register', 'Home::registerSubmit');
 $routes->get('/login', 'Home::login'); 
 $routes->post('/login', 'Home::loginSubmit');
-$routes->get('/dashboard', 'Home::dashboard');
+// $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/logout', 'Home::logout');
 // $routes->get('/home', 'Home::index'); // If your homepage is '/home'
 
 
-$routes->get('/dashboard', 'Home::dashboard');
+// $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/users/create', 'UserController::create');
 $routes->post('/users/store', 'UserController::store');
 $routes->get('/users/edit/(:num)', 'UserController::edit_user/$1');

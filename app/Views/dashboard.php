@@ -53,36 +53,44 @@
             </div>
 
             <!-- Stats Section -->
-            <div class="row mb-4">
-                <div class="col-md-3 mb-3">
+            <div class="row mb-5">
+                <div class="col-md-2 mb-2">
                     <div class="card text-center">
                         <div class="card-body">
                             <h5 class="card-title">Total Orders</h5>
-                            <p class="card-text"><? $totalOrders ?></p>
+                            <p class="card-text"><?php echo $totalOrders ?></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-3 mb-2">
                     <div class="card text-center">
                         <div class="card-body">
                             <h5 class="card-title">Pending Orders</h5>
-                            <p class="card-text"><? $pendingOrders ?></p>
+                            <p class="card-text"><?php echo $pendingOrders ?></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-3 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Completed  Orders</h5>
+                            <p class="card-text"><?php echo $completedOders ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-2">
                     <div class="card text-center">
                         <div class="card-body">
                             <h5 class="card-title">Total Sales</h5>
-                            <p class="card-text"><?$totalSales ?></p>
+                            <p class="card-text">₹<?php echo $totalSales ?></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-2 mb-2">
                     <div class="card text-center">
                         <div class="card-body">
                             <h5 class="card-title">Total Products</h5>
-                            <p class="card-text"><? $totalProducts ?></p>
+                            <p class="card-text"><?php echo $totalProducts ?></p>
                         </div>
                     </div>
                 </div>
