@@ -200,8 +200,8 @@
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1" onclick="togglePopup()"></i>Bag
+                                <a href="#" class="btn btn-sm"onclick="togglePopup()">
+                                    <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -240,8 +240,8 @@
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1" onclick="togglePopup()"></i>Bag
+                                <a href="#" class="btn btn-sm" onclick="togglePopup()">
+                                    <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -280,8 +280,8 @@
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1" onclick="togglePopup()"></i>Bag
+                                <a href="#" class="btn btn-sm" onclick="togglePopup()">
+                                    <i class="bi bi-bag p-1"></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -319,8 +319,8 @@
                                 <a href="#" class="btn btn-sm">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1 " onclick="togglePopup()"></i>Bag
+                                <a href="#" class="btn btn-sm" onclick="togglePopup()">
+                                    <i class="bi bi-bag p-1 "></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -455,7 +455,7 @@
             </div>
         </div>
     </footer>
-    
+
     <script>
     function togglePopup() {
       var popup = document.getElementById('popup');
