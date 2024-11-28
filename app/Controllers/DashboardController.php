@@ -28,6 +28,7 @@ class DashboardController extends BaseController
 // exit();
     // Fetching pending orders count
     $pendingOrders = $this->orderModel->where('status', 'pending')->countAllResults();
+        // Fetching completed orders count
     $completedOders = $this->orderModel->where('status', 'completed')->countAllResults();
 
     // Fetching total sales (sum of total_price in orders)
