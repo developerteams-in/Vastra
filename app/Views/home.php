@@ -10,6 +10,113 @@
     <title>Vastra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- popup code start here  -->
+ <style>
+     #line-2 {
+      margin: 20px 0;
+      border: 1px solid #ddd;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    /* Style for the close button */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: black;
+      color: white;
+      padding: 5px 10px;
+      font-size: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+
+    .close-btn:hover {
+      background-color: #333;
+    }
+
+    .product-info h2, .product-info p {
+      margin: 10px 0;
+    }
+
+    .product-images {
+      display: flex;
+      gap: 10px;
+    }
+
+    .product-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .product-sizes button {
+      padding: 8px 12px;
+      margin: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .product-sizes button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .add-to-bag {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-to-bag:hover {
+      background-color: #218838;
+    }
+
+    .open-popup-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 20px;
+    }
+
+    .open-popup-btn:hover {
+      background-color: #0056b3;
+    }
+    </style>
+ <!-- popup code end here  -->
     <style>
  .scroll-container {
     width: 100%;
@@ -94,7 +201,7 @@
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
+                                    <i class="bi bi-bag p-1" onclick="togglePopup()"></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -134,7 +241,7 @@
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
+                                    <i class="bi bi-bag p-1" onclick="togglePopup()"></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -174,7 +281,7 @@
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
+                                    <i class="bi bi-bag p-1" onclick="togglePopup()"></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -213,7 +320,7 @@
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
+                                    <i class="bi bi-bag p-1 " onclick="togglePopup()"></i>Bag
                                 </a>
                             </div>
                             </div>
@@ -225,6 +332,52 @@
              
         </section>
     </div>
+
+<!-- popup code start here  -->
+
+<hr id="line-2">
+  <!-- Button to open the popup -->
+  <button class="open-popup-btn" onclick="togglePopup()">View Product</button>
+
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <!-- Close Button -->
+      <span class="close-btn" onclick="togglePopup()"><i class="bi bi-x"></i></span>
+      <div class="product-info">
+        <h2 class="product-name">Stylish Jacket</h2>
+        <p class="product-prices"> ₹1499</p>
+        <p class="product-color">Navy Blue</p>
+
+        <div class="product-images">
+          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200"
+               alt="Product Image 1" class="product-image">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200"
+               alt="Product Image 2" class="product-image">
+          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"
+               alt="Product Image 3" class="product-image">
+        </div>
+
+        <div class="product-sizes">
+          <h5>Sizes:</h5>
+          <button class="size-btn">XS</button>
+          <button class="size-btn">S</button>
+          <button class="size-btn">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+        </div>
+
+        <button class="add-to-bag">
+          Add Bag <i class="fas fa-shopping-bag"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+ <!-- popup code end here  -->
+
+
+
+
+    
     <hr class="border-top border-1 border-success my-4 d-none d-sm-block">
 
 <!-- Partner Section -->
@@ -302,7 +455,14 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+    function togglePopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+    }
+  </script>
+
 </body>
 
 </html>
