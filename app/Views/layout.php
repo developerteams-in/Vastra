@@ -212,7 +212,7 @@
                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-heart p-1"></i>Favorites</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-heart p-1"></i>Favorites</a></li>
                         <li class="nav-item"><a class="nav-link" href="#" onclick="togglePopup()"> <i class="bi bi-bag p-1"></i>Bag</a></li>
                     <?php else: ?>
                         <!-- If no user is logged in, show register and login options -->

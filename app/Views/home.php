@@ -10,7 +10,112 @@
     <title>Vastra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    #line-separator {
+      margin: 20px 0;
+      border: 1px solid #ddd;
+    }
 
+    .overlay-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-container {
+      background: white;
+      padding: 20px;
+      width: 80%;
+      max-width: 900px;
+      height:600px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    /* Style for the close button */
+    .close-btn-popup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: black;
+      color: white;
+      padding: 5px 10px;
+      font-size: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+
+    .close-btn-popup:hover {
+      background-color: #333;
+    }
+
+    .product-details h2, .product-details p {
+      margin: 10px 0;
+    }
+
+    .image-gallery {
+      display: flex;
+      gap: 10px;
+    }
+
+    .product-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .size-buttons button {
+      padding: 8px 12px;
+      margin: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .size-buttons button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .add-to-cart-btn {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #218838;
+    }
+
+    .open-popup-btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 20px;
+    }
+
+    .open-popup-btn:hover {
+      background-color: #0056b3;
+    }
+</style>
+  </style>
 <!-- popup code start here  -->
  <style>
      #line-2 {
@@ -197,7 +302,7 @@
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
                                 <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
+                                <a href="#" class="btn btn-sm"onclick="toggleVisibility('favourites-popup')">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm"onclick="togglePopup()">
@@ -238,7 +343,7 @@
                                 </p>
                                 <div class="d-flex justify-content-center gap-1">
                                 <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
+                                    <i class="bi bi-heart p-1"onclick="toggleVisibility('favourites-popup')"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm" onclick="togglePopup()">
                                     <i class="bi bi-bag p-1"></i>Bag
@@ -277,7 +382,7 @@
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
                                 <div class="d-flex justify-content-center ">
-                                <a href="#" class="btn btn-sm">
+                                <a href="#" class="btn btn-sm"onclick="toggleVisibility('favourites-popup')">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm" onclick="togglePopup()">
@@ -316,7 +421,7 @@
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
                                 <div class="d-flex justify-content-center">
-                                <a href="#" class="btn btn-sm">
+                                <a href="#" class="btn btn-sm"onclick="toggleVisibility('favourites-popup')">
                                     <i class="bi bi-heart p-1"></i>Favorites
                                 </a>
                                 <a href="#" class="btn btn-sm" onclick="togglePopup()">
@@ -371,6 +476,69 @@
   </div>
  <!-- popup code end here  -->
 
+<!-- <popup favourites code start here  -->
+<hr id="line-separator">
+  <!-- Favourites Popup -->
+  <div class="overlay-popup" id="favourites-popup">
+    <div class="popup-container">
+      <!-- Close Button -->
+      <span class="close-btn-popup" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-x"></i></span>
+      <div class="product-details">
+      <section class="py-4">
+      <h2 class="product-name text-center">Favourite</h2>
+        <p class="product-color">Black</p>
+            <div class="scroll-container py-3">
+                <div class="product-cards d-flex gap-4">
+                   
+<!-- Product Cards -->
+<?php if (!empty($ladies)): ?>
+                    <?php foreach ($ladies as $product): ?>
+                        <div class="card" style="width: 210px; height:320px;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                  style="object-fit: cover; height: 65%; width: 100%;">
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <div class="d-flex justify-content-center gap-2 " style="font-size:4px">
+                                    <a href="#" class="btn btn-sm text-white bg-danger " onclick="togglePopup()"style="font-size:10px">
+                                    <i class="bi bi-bag-check"></i>  CheckOut 
+                                    </a>
+                                <a href="#" class="btn btn-sm text-white bg-danger "onclick="toggleVisibility('favourites-popup')"style="font-size:10px">
+                                <i class="bi bi-cart2"></i> Buy Now
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No products found in this category.</p>
+                <?php endif; ?>
+                </div>
+            </div>
+        </section>
+      
+
+        <div class="size-buttons">
+          <h5>Sizes:</h5>
+          <button class="size-btn">XS</button>
+          <button class="size-btn">S</button>
+          <button class="size-btn">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <popup favourites code end here  -->
 
 
 
@@ -452,14 +620,20 @@
             </div>
         </div>
     </footer>
-
     <script>
+        // Function to bag popup 
     function togglePopup() {
       var popup = document.getElementById('popup');
       popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
     }
   </script>
-
+<script>
+    // Function to Favourites popup visibility
+    function toggleVisibility(popupId) {
+      var popup = document.getElementById(popupId);
+      popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+    }
+  </script>
 </body>
 
 </html>
