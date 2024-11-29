@@ -32,7 +32,7 @@
       background: white;
       padding: 20px;
       width: 80%;
-      max-width: 900px;
+      max-width: 800px;
       height:600px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -139,7 +139,7 @@
       background: white;
       padding: 20px;
       width: 80%;
-      max-width: 500px;
+      max-width: 800px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       position: relative;
@@ -268,15 +268,26 @@
 <body>
 
     <!-- Hero Section -->
-    <!-- Hero Section -->
-    <header class="text-white text-center py-5"
-        style="background: url('https://plus.unsplash.com/premium_photo-1695575593603-1f42ca27bb6d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGZhc2hpb258ZW58MHx8MHx8fDA%3D') no-repeat center center; background-size: cover;">
-        <div class="container">
-            <h1 class="display-4">Discover Our Latest Styles</h1>
+    <header class="text-white text-center py-5 position-relative top-0 " style="height: 60vh; overflow: hidden;">
+    <!-- Video Background -->
+    <video autoplay loop muted playsinline 
+        class="absolute top-0 left-0 w-full h-full object-cover" style="opacity:0.7">
+        <source src="<?= base_url('videos/back.mp4'); ?>" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Content (Text and Button on Video) -->
+    <div class="container position-absolute text-center" style="z-index:99; top:25%;">
+        <!-- Optional Dark Overlay for Better Contrast -->
+        <div class=" p-5 rounded-md">
+            <h1 class="display-4" style="z-index:-1;">Discover Our Latest Styles</h1>
             <p class="lead">Fresh Looks for Every Occasion</p>
-            <a href="#" class="btn btn-light btn-lg">Shop Now</a>
+            <a href="#" class="btn btn-light btn-lg"style="z-index:0;">Shop Now</a>
         </div>
-    </header>
+    </div>
+</header>
+
+
     <!-- Featured Products -->
     <div class="container bg-[#D0FFB2]">
         <section class="py-4">
@@ -437,39 +448,54 @@
              
         </section>
     </div>
-
 <!-- popup code start here  -->
 
 <hr id="line-2">
-  <div class="popup-overlay" id="popup">
+  <div class="popup-overlay" id="popup" style="z-index:999;">
     <div class="popup-content">
       <!-- Close Button -->
       <span class="close-btn" onclick="togglePopup()"><i class="bi bi-x"></i></span>
       <div class="product-info">
-        <h2 class="product-name">Stylish Jacket</h2>
-        <p class="product-prices"> ₹1499</p>
-        <p class="product-color">Navy Blue</p>
-
-        <div class="product-images">
-          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200"
-               alt="Product Image 1" class="product-image">
-          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=200"
-               alt="Product Image 2" class="product-image">
-          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"
-               alt="Product Image 3" class="product-image">
-        </div>
-
-        <div class="product-sizes">
-          <h5>Sizes:</h5>
-          <button class="size-btn">XS</button>
-          <button class="size-btn">S</button>
-          <button class="size-btn">M</button>
-          <button class="size-btn">L</button>
-          <button class="size-btn">XL</button>
-        </div>
-
+      <section class="py-4">
+            <h2 class="text-center mb-4">Buy Now</h2>
+            <div class="scroll-container py-3">
+                <div class="product-cards d-flex gap-4">
+ <!-- Product Cards -->
+               <?php if (!empty($men)): ?>
+                    <?php foreach ($men as $product): ?>
+                        <div class="card" style="width: 220px; height: 350px;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 style="object-fit: cover; height: 65%; width: 100%;">
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.6rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <div class="d-flex justify-content-center gap-2 " style="font-size:4px">
+                                    <a href="#" class="btn btn-sm text-white bg-danger " onclick="togglePopup()"style="font-size:10px">
+                                    <i class="bi bi-bag-check"></i>  CheckOut 
+                                    </a>
+                                <a href="#" class="btn btn-sm text-white bg-danger "onclick="toggleVisibility('favourites-popup')"style="font-size:10px text-center">
+                                <i class="bi bi-cart2"></i> Buy Now
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>No products found in this category.</p>
+                <?php endif; ?>
+             
+        </section>
         <button class="add-to-bag">
-          Add Bag <i class="fas fa-shopping-bag"></i>
+          Buy Now <i class="fas fa-shopping-bag"></i>
         </button>
       </div>
     </div>
@@ -479,14 +505,13 @@
 <!-- <popup favourites code start here  -->
 <hr id="line-separator">
   <!-- Favourites Popup -->
-  <div class="overlay-popup" id="favourites-popup">
+  <div class="overlay-popup" id="favourites-popup"style="z-index:999;">
     <div class="popup-container">
       <!-- Close Button -->
       <span class="close-btn-popup" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-x"></i></span>
       <div class="product-details">
       <section class="py-4">
       <h2 class="product-name text-center">Favourite</h2>
-        <p class="product-color">Black</p>
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
                    
@@ -526,7 +551,7 @@
             </div>
         </section>
       
-
+<!-- 
         <div class="size-buttons">
           <h5>Sizes:</h5>
           <button class="size-btn">XS</button>
@@ -534,7 +559,7 @@
           <button class="size-btn">M</button>
           <button class="size-btn">L</button>
           <button class="size-btn">XL</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
