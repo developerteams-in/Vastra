@@ -155,4 +155,17 @@ if ($file->isValid() && !$file->hasMoved()) {
     }
 }
 
+public function getProduct($id)
+{
+    $productModel = new \App\Models\ProductModel();
+    $product = $productModel->find($id);
+
+    if ($product) {
+        return $this->response->setJSON($product);
+    } else {
+        return $this->response->setJSON(['error' => 'Product not found'], 404);
+    }
+}
+
+
 }

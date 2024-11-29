@@ -312,14 +312,6 @@
                                 <p class="card-text" style="font-size: 0.75rem;">
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
-                                <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm"onclick="toggleVisibility('favourites-popup')">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm"onclick="togglePopup()">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -352,14 +344,6 @@
                                 <p class="card-text" style="font-size: 0.75rem;">
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
-                                <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"onclick="toggleVisibility('favourites-popup')"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm" onclick="togglePopup()">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -392,14 +376,7 @@
                                 <p class="card-text" style="font-size: 0.75rem;">
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
-                                <div class="d-flex justify-content-center ">
-                                <a href="#" class="btn btn-sm"onclick="toggleVisibility('favourites-popup')">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm" onclick="togglePopup()">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
+                                
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -431,14 +408,6 @@
                                 <p class="card-text" style="font-size: 0.75rem;">
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
-                                <div class="d-flex justify-content-center">
-                                <a href="#" class="btn btn-sm"onclick="toggleVisibility('favourites-popup')">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm" onclick="togglePopup()">
-                                    <i class="bi bi-bag p-1 "></i>Bag
-                                </a>
-                            </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -448,126 +417,7 @@
              
         </section>
     </div>
-<!-- popup code start here  -->
 
-<hr id="line-2">
-  <div class="popup-overlay" id="popup" style="z-index:999;">
-    <div class="popup-content">
-      <!-- Close Button -->
-      <span class="close-btn" onclick="togglePopup()"><i class="bi bi-x"></i></span>
-      <div class="product-info">
-      <section class="py-4">
-            <h2 class="text-center mb-4">Buy Now</h2>
-            <div class="scroll-container py-3">
-                <div class="product-cards d-flex gap-4">
- <!-- Product Cards -->
-               <?php if (!empty($men)): ?>
-                    <?php foreach ($men as $product): ?>
-                        <div class="card" style="width: 220px; height: 350px;">
-                            <img class="card-img-top img-fluid" 
-                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                 style="object-fit: cover; height: 65%; width: 100%;">
-                            <div class="card-body text-center p-2">
-                                <h5 class="card-title text-truncate" style="font-size: 0.6rem;">
-                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <p class="card-text" style="font-size: 0.75rem;">
-                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                                </p>
-                                <div class="d-flex justify-content-center gap-2 " style="font-size:4px">
-                                    <a href="#" class="btn btn-sm text-white bg-danger " onclick="togglePopup()"style="font-size:10px">
-                                    <i class="bi bi-bag-check"></i>  CheckOut 
-                                    </a>
-                                <a href="#" class="btn btn-sm text-white bg-danger "onclick="toggleVisibility('favourites-popup')"style="font-size:10px text-center">
-                                <i class="bi bi-cart2"></i> Buy Now
-                                </a>
-                            </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No products found in this category.</p>
-                <?php endif; ?>
-             
-        </section>
-        <button class="add-to-bag">
-          Buy Now <i class="fas fa-shopping-bag"></i>
-        </button>
-      </div>
-    </div>
-  </div>
- <!-- popup code end here  -->
-
-<!-- <popup favourites code start here  -->
-<hr id="line-separator">
-  <!-- Favourites Popup -->
-  <div class="overlay-popup" id="favourites-popup"style="z-index:999;">
-    <div class="popup-container">
-      <!-- Close Button -->
-      <span class="close-btn-popup" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-x"></i></span>
-      <div class="product-details">
-      <section class="py-4">
-      <h2 class="product-name text-center">Favourite</h2>
-            <div class="scroll-container py-3">
-                <div class="product-cards d-flex gap-4">
-                   
-<!-- Product Cards -->
-<?php if (!empty($ladies)): ?>
-                    <?php foreach ($ladies as $product): ?>
-                        <div class="card" style="width: 210px; height:320px;">
-                            <img class="card-img-top img-fluid" 
-                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                  style="object-fit: cover; height: 65%; width: 100%;">
-                            <div class="card-body text-center p-2">
-                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
-                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <p class="card-text" style="font-size: 0.75rem;">
-                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                                </p>
-                                <div class="d-flex justify-content-center gap-2 " style="font-size:4px">
-                                    <a href="#" class="btn btn-sm text-white bg-danger " onclick="togglePopup()"style="font-size:10px">
-                                    <i class="bi bi-bag-check"></i>  CheckOut 
-                                    </a>
-                                <a href="#" class="btn btn-sm text-white bg-danger "onclick="toggleVisibility('favourites-popup')"style="font-size:10px">
-                                <i class="bi bi-cart2"></i> Buy Now
-                                </a>
-                            </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No products found in this category.</p>
-                <?php endif; ?>
-                </div>
-            </div>
-        </section>
-      
-<!-- 
-        <div class="size-buttons">
-          <h5>Sizes:</h5>
-          <button class="size-btn">XS</button>
-          <button class="size-btn">S</button>
-          <button class="size-btn">M</button>
-          <button class="size-btn">L</button>
-          <button class="size-btn">XL</button>
-        </div> -->
-      </div>
-    </div>
-  </div>
-  <!-- <popup favourites code end here  -->
-
-
-
-    
     <hr class="border-top border-1 border-success my-4 d-none d-sm-block">
 
 <!-- Partner Section -->
@@ -645,20 +495,7 @@
             </div>
         </div>
     </footer>
-    <script>
-        // Function to bag popup 
-    function togglePopup() {
-      var popup = document.getElementById('popup');
-      popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
-    }
-  </script>
-<script>
-    // Function to Favourites popup visibility
-    function toggleVisibility(popupId) {
-      var popup = document.getElementById(popupId);
-      popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
-    }
-  </script>
+   
 </body>
 
 </html>
