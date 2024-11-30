@@ -28,6 +28,11 @@
     display: flex;  /* Flexbox ensures cards are aligned horizontally */
     gap: 20px;  /* Space between product cards */
 }
+a{
+    color:black !important;
+    text-decoration: none;
+    list-style: none;
+}
 .card {
     flex: 0 0 auto;  /* Prevent cards from stretching */
     width: 220px;
@@ -182,6 +187,7 @@
 <!-- Product Cards -->
 <?php if (!empty($ladies)): ?>
                     <?php foreach ($ladies as $product): ?>
+                      <a href="<?= site_url('product_view/'. $product['id'])?>">
                         <div class="card" style="width: 220px; height: 350px;">
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
@@ -199,6 +205,7 @@
                                 </p>
                             </div>
                         </div>
+                    </a>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No products found in this category.</p>

@@ -333,7 +333,7 @@ a{
 <!-- Product Cards -->
 <?php if (!empty($kids)): ?>
                     <?php foreach ($kids as $product): ?>
-                        <a href="/product_view">
+                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
