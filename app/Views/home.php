@@ -15,7 +15,11 @@
       margin: 20px 0;
       border: 1px solid #ddd;
     }
-
+a{
+    color:black !important;
+    text-decoration: none;
+    list-style: none;
+}
     .overlay-popup {
       display: none;
       position: fixed;
@@ -282,12 +286,10 @@
         <div class=" p-5 rounded-md">
             <h1 class="display-4" style="z-index:-1;">Discover Our Latest Styles</h1>
             <p class="lead">Fresh Looks for Every Occasion</p>
-            <a href="#" class="btn btn-light btn-lg"style="z-index:0;">Shop Now</a>
+            <a href="/product_view" class="btn btn-light btn-lg"style="z-index:0;">Shop Now</a>
         </div>
     </div>
 </header>
-
-
     <!-- Featured Products -->
     <div class="container bg-[#D0FFB2]">
         <section class="py-4">
@@ -297,23 +299,25 @@
                    <!-- Product Cards -->
                    <?php if (!empty($newarrivals)): ?>
                     <?php foreach ($newarrivals as $product): ?>
+                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
                                  style="object-fit: cover; height: 65%; width: 100%;">
-                            <div class="card-body text-center p-2">
-                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
-                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <p class="card-text" style="font-size: 0.75rem;">
-                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                                </p>
-                            </div>
-                        </div>
+                                 <div class="card-body text-center p-2">
+                                     <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                         <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                        </h5>
+                                        <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                            <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                                        </h5>
+                                        <p class="card-text" style="font-size: 0.75rem;">
+                                            ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No products found in this category.</p>
@@ -329,6 +333,7 @@
 <!-- Product Cards -->
 <?php if (!empty($kids)): ?>
                     <?php foreach ($kids as $product): ?>
+                        <a href="/product_view">
                         <div class="card" style="width: 220px; height: 350px;">
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
@@ -346,6 +351,7 @@
                                 </p>
                             </div>
                         </div>
+                        </a>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No products found in this category.</p>
@@ -358,9 +364,10 @@
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
                    
-<!-- Product Cards -->
-<?php if (!empty($ladies)): ?>
+            <!-- Product Cards -->
+             <?php if (!empty($ladies)): ?>
                     <?php foreach ($ladies as $product): ?>
+                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
@@ -379,6 +386,7 @@
                                 
                             </div>
                         </div>
+                        </a>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No products found in this category.</p>
@@ -393,6 +401,7 @@
  <!-- Product Cards -->
                <?php if (!empty($men)): ?>
                     <?php foreach ($men as $product): ?>
+                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
@@ -410,6 +419,7 @@
                                 </p>
                             </div>
                         </div>
+                        </a>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No products found in this category.</p>

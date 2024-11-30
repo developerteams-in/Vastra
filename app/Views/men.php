@@ -200,14 +200,6 @@
                                 <p class="card-text" style="font-size: 0.75rem;">
                                     ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
-                                <div class="d-flex justify-content-center gap-1">
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-heart p-1"></i>Favorites
-                                </a>
-                                <a href="#" class="btn btn-sm">
-                                    <i class="bi bi-bag p-1"></i>Bag
-                                </a>
-                            </div>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -62,3 +62,7 @@ $routes->get('/kids', 'ProductController::kids'); //
 
 $routes->get('products_list/edit/(:num)', 'ProductController::edit/$1');
 $routes->post('products_list/update/(:num)', 'ProductController::update/$1');
+
+
+$routes->get('product_view/(:num)', 'Product_view::showProduct_view/$1');
+$routes->get('product_view', 'Product_view::showProduct_view/$1');
