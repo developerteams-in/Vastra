@@ -66,3 +66,9 @@ $routes->post('products_list/update/(:num)', 'ProductController::update/$1');
 
 $routes->get('product_view/(:num)', 'Product_view::showProduct_view/$1');
 $routes->get('product_view', 'Product_view::showProduct_view/$1');
+
+
+$routes->get('/cart', 'CartController::index');               // Cart page
+$routes->get('/cart/remove/(:num)', 'CartController::remove/$1');  // Remove item from cart
+$routes->post('/cart/updateQuantity', 'CartController::updateQuantity'); // Update cart item quantity
+$routes->get('/cart/checkout', 'CartController::checkout');    // Checkout page

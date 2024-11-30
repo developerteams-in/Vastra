@@ -83,7 +83,7 @@
                         <input type="hidden" name="product_id" value="<?= esc($product['id']) ?>">
                         <input type="hidden" name="product_name" value="<?= esc($product['productName']) ?>">
                         <input type="hidden" name="product_price" value="<?= esc($product['productPrice']) ?>">
-                        <button type="button" class="btn btn-success"onclick="window.location.href = '<?= $user ? '/buy' : '/login' ?>';"><i class="bi bi-bag p-2"></i>Bag</button>
+                        <button type="button" class="btn btn-success"onclick="window.location.href = '<?= $user ? '/cart' : '/login' ?>';"><i class="bi bi-bag p-2"></i>Bag</button>
                     </form>
                     <!-- Buy Now Form -->
                     <form action="<?= site_url('product_view/' . esc($product['id'])) ?>" method="post">
@@ -107,56 +107,9 @@
     </section>
     <hr class="border-top border-1 border-success my-4 d-none d-sm-block">
 
-    <!-- Footer -->
-    <footer class="bg-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5 class="text-black" style="font-size: 15px; margin-bottom:120px;">INDIA|₹</h5>
-                    <ul class="list-unstyled">
-                        <h5 class="text-danger fw-bold">VASTRA</h5>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <h5 class="fs-6">SHOP</h5>
-                    <ul class="list-unstyled footer-links" style="font-size: 12px;">
-                        <li><a href="#" class="text-black text-decoration-none">Ladies</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Men</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Body</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Kids</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Sport</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <h5 class="fs-6">CORPORATE INFO</h5>
-                    <ul class="list-unstyled footer-links" style="font-size: 12px;">
-                        <li><a href="#" class="text-black text-decoration-none">Career</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">About</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Group</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Press</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Investor relations</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="fs-6">HELPS</h5>
-                    <ul class="list-unstyled footer-links" style="font-size: 12px; gap: 15px;">
-                        <li><a href="#" class="text-black text-decoration-none">Customer service</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Contact</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Report a scam</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Cookie Notice</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Cookie Settings</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2" style="font-size: 13px;">
-                    <ul class="list-unstyled footer-links" style="font-size: 12px;">
-                        <p>Sign up now to get exclusive offers, the latest fashion updates, and styling tips. Be the first to discover new trends and discounts. Stay inspired and elevate your wardrobe effortlessly!</p>
-                        <a href="#" class="text-black text-decoration-none">Read More<i class="bi bi-arrow-right-short fs-6"></i></a>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+       <!-- Footer -->
+       <?= $this->include('footer'); ?>
+       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

@@ -1,27 +1,48 @@
 <?php
+
+namespace App\Controllers;
+
 use App\Models\CartModel;
+use CodeIgniter\Controller;
 
-class CartController extends \CodeIgniter\Controller
+class CartController extends Controller
 {
-    public function index()
-    {
-        $cartModel = new CartModel();
-        $items = $cartModel->findAll(); // Fetch all cart items
+    protected $cartModel;
 
-        return view('cart/index', ['items' => $items]);
+    public function __construct()
+    {
+        $this->cartModel = new CartModel();
     }
 
-    public function add()
+    public function index()
     {
-        $cartModel = new CartModel();
-        $cartModel->insert([
-            'productName'        => 'Sample Product',
-            'productDescription' => 'Description here',
-            'productPrice'       => 100.00,
-            'productCategory'    => 'Category',
-            'productImage'       => 'image.jpg',
-        ]);
+        // Fetch cart items
+        $cartItems = $this->cartModel->getCartItems();
+        
+        // Pass data to view
+        return view('cart', ['cartItems' => $cartItems]);
+    }
 
+    public function remove($id)
+    {
+        // Remove item from cart
+        $this->cartModel->removeFromCart($id);
         return redirect()->to('/cart');
+    }
+
+    public function updateQuantity()
+    {
+        // Update item quantity in cart
+        $itemId = $this->request->getPost('item_id');
+        $quantity = $this->request->getPost('quantity');
+        
+        $this->cartModel->updateItemQuantity($itemId, $quantity);
+        return redirect()->to('/cart');
+    }
+
+    public function checkout()
+    {
+        // Handle checkout process
+        return view('product_view');  // Adjust this view if necessary
     }
 }

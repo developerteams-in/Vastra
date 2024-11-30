@@ -6,22 +6,47 @@ use CodeIgniter\Model;
 
 class CartModel extends Model
 {
-    protected $table      = 'cart_items';   // Table name
-    protected $primaryKey = 'id';           // Primary key
+    protected $table = 'cart'; // Use session or table for cart items
+    protected $allowedFields = ['product_id', 'quantity', 'user_id'];
 
-    protected $useAutoIncrement = true;
-    protected $returnType       = 'array';  // Returns data as an array
+    public function getCartItems()
+    {
+        // Get cart items from database or session
+        // For simplicity, assuming data is stored in session
+        return session()->get('cart') ?? [];
+    }
 
-    protected $allowedFields = [
-        'productName',
-        'productDescription',
-        'productPrice',
-        'productCategory',
-        'productImage',
-        'created_at',
-        'updated_at',
-    ];
+    public function addToCart($productId, $quantity)
+    {
+        // Add product to cart
+        $cart = session()->get('cart') ?? [];
+        $cart[] = ['product_id' => $productId, 'quantity' => $quantity];
+        session()->set('cart', $cart);
+    }
 
-    // Enable automatic handling of created_at and updated_at
-    protected $useTimestamps = true;
+    public function removeFromCart($productId)
+    {
+        // Remove product from cart
+        $cart = session()->get('cart');
+        foreach ($cart as $key => $item) {
+            if ($item['product_id'] == $productId) {
+                unset($cart[$key]);
+                break;
+            }
+        }
+        session()->set('cart', $cart);
+    }
+
+    public function updateItemQuantity($productId, $quantity)
+    {
+        // Update quantity of an item in the cart
+        $cart = session()->get('cart');
+        foreach ($cart as &$item) {
+            if ($item['product_id'] == $productId) {
+                $item['quantity'] = $quantity;
+                break;
+            }
+        }
+        session()->set('cart', $cart);
+    }
 }
