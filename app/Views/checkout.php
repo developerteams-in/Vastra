@@ -237,6 +237,7 @@
     
     <div class="main-container">
     <div class="product-container">
+        
         <img class="card-img-top img-fluid" 
         src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
         alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 

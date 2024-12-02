@@ -87,4 +87,5 @@ $routes->post('checkout/(:num)', 'CheckoutController::Showcheckout/$1');
 // $routes->get('checkout', 'CheckoutController::Showcheckout'); 
 $routes->post('checkoutcontroller/processPayment', 'CheckoutController::processPayment');
 
-
+$routes->post('cart/add', 'CartController::addToCart');
+$routes->get('cart/count', 'CartController::cartCount');

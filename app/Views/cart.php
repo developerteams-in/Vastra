@@ -31,18 +31,19 @@
             <tbody>
                 <?php foreach ($cartItems as $item): ?>
                     <tr>
-                        <td><?= esc($item['productName']) ?></td>
-                        <td>$<?= number_format($item['productPrice'], 2) ?></td>
+                        <td><?= esc($item['product_name']) ?></td>
+                        <td>$<?= number_format($item['product_price'], 2) ?></td>
                         <td>
-                            <form action="/cart/updateQuantity" method="POST">
-                                <input type="hidden" name="item_id" value="<?= $item['product_id'] ?>">
+                            <form action="<?= site_url('/cart/updateQuantity') ?>" method="POST">
+                                <?= csrf_field() ?>
+                                <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
                                 <input type="number" name="quantity" value="<?= $item['quantity'] ?>" min="1" class="form-control" style="width: 70px;">
                                 <button type="submit" class="btn btn-sm btn-primary mt-2">Update</button>
                             </form>
                         </td>
-                        <td>$<?= number_format($item['productPrice'] * $item['quantity'], 2) ?></td>
+                        <td>$<?= number_format($item['product_price'] * $item['quantity'], 2) ?></td>
                         <td>
-                            <a href="/cart/remove/<?= $item['product_id'] ?>" class="btn btn-sm btn-danger">Remove</a>
+                            <a href="<?= site_url('/cart/remove/' . $item['id']) ?>" class="btn btn-sm btn-danger">Remove</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -52,13 +53,13 @@
         <!-- Total -->
         <div class="d-flex justify-content-end">
             <h4>Total: $<?= number_format(array_sum(array_map(function($item) {
-                return $item['productPrice'] * $item['quantity'];
+                return $item['product_price'] * $item['quantity'];
             }, $cartItems)), 2) ?></h4>
         </div>
 
         <!-- Checkout Button -->
         <div class="d-flex justify-content-end mt-4">
-            <a href="/cart/checkout" class="btn btn-success">Proceed to Checkout</a>
+            <a href="<?= site_url('/cart/checkout') ?>" class="btn btn-success">Proceed to Checkout</a>
         </div>
     <?php endif; ?>
 
