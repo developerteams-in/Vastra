@@ -86,12 +86,12 @@
                         <button type="button" class="btn btn-success"onclick="window.location.href = '<?= $user ? '/cart' : '/login' ?>';"><i class="bi bi-bag p-2"></i>Bag</button>
                     </form>
                     <!-- Buy Now Form -->
-                    <form action="<?= site_url('product_view/' . esc($product['id'])) ?>" method="post">
+                    <form action="<?= site_url('checkout/' . esc($product['id'])) ?>" method="post">
                         <?= csrf_field() ?>
                         <input type="hidden" name="product_id" value="<?= esc($product['id']) ?>">
                         <input type="hidden" name="product_name" value="<?= esc($product['productName']) ?>">
                         <input type="hidden" name="product_price" value="<?= esc($product['productPrice']) ?>">
-                        <button type="button" class="btn btn-success"onclick="window.location.href = '<?= $user ? '/buy' : '/login' ?>';">Buy Now</button>
+                        <button type="submit" class="btn btn-success"onclick="window.location.href = '<?= $user ? '/checkout' : '/login' ?>';">Buy Now</button>
 
                     </form>
                 </div>
@@ -109,7 +109,7 @@
 
        <!-- Footer -->
        <?= $this->include('footer'); ?>
-       
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

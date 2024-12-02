@@ -40,9 +40,9 @@ class CartController extends Controller
         return redirect()->to('/cart');
     }
 
-    public function checkout()
-    {
-        // Handle checkout process
-        return view('product_view');  // Adjust this view if necessary
-    }
+    // public function checkout()
+    // {
+    //     // Handle checkout process
+    //     return view('product_view');  // Adjust this view if necessary
+    // }
 }
