@@ -11,6 +11,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+      /* icons set postion   */
+      .card {
+    position: relative; /* Ensure positioning works for child elements */
+}
+
+.favorite-icon {
+    position: absolute;
+    top: 10px; /* Distance from the top */
+    right: 10px; /* Distance from the right */
+    text:bold;
+    color: red;
+    font-size: 1.2rem;
+    z-index: 10; /* Ensure it stays above other elements */
+}
+
     #line-separator {
       margin: 20px 0;
       border: 1px solid #ddd;
@@ -301,6 +316,8 @@ a{
                     <?php foreach ($newarrivals as $product): ?>
                         <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
+                           <!-- Favorite Icon -->
+                           <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
@@ -335,6 +352,8 @@ a{
                     <?php foreach ($kids as $product): ?>
                         <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
+                           <!-- Favorite Icon -->
+                           <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
@@ -364,33 +383,35 @@ a{
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
                    
-            <!-- Product Cards -->
-             <?php if (!empty($ladies)): ?>
-                    <?php foreach ($ladies as $product): ?>
-                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
-                        <div class="card" style="width: 220px; height: 350px;">
-                            <img class="card-img-top img-fluid" 
-                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                  style="object-fit: cover; height: 65%; width: 100%;">
-                            <div class="card-body text-center p-2">
-                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
-                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <p class="card-text" style="font-size: 0.75rem;">
-                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                                </p>
-                                
-                            </div>
-                        </div>
-                        </a>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No products found in this category.</p>
-                <?php endif; ?>
+           <!-- Product Cards -->
+<?php if (!empty($ladies)): ?>
+    <?php foreach ($ladies as $product): ?>
+        <a href="<?= site_url('product_view/' . $product['id']) ?>">
+            <div class="card" style="width: 220px; height: 350px; position: relative;">
+                <!-- Favorite Icon -->
+                <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
+                <img class="card-img-top img-fluid"
+                     src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                     alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                     style="object-fit: cover; height: 65%; width: 100%;">
+                <div class="card-body text-center p-2">
+                    <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                        <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                    </h5>
+                    <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                        <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                    </h5>
+                    <p class="card-text" style="font-size: 0.75rem;">
+                        ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+                </div>
+            </div>
+        </a>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>No products found in this category.</p>
+<?php endif; ?>
+
                 </div>
             </div>
         </section>
@@ -403,6 +424,8 @@ a{
                     <?php foreach ($men as $product): ?>
                         <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
+                           <!-- Favorite Icon -->
+                         <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 

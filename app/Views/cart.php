@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,20 +13,53 @@
 
 <div class="container my-5">
     <h1>Your Cart</h1>
-
-<?php if (!empty($cart)): ?>
-    <ul>
-        <?php foreach ($cart as $item): ?>
-            <li>
-                <?php echo esc($item['name']); ?> - Rs. <?php echo esc($item['price']); ?> x <?php echo esc($item['quantity']); ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-<?php else: ?>
-    <p>Your cart is empty.</p>
-<?php endif; ?>
+<div id="cart-items">
+    <?php if (!empty($cart)): ?>
+        <ul class="list-group">
+            <?php foreach ($cart as $index => $item): ?>
+                <li class="list-group-item d-flex justify-content-between align-items-center" data-index="<?php echo $index; ?>">
+                    <?php echo esc($item['name']); ?> - Rs. <?php echo esc($item['price']); ?> x <?php echo esc($item['quantity']); ?>
+                    <button class="btn btn-danger btn-sm remove-item">Remove</button>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Your cart is empty.</p>
+    <?php endif; ?>
 </div>
 
+</div>
+
+<!-- jQuery for AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('.remove-item').click(function() {
+        const $itemElement = $(this).closest('[data-index]');
+        const index = $itemElement.data('index');
+
+        $.ajax({
+            url: 'remove_from_cart.php',
+            type: 'POST',
+            data: { index: index },
+            success: function(response) {
+                if (response.status === 'success') {
+                    $itemElement.remove();
+                    if ($('#cart-items .list-group-item').length === 0) {
+                        $('#cart-items').html('<p>Your cart is empty.</p>');
+                    }
+                } else {
+                    alert('Failed to remove item from cart.');
+                }
+            },
+            error: function() {
+                alert('Something went wrong.');
+            }
+        });
+    });
+});
+</script>
 
 <!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
