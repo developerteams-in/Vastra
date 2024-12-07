@@ -87,3 +87,10 @@ $routes->group('cart', function ($routes) {
     $routes->get('', 'CartController::index'); // Load the main cart view
     $routes->post('add', 'CartController::add'); // Add items to cart
 });
+$routes->get('favorites', 'FavoritesController::viewFavorites');
+
+$routes->get('/cart', 'CartController::addtocart');
+$routes->get('/cart', 'CartController::index');
+$routes->post('/cart/add', 'CartController::add');
+$routes->post('/cart/remove', 'CartController::remove');
+

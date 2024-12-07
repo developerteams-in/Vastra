@@ -317,7 +317,7 @@ a{
                         <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
                            <!-- Favorite Icon -->
-                           <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
+                          <i class="bi bi-heart p-1 favorite-icon"></i>
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
@@ -353,7 +353,7 @@ a{
                         <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
                            <!-- Favorite Icon -->
-                           <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
+                      <i class="bi bi-heart p-1 favorite-icon"></i>
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
@@ -389,7 +389,7 @@ a{
         <a href="<?= site_url('product_view/' . $product['id']) ?>">
             <div class="card" style="width: 220px; height: 350px; position: relative;">
                 <!-- Favorite Icon -->
-                <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
+                <i class="bi bi-heart p-1 favorite-icon"></i>
                 <img class="card-img-top img-fluid"
                      src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                      alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
@@ -425,7 +425,7 @@ a{
                         <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
                            <!-- Favorite Icon -->
-                         <a href=""><i class="bi bi-heart p-1 favorite-icon"></i></a>
+                         <i class="bi bi-heart p-1 favorite-icon"></i>
                             <img class="card-img-top img-fluid" 
                                  src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
                                  alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 

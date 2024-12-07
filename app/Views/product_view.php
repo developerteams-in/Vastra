@@ -144,13 +144,13 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
     $('.add-to-cart').click(function () {
         let productId = $(this).data('id');
         let productName = $(this).data('name');
         let productPrice = $(this).data('price');
         let productQuantity = $('#product_quantity').val();
-        let selectedSizes = []; // Add any selected sizes if implemented
+        let selectedSizes = []; // Capture size selections if implemented
 
         $.ajax({
             url: '<?= site_url("cart/add") ?>',
@@ -160,7 +160,7 @@
                 product_name: productName,
                 product_price: productPrice,
                 product_quantity: productQuantity,
-                selected_sizes: selectedSizes.join(','), 
+                selected_sizes: selectedSizes.join(','),
             },
             success: function (response) {
                 alert(response.message);

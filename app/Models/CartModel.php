@@ -20,7 +20,20 @@ class CartModel extends Model
     // Add a new product to the cart
     public function addProductToCart($productData)
     {
-        $this->insert($productData);
+        // Check if the product already exists in the user's cart
+        $existingItem = $this->where([
+            'product_id' => $productData['product_id'],
+            'user_id' => $productData['user_id']
+        ])->first();
+    
+        if ($existingItem) {
+            // If exists, update the quantity
+            $newQuantity = $existingItem['quantity'] + $productData['quantity'];
+            $this->update($existingItem['id'], ['quantity' => $newQuantity]);
+        } else {
+            // If not, insert a new record
+            $this->insert($productData);
+        }
     }
 
     // Update the quantity of an existing product in the cart
@@ -34,4 +47,6 @@ class CartModel extends Model
     {
         return $this->where('user_id', $userId)->countAllResults();
     }
+
+
 }

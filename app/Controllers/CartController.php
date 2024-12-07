@@ -1,49 +1,57 @@
 <?php
-
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use App\Models\CartModel;
 
 class CartController extends Controller
 {
     public function index()
     {
-        // Load the main cart view
-        $session = session();
-        $cart = $session->get('cart') ?? []; // Get current cart from session
-        return view('cart', ['cart' => $cart]); // Pass cart data to the view
+        $cartModel = new CartModel();
+        $userId = session()->get('user')['id']; // Assuming user data is stored in session
+        $cartItems = $cartModel->getCartByUser($userId);
+
+        return view('cart', ['cart' => $cartItems]);
+    }
+
+    public function addtocart()
+    {
+        return view('cart');
     }
 
     public function add()
     {
-        // Get data from POST request
+        $cartModel = new CartModel();
+
         $productId = $this->request->getPost('product_id');
-        $productName = $this->request->getPost('product_name');
-        $productPrice = $this->request->getPost('product_price');
         $productQuantity = $this->request->getPost('product_quantity');
-        $selectedSizes = $this->request->getPost('selected_sizes');
+        $userId = session()->get('user')['id']; // Assuming user data is stored in session
 
-        $session = session();
-        if (!$session->has('cart')) {
-            $session->set('cart', []);
-        }
-
-        // Prepare product data
-        $productData = [
-            'id' => $productId,
-            'name' => $productName,
-            'price' => $productPrice,
+        $data = [
+            'product_id' => $productId,
             'quantity' => $productQuantity,
-            'sizes' => $selectedSizes,
+            'user_id' => $userId,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
-        $cart = $session->get('cart');
-        $cart[] = $productData; // Add product to cart
-        $session->set('cart', $cart);
+        $cartModel->addProductToCart($data);
 
         return $this->response->setJSON([
             'message' => 'Product added to cart successfully!',
-            'cart' => $cart,
         ]);
+    }
+
+    public function remove()
+    {
+        $cartModel = new CartModel();
+        $index = $this->request->getPost('index'); // Assuming index corresponds to cart item ID
+
+        if ($cartModel->delete($index)) {
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'error']);
+        }
     }
 }
