@@ -14,8 +14,15 @@
         <?php if (!empty($cart)): ?>
             <ul class="list-group">
                 <?php foreach ($cart as $item): ?>
-                    <li class="list-group-item d-flex justify-content-between align-items-center" data-index="<?php echo $item['id']; ?>">
-                        Product ID: <?php echo esc($item['product_id']); ?> - Quantity: <?php echo esc($item['quantity']); ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <!-- Dynamically load the product image from the uploads directory -->
+                            <img src="<?php echo base_url('uploads/' . esc($item['product_image'])); ?>" alt="<?php echo esc($item['product_name']); ?>" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
+                            <div>
+                                <h5><?php echo esc($item['product_name']); ?></h5>
+                                <p>₹<?php echo esc($item['product_price']); ?> x <?php echo esc($item['quantity']); ?></p>
+                            </div>
+                        </div>
                         <button class="btn btn-danger btn-sm remove-item">Remove</button>
                     </li>
                 <?php endforeach; ?>
@@ -25,6 +32,7 @@
         <?php endif; ?>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

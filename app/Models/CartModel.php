@@ -13,9 +13,27 @@ class CartModel extends Model
 
     // Get all cart items for a user
     public function getCartByUser($userId)
-    {
-        return $this->where('user_id', $userId)->findAll();
-    }
+{
+    $cartItems = $this->select('cart_items.id, cart_items.product_id, cart_items.quantity, products.productName as product_name, products.productPrice as product_price, products.productImage as product_image')
+                      ->join('products', 'products.id = cart_items.product_id')
+                      ->where('cart_items.user_id', $userId)
+                      ->findAll();
+                      
+    return $cartItems;
+}
+
+    // public function getCartByUser($userId)
+    // {
+    //     $productModel = new \App\Models\ProductModel();
+        
+    //     $cartItems = $this->select('cart_items.id, cart_items.product_id, cart_items.quantity, products.name as product_name, products.price')
+    //                       ->join('products', 'products.id = cart_items.product_id')
+    //                       ->where('cart_items.user_id', $userId)
+    //                       ->findAll();
+                          
+    //     return $cartItems;
+    // }
+    
 
     // Add a new product to the cart
     public function addProductToCart($productData)

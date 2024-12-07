@@ -4,6 +4,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\CartModel;
 
+
 class CartController extends Controller
 {
     public function index()
