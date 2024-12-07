@@ -10,6 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    .badge {
+        font-size: 14px;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+</style>
+    <style>
         /* Your existing styles */
         #searchForm {
             position: relative;
@@ -212,8 +220,8 @@
                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="/favorites" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-heart p-1"></i>Favorites</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/cart" onclick="togglePopup()"> <i class="bi bi-bag p-1"></i>Bag</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/favorites" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-heart p-1"></i>Favorites</a></li>    
+                        <li class="nav-item"><a class="nav-link" href="/cart" onclick="togglePopup()"> <i class="bi bi-bag p-1"></i>Bag <span class="badge bg-danger"></span></a></li>
                     <?php else: ?>
                         <!-- If no user is logged in, show register and login options -->
                         <li class="nav-item"><a class="nav-link" href="/register">Become a Member</a></li>

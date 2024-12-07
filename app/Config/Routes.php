@@ -67,18 +67,9 @@ $routes->post('products_list/update/(:num)', 'ProductController::update/$1');
 $routes->get('product_view/(:num)', 'Product_view::showProduct_view/$1');
 $routes->get('product_view', 'Product_view::showProduct_view/$1');
 
-
-$routes->get('/cart', 'CartController::index');               // Cart page
 $routes->get('/cart/remove/(:num)', 'CartController::remove/$1');  // Remove item from cart
 $routes->post('/cart/updateQuantity', 'CartController::updateQuantity'); // Update cart item quantity
 
-// Checkout page 
-
-
-// $routes->post('/checkout/process', 'CheckoutController::processPayment'); // Payment processing route
-
-// Payment process /
-// $routes->post('/checkout/process', 'CheckoutController::processPayment');
 
 
 // payment routes 
@@ -87,5 +78,12 @@ $routes->post('checkout/(:num)', 'CheckoutController::Showcheckout/$1');
 // $routes->get('checkout', 'CheckoutController::Showcheckout'); 
 $routes->post('checkoutcontroller/processPayment', 'CheckoutController::processPayment');
 
-$routes->post('cart/add', 'CartController::addToCart');
-$routes->get('cart/count', 'CartController::cartCount');
+
+// $routes->group('cart', function ($routes) {
+//     $routes->get('', 'CartController::index');
+//     $routes->post('add', 'CartController::add');
+// });
+$routes->group('cart', function ($routes) {
+    $routes->get('', 'CartController::index'); // Load the main cart view
+    $routes->post('add', 'CartController::add'); // Add items to cart
+});

@@ -86,7 +86,7 @@ class Home extends BaseController
     
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)->first();
-    
+        
         if ($user && password_verify($password, $user['password'])) {
             // Set session data for the user
             session()->set('user', $user);

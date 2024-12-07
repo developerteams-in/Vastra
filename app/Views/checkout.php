@@ -243,7 +243,8 @@
         alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
         style="object-fit: cover; height: 20%; width:50%;">
         <h2 class="product-title"><?= esc($product['productName']) ?></h2>
-                <p class="product-price">₹<?= number_format($product['productPrice'], 2) ?></p>
+                <!-- Display Total Price Based on Quantity -->
+                <h6 class="product-price">Total Price: ₹<span id="total-price"><?= number_format($product['productPrice'], 2) ?></span></h6>
                 <p class="product-description"><?= esc($product['productDescription']) ?></p>
                  <form action="<?= site_url('checkout/' . esc($product['id'])) ?>" method="post">
                         <?= csrf_field() ?>
@@ -324,6 +325,5 @@
             });
         });
     </script>
-  
 </body>
 </html>
