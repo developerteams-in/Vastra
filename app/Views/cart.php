@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -21,8 +22,8 @@
 <body>
     <div class="container my-5">
         <!-- Cart Title -->
-        <h1 class="text-center mb-4">Your Cart</h1>
-
+        <a href="/"  class="text-black"><i class="bi bi-house text-black"></i>Vastra</a>
+        <h1 class="text-center mb-4">Your Bag Items</h1>
         <!-- Main Section - Two Columns -->
         <div class="row">
             <!-- Left Side - Cart Items -->
@@ -59,6 +60,7 @@
                         <h4>Checkout Summary</h4>
                     </div>
                     <div class="card-body">
+                        <p>Add items worth<span class="text-danger"> ₹70.00</span> for FREE Delivery</p>
                         <p><strong>Total Quantity:</strong> <span id="total-quantity">0</span></p>
                         <p><strong>Total Price:</strong> ₹<span id="total-price">0</span></p>
                     </div>

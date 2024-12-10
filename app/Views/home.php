@@ -301,7 +301,6 @@ a{
         <div class=" p-5 rounded-md">
             <h1 class="display-4" style="z-index:-1;">Discover Our Latest Styles</h1>
             <p class="lead">Fresh Looks for Every Occasion</p>
-            <a href="/" class="btn btn-light btn-lg"style="z-index:0;">Shop Now</a>
         </div>
     </div>
 </header>
