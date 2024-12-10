@@ -4,7 +4,6 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-
 class CartItems extends Migration
 {
     public function up()
@@ -13,12 +12,32 @@ class CartItems extends Migration
         $this->forge->addField([
             'id'          => [
                 'type'           => 'INT',
-                'unsigned'      => true,
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'product_id'  => [
                 'type'           => 'INT',
-                'unsigned'      => true,
+                'unsigned'       => true,
+            ],
+            'product_name' => [ // Adding product_name
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => false,
+            ],
+            'product_price' => [
+                'type'           => 'DECIMAL',
+                'constraint'     => '10,2',
+                'null'           => false,
+            ],
+            'product_image' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 255,
+                'null'           => true,
+            ],
+            'product_size' => [ 
+                'type'       => 'VARCHAR',
+                'constraint' => 10,
+                'null'       => true,
             ],
             'quantity'    => [
                 'type'           => 'INT',
@@ -26,7 +45,7 @@ class CartItems extends Migration
             ],
             'user_id'     => [
                 'type'           => 'INT',
-                'unsigned'      => true,
+                'unsigned'       => true,
             ],
             'created_at'  => [
                 'type'           => 'TIMESTAMP',
@@ -38,7 +57,7 @@ class CartItems extends Migration
                 'null'           => true,
             ],
         ]);
-        
+
         // Adding primary key
         $this->forge->addPrimaryKey('id');
 

@@ -13,6 +13,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        .size-btn.btn-selected {
+  background-color: #e67e22 !important;
+  color: white;
+}
+
     .product-sizes {
     margin-top: 20px;
     display: flex;
@@ -95,16 +100,19 @@
                 <p class="product-price" id="price">₹<?= number_format($product['productPrice'], 2) ?></p>
                 <p class="product-description"><?= esc($product['productDescription']) ?></p>
                 
-                <!-- Size Selection -->
-            <div class="product-sizes col-md-4 mb-4 mt-4 ">
-            <h6>Sizes:</h6>
-            <button type="submit" class="size-btn bg-black text-white border border-0 rounded">XS</button>
-            <button type="submit"  class="size-btn bg-black text-white border border-0 rounded">S</button>
-            <button type="submit"  class="size-btn bg-black text-white border border-0 rounded">M</button>
-            <button type="submit"  class="size-btn bg-black text-white border border-0 rounded">L</button>
-            <button type="submit"  class="size-btn bg-black text-white border border-0 rounded">XL</button>
-          </div>
+              
+        <!-- Size Selection Section -->
+<div class="product-sizes col-md-4 mb-4 mt-4">
+  <h6>Sizes:</h6>
+  <button type="button" class="size-btn bg-black text-white border border-0 rounded">XS</button>
+  <button type="button" class="size-btn bg-black text-white border border-0 rounded">S</button>
+  <button type="button" class="size-btn bg-black text-white border border-0 rounded">M</button>
+  <button type="button" class="size-btn bg-black text-white border border-0 rounded">L</button>
+  <button type="button" class="size-btn bg-black text-white border border-0 rounded">XL</button>
+</div>
 
+<input type="hidden" name="selected_sizes" id="hidden-sizes" value="">
+  <!-- Size Selection end -->
                 <!-- Quantity Selection with + and - buttons -->
                 <h6 class="mb-3 mt-4" style="color: #7f8c8d;">Quantity</h6>
                 <div class="quantity-btns mb-3 mt-4">
@@ -115,20 +123,22 @@
     <div class="d-flex action-btns mt-3">
         
     <!-- Add to Cart Button -->
-    <?php if (isset($user) && $user): ?>
-        <button type="button" class="btn btn-success me-3 add-to-cart" 
-            data-id="<?= esc($product['id']) ?>" 
-            data-name="<?= esc($product['productName']) ?>" 
-            data-price="<?= esc($product['productPrice']) ?>" 
-            data-quantity="1">
-            Add to Cart
-        </button>
-    <?php else: ?>
-        <a href="<?= site_url('login') ?>" class="btn btn-primary me-3">
-            Add to Cart
-        </a>
-    <?php endif; ?>
-    
+ <!-- Add to Cart Button -->
+<?php if (isset($user) && $user): ?>
+    <button type="button" class="btn btn-success me-3 add-to-cart" 
+        data-id="<?= esc($product['id']) ?>" 
+        data-name="<?= esc($product['productName']) ?>" 
+        data-price="<?= esc($product['productPrice']) ?>" 
+        data-quantity="1"
+        data-image="<?= esc($product['productImage']) ?>">
+        Add to Cart
+    </button>
+<?php else: ?>
+    <a href="<?= site_url('login') ?>" class="btn btn-primary me-3">
+        Add to Cart
+    </a>
+<?php endif; ?>
+
     <!-- Buy Now Form -->
     <form action="<?= site_url('checkout/' . esc($product['id'])) ?>" method="post">
         <?= csrf_field() ?>
@@ -144,36 +154,57 @@
         </div>
     </div>
     <script>
-    $(document).ready(function () {
+ $(document).ready(function () {
     $('.add-to-cart').click(function () {
-        let productId = $(this).data('id');
-        let productName = $(this).data('name');
-        let productPrice = $(this).data('price');
-        let productQuantity = $('#product_quantity').val();
-        let selectedSizes = []; // Capture size selections if implemented
+        const productId = $(this).data('id');
+        const productQuantity = $('#product_quantity').val();
+        const productName = $(this).data('name');
+        const productSize = $('#hidden-sizes').val();
+        const productImage = $(this).data('image');
+        const productPrice = $(this).data('price');
+
+        if (!productSize) {
+            alert('Please select a size');
+            return;
+        }
 
         $.ajax({
-            url: '<?= site_url("cart/add") ?>',
-            type: 'POST',
+            url: '/cart/add',
+            method: 'POST',
             data: {
                 product_id: productId,
-                product_name: productName,
-                product_price: productPrice,
                 product_quantity: productQuantity,
-                selected_sizes: selectedSizes.join(','),
+                product_name:productName,
+                product_size: productSize,
+                product_image: productImage,
+                product_price: productPrice,
+                csrf_token: "<?= csrf_token() ?>"
             },
             success: function (response) {
-                alert(response.message);
-                window.location.href = '<?= site_url("cart") ?>'; // Redirect to cart page
+                if (response.status) {
+                    alert(response.message);
+                    window.location.href = "<?= site_url('cart') ?>";
+                } else {
+                    alert(response.message);
+                }
             },
             error: function () {
-                alert('An error occurred. Please try again.');
+                alert('Something went wrong');
             }
         });
     });
+
+  $('.size-btn').click(function () {
+    $('.size-btn').removeClass('btn-selected');
+    $(this).addClass('btn-selected');
+    const size = $(this).text();
+    $('#hidden-sizes').val(size);
+  });
 });
 
-    </script>
+
+</script>
+
    
     <script>
         $(document).ready(function() {
@@ -217,6 +248,26 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+  let selectedSize = "";
+
+  // Handle clicks on size buttons
+  $('.size-btn').click(function() {
+    $('.size-btn').removeClass('btn-selected'); // Remove selection from all buttons
+    $(this).addClass('btn-selected'); // Highlight clicked button
+    selectedSize = $(this).text(); // Capture the clicked button's text
+    $('#hidden-sizes').val(selectedSize); // Update hidden input
+  });
+  
+  // Optional: Add CSS to visually highlight the selected size
+  $('.btn-selected').css({
+    'background-color': '#e67e22',
+    'color': 'white'
+  });
+});
+
+        </script>
 </body>
 
 </html>

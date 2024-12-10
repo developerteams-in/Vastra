@@ -89,8 +89,8 @@ $routes->group('cart', function ($routes) {
 });
 $routes->get('favorites', 'FavoritesController::viewFavorites');
 
-$routes->get('/cart', 'CartController::addtocart');
 $routes->get('/cart', 'CartController::index');
-$routes->post('/cart/add', 'CartController::add');
+$routes->post('cart/add', 'CartController::add');
 $routes->post('/cart/remove', 'CartController::remove');
 
+$routes->get('/cart/count', 'CartController::getCartCount');

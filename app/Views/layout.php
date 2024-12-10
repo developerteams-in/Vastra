@@ -1,6 +1,14 @@
 <?php
     $user = session()->get('user');
 ?>
+<?php
+$user = session()->get('user');
+$cartCount = 0; // Default count is 0
+if ($user) {
+    $cartModel = new \App\Models\CartModel();
+    $cartCount = $cartModel->getCartCount($user['id']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +17,19 @@
     <title>Vastra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-    .badge {
-        font-size: 14px;
-        position: absolute;
-        top: 5px;
-        right: 10px;
-    }
-</style>
+
+<style>
+        .badge {
+            font-size: 12px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+        }
+    </style>
     <style>
         /* Your existing styles */
         #searchForm {
@@ -221,7 +234,19 @@
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="/favorites" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-heart p-1"></i>Favorites</a></li>    
-                        <li class="nav-item"><a class="nav-link" href="/cart" onclick="togglePopup()"> <i class="bi bi-bag p-1"></i>Bag <span class="badge bg-danger"></span></a></li>
+                        <li class="nav-item position-relative">
+    <a class="nav-link text-center" href="/cart" style="display: inline-block;">
+        <?php if ($cartCount > 0): ?>
+            <!-- Fixed position badge above the icon -->
+            <span class="badge bg-black text-white position-absolute top-0 end-0 rounded-circle" style="width: 20px; height: 20px; font-size: 12px; line-height: 12px;">
+                <?php echo $cartCount; ?>
+            </span>
+        <?php endif; ?>
+        <i class="bi bi-bag"></i> Bag
+    </a>
+</li>
+
+
                     <?php else: ?>
                         <!-- If no user is logged in, show register and login options -->
                         <li class="nav-item"><a class="nav-link" href="/register">Become a Member</a></li>
@@ -256,5 +281,40 @@
     }
   </script>
 
+<script>
+$(document).ready(function() {
+    function updateCartCount() {
+        $.ajax({
+            url: '/cart/getCartCount',
+            method: 'GET',
+            success: function(response) {
+                if (response.cartCount !== undefined) {
+                    const $badge = $('.bi-bag').next('.badge');
+                    if (response.cartCount > 0) {
+                        if ($badge.length > 0) {
+                            $badge.text(response.cartCount);
+                        } else {
+                            $('.bi-bag').after(`<span class="badge">${response.cartCount}</span>`);
+                        }
+                    } else {
+                        $badge.remove();
+                    }
+                }
+            },
+            error: function() {
+                console.error('Failed to fetch cart count.');
+            }
+        });
+    }
+
+    // Call the function on page load
+    updateCartCount();
+
+    // Optionally call it periodically or on certain actions
+    setInterval(updateCartCount, 30000); // Update every 30 seconds
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

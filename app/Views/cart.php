@@ -14,13 +14,13 @@
         <?php if (!empty($cart)): ?>
             <ul class="list-group">
                 <?php foreach ($cart as $item): ?>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" data-id="<?php echo esc($item['id']); ?>">
                         <div class="d-flex align-items-center">
-                            <!-- Dynamically load the product image from the uploads directory -->
-                            <img src="<?php echo base_url('uploads/' . esc($item['product_image'])); ?>" alt="<?php echo esc($item['product_name']); ?>" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
-                            <div>
-                                <h5><?php echo esc($item['product_name']); ?></h5>
-                                <p>₹<?php echo esc($item['product_price']); ?> x <?php echo esc($item['quantity']); ?></p>
+                            <img src="<?php echo base_url('uploads/' . esc($item['product_image'])); ?>" alt="Product Image" class="img-thumbnail" style="width: 60px; height: 60px;">
+                            <div class="ms-3">
+                            <h5><?php echo esc(isset($item['product_name']) ? $item['product_name'] : 'Unknown Product'); ?></h5>
+                                <p>Size: <?php echo esc(isset($item['product_size']) ? $item['product_size'] : 'Unknown Size'); ?></p>
+                                <p>₹<?php echo esc(isset($item['product_price']) ? $item['product_price'] : 0); ?> x <?php echo esc(isset($item['quantity']) ? $item['quantity'] : 0); ?></p>
                             </div>
                         </div>
                         <button class="btn btn-danger btn-sm remove-item">Remove</button>
@@ -33,26 +33,35 @@
     </div>
 </div>
 
-
+<!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
     $('.remove-item').click(function() {
-        const $itemElement = $(this).closest('[data-index]');
-        const index = $itemElement.data('index');
+        const $itemElement = $(this).closest('.list-group-item');
+        const cartId = $itemElement.data('id'); // Get the cart item's id from the data-id attribute
 
+        if (!cartId) {
+            alert('Error: Invalid Cart ID');
+            return;
+        }
+
+        // Send AJAX POST request
         $.ajax({
-            url: '/cart/remove',
+            url: '/cart/remove', // URL endpoint for removing items
             type: 'POST',
-            data: { index: index },
+            data: { cart_id: cartId },
             success: function(response) {
-                if (response.status === 'success') {
+                if (response.status) {
+                    // Remove the item from the DOM on success
                     $itemElement.remove();
+                    
+                    // If no items left in the cart
                     if ($('#cart-items .list-group-item').length === 0) {
                         $('#cart-items').html('<p>Your cart is empty.</p>');
                     }
                 } else {
-                    alert('Failed to remove item from cart.');
+                    alert(response.message); // Show server error message
                 }
             },
             error: function() {
