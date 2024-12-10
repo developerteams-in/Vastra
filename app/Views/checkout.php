@@ -258,7 +258,7 @@
         <div class="payment-container">
             <img src="<?= base_url('images/vastra.png') ?>" style="width: 30%;" alt="Logo">
             <h2>Abstraction Magazine</h2>
-            <p>₹19 per month</p>
+            <h6 class="product-price">Total Price: ₹<span id="total-price"><?= number_format($product['productPrice'], 2) ?></span></h6>
             <button class="btn-custom">
                 <i class="bi bi-apple"></i> Apple Pay
             </button>
@@ -284,7 +284,7 @@
                     <label for="zip">ZIP</label>
                     <input type="text" id="zip" placeholder="Enter ZIP code" required>
                 </div>
-                <button type="submit" class="submit-button">Pay ₹19</button>
+                <button type="submit" class="submit-button">Pay ₹<span id="total-price"><?= number_format($product['productPrice'], 2) ?></span></button>
             </form>
         </div>
     </div>
