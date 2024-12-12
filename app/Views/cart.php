@@ -70,15 +70,15 @@
     <!-- Steps Section -->
     <ul class="list-unstyled d-flex align-items-center mb-0">
       <li>
-        <a href="#" class="text-decoration-none step-link active">BAG</a>
+        <a href="/cart" class="text-decoration-none step-link active">BAG</a>
       </li>
       <li>
         <span class="mx-3 separator">---------</span>
-        <a href="#" class="text-decoration-none step-link text-black">ADDRESS</a>
+        <a href="/address" class="text-decoration-none step-link text-black">ADDRESS</a>
       </li>
       <li>
         <span class="mx-3 separator">---------</span>
-        <a href="#" class="text-decoration-none step-link text-black">PAYMENT</a>
+        <a href="/checkout" class="text-decoration-none step-link text-black">PAYMENT</a>
       </li>
     </ul>
 

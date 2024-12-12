@@ -65,54 +65,51 @@ public function Address()
     public function edit($id)
     {
         $model = new AddressModel();
-        
-        // Get the address by ID
         $address = $model->find($id);
-        
+
         if (!$address) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Address not found');
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Address not found.');
         }
-        
-        // Return the address data as JSON
-        return $this->response->setJSON(['address' => $address]);
+
+        return view('address_page', ['address' => $address, 'editing' => true]);
     }
-    
-    
-    // Update an address in the database
+
     public function update($id)
     {
         $model = new AddressModel();
-    
-        // Get data from the form input
-        $data = [
-            'full_name'    => $this->request->getPost('full_name'),
-            'phone_number' => $this->request->getPost('phone_number'),
-            'address'      => $this->request->getPost('address'),
-            'city'         => $this->request->getPost('city'),
-            'state'        => $this->request->getPost('state'),
-            'zip_code'     => $this->request->getPost('zip_code'),
-        ];
-    
-        // Validate the data
-        if (!$this->validate([
+
+        $data = $this->request->getPost([
+            'full_name', 'phone_number', 'address', 'city', 'state', 'zip_code'
+        ]);
+
+        $validationRules = [
             'full_name'    => 'required|min_length[3]|max_length[255]',
             'phone_number' => 'required|min_length[10]|max_length[20]',
             'address'      => 'required|min_length[10]',
             'city'         => 'required|min_length[3]|max_length[100]',
             'state'        => 'required|min_length[3]|max_length[100]',
             'zip_code'     => 'required|min_length[5]|max_length[20]',
-        ])) {
-            // If validation fails, redirect back with validation errors
+        ];
+
+        if (!$this->validate($validationRules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
-    
-        // Update the address in the database
+
         $model->update($id, $data);
-    
-        // Redirect after updating
-        return redirect()->to('/address')->with('success', 'Address updated successfully');
+
+        return redirect()->to('/address')->with('success', 'Address updated successfully.');
     }
-    
+
+    public function delete($id)
+    {
+        $model = new AddressModel();
+
+        if ($model->delete($id)) {
+            return redirect()->to('/address')->with('success', 'Address deleted successfully.');
+        } else {
+            return redirect()->to('/address')->with('error', 'Failed to delete address.');
+        }
+    }
     // Delete an address from the database
     public function removeAddress($id)
     {
@@ -131,5 +128,16 @@ public function Address()
 
         // Return the data as JSON
         return $this->response->setJSON($addresses);
+    }
+    public function fetchAddress($id)
+    {
+        $model = new AddressModel();
+        $address = $model->find($id);
+
+        if (!$address) {
+            return $this->response->setJSON(['error' => 'Address not found'], 404);
+        }
+
+        return $this->response->setJSON($address);
     }
 }

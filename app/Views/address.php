@@ -73,15 +73,15 @@
 
         <ul class="list-unstyled d-flex align-items-center mb-0">
             <li>
-                <a href="#" class="text-decoration-none step-link text-black">BAG</a>
+                <a href="/cart" class="text-decoration-none step-link text-black">BAG</a>
             </li>
             <li>
                 <span class="mx-3 separator">---------</span>
-                <a href="#" class="text-decoration-none step-link active">ADDRESS</a>
+                <a href="/address" class="text-decoration-none step-link active">ADDRESS</a>
             </li>
             <li>
                 <span class="mx-3 separator">---------</span>
-                <a href="#" class="text-decoration-none step-link text-black">PAYMENT</a>
+                <a href="/checkout" class="text-decoration-none step-link text-black">PAYMENT</a>
             </li>
         </ul>
 
@@ -102,7 +102,7 @@
                 <script>
                     async function fetchAddresses() {
                         try {
-                            const response = await fetch('<?= base_url('address/fetch') ?>');
+                            const response = await fetch('/address/fetch'); // Direct URL to the endpoint
                             const data = await response.json();
 
                             const addressList = document.getElementById('address-list');
@@ -125,12 +125,11 @@
                                             <p><small>Phone: ${address.phone_number}</small></p>
                                         </div>
                                         <div>
-                                            <button class="btn btn-transparent btn-sm me-2" onclick="editAddress(${address.id})">Edit</button>
-                                            <button class="btn btn-transparent btn-sm" onclick="removeAddress(${address.id})">Remove</button>
+                                            <button class="btn btn-transparent btn-sm" onclick="editAddress(${address.id})">Edit</button>
+                                            <button class="btn btn-transparent btn-sm me-2" onclick="removeAddress(${address.id})">Remove</button>
                                         </div>
                                     </div>
                                 `;
-
                                 addressList.appendChild(addressCard);
                             });
                         } catch (error) {
@@ -141,11 +140,9 @@
 
                     // Function to handle edit action
                     function editAddress(addressId) {
-                        // Fetch the address data and open the modal with prefilled values
-                        fetch(`<?= base_url('address/get') ?>/${addressId}`)
+                        fetch(`/address/get/${addressId}`)
                             .then(response => response.json())
                             .then(address => {
-                                // Prefill the edit modal with the fetched address data
                                 document.getElementById('edit-address-id').value = address.id;
                                 document.getElementById('edit-full-name').value = address.full_name;
                                 document.getElementById('edit-phone').value = address.phone_number;
@@ -154,7 +151,6 @@
                                 document.getElementById('edit-state').value = address.state;
                                 document.getElementById('edit-zip-code').value = address.zip_code;
 
-                                // Show the edit modal
                                 const editModal = new bootstrap.Modal(document.getElementById('editAddressModal'));
                                 editModal.show();
                             })
@@ -164,7 +160,7 @@
                     async function removeAddress(addressId) {
                         if (confirm('Are you sure you want to remove this address?')) {
                             try {
-                                const response = await fetch(`<?= base_url('address/remove') ?>/${addressId}`, {
+                                const response = await fetch(`/address/remove/${addressId}`, {
                                     method: 'DELETE'
                                 });
                                 const result = await response.json();
@@ -257,15 +253,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="<?= site_url('address/update') ?>" id="edit-address-form">
+                <form method="post" action="<?= isset($editing) ? site_url('address/update/'.$address['id']) : site_url('address/store') ?>" id="edit-address-form">
                         <?= csrf_field() ?>
-                        <input type="hidden" name="address_id" id="edit-address-id">
-                        <input type="text" name="full_name" id="edit-full-name" class="form-control mb-3" placeholder="Full Name" required>
-                        <input type="text" name="phone_number" id="edit-phone" class="form-control mb-3" placeholder="Phone Number" required>
-                        <textarea name="address" id="edit-address" class="form-control mb-3" placeholder="Address" required></textarea>
-                        <input type="text" name="city" id="edit-city" class="form-control mb-3" placeholder="City" required>
-                        <input type="text" name="state" id="edit-state" class="form-control mb-3" placeholder="State" required>
-                        <input type="text" name="zip_code" id="edit-zip-code" class="form-control mb-3" placeholder="Zip Code" required>
+                        <input type="hidden" name="id" id="edit-address-id">
+                        <input type="text" name="full_name" id="edit-full-name" class="form-control mb-3" placeholder="Full Name" name="full_name" value="<?= old('full_name', $address['full_name'] ?? '') ?>" required>
+                        <input type="text" name="phone_number" id="edit-phone" class="form-control mb-3" placeholder="Phone Number" name="phone_number" value="<?= old('phone_number', $address['phone_number'] ?? '') ?>" required>
+                        <textarea name="address" id="edit-address" class="form-control mb-3" placeholder="Address" <?= old('address', $address['address'] ?? '') ?> required></textarea>
+                        <input type="text" name="city" id="edit-city" class="form-control mb-3" placeholder="City" name="city" value="<?= old('city', $address['city'] ?? '') ?>" required>
+                        <input type="text" name="state" id="edit-state" class="form-control mb-3" placeholder="State"  name="state" value="<?= old('state', $address['state'] ?? '') ?>" required>
+                        <input type="text" name="zip_code" id="edit-zip-code" class="form-control mb-3" placeholder="Zip Code" name="zip_code" value="<?= old('zip_code', $address['zip_code'] ?? '') ?>" required>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -274,8 +270,41 @@
             </div>
         </div>
     </div>
+    <script>
+    function editAddress(addressId) {
+    fetch(`/address/get/${addressId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch address details');
+            }
+            return response.json();
+        })
+        .then(address => {
+            // Check if address data is valid
+            if (address) {
+                document.getElementById('edit-address-id').value = address.id;
+                document.getElementById('edit-full-name').value = address.full_name || '';
+                document.getElementById('edit-phone').value = address.phone_number || '';
+                document.getElementById('edit-address').value = address.address || '';
+                document.getElementById('edit-city').value = address.city || '';
+                document.getElementById('edit-state').value = address.state || '';
+                document.getElementById('edit-zip-code').value = address.zip_code || '';
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+                const editModal = new bootstrap.Modal(document.getElementById('editAddressModal'));
+                editModal.show();
+            } else {
+                alert('Address data is missing or malformed');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching address details:', error);
+            alert('An error occurred while fetching address details.');
+        });
+}
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

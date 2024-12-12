@@ -96,10 +96,15 @@ $routes->post('/cart/remove', 'CartController::remove');
 $routes->get('/cart/count', 'CartController::getCartCount');
 
 // In your routes file (routes/web.php or similar)
+$routes->post('/address/update/(:num)', 'AddressController::update/$1');
+$routes->get('address/get/(:num)', 'AddressController::fetchAddress/$1');
+
 $routes->get('address', 'AddressController::Address');  // Show the list of addresses
 $routes->get('address/create', 'AddressController::create');  // Show the form to create a new address
 $routes->post('address/store', 'AddressController::store');  // Store a new address
 $routes->get('address/edit/(:num)', 'AddressController::edit/$1');  // Show the form to edit an address
 $routes->post('address/update/(:num)', 'AddressController::update/$1');  // Update an address
-$routes->delete('address/delete/(:num)', 'AddressController::removeAddress/$1');  // Delete an address
+// app/Config/Routes.php
+$routes->delete('address/remove/(:num)', 'AddressController::removeAddress/$1');
 $routes->get('address/fetch', 'AddressController::fetchAddresses');  // Fetch all addresses
+
