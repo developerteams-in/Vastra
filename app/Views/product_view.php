@@ -125,7 +125,7 @@
     <!-- Add to Cart Button -->
  <!-- Add to Cart Button -->
 <?php if (isset($user) && $user): ?>
-    <button type="button" class="btn btn-success me-3 add-to-cart" 
+    <button type="button" class="btn btn-danger me-3 add-to-cart" 
         data-id="<?= esc($product['id']) ?>" 
         data-name="<?= esc($product['productName']) ?>" 
         data-price="<?= esc($product['productPrice']) ?>" 
@@ -147,12 +147,14 @@
         <input type="hidden" name="product_price" value="<?= esc($product['productPrice']) ?>">
         <input type="hidden" name="quantity" id="hidden-quantity" value="1">
         <input type="hidden" name="selected_sizes" id="hidden-sizes" value="">
-        <button type="submit" class="btn btn-success">Buy Now</button>
+        <button type="submit" class="btn btn-danger">Buy Now</button>
     </form>
-</div>
+             </div>
             </div>
         </div>
     </div>
+    <h6 class="mt-4">You may also like:</h6>
+    
     <script>
  $(document).ready(function () {
     $('.add-to-cart').click(function () {

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers;
-
 use App\Controllers\BaseController;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
