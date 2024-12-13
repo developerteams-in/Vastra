@@ -150,6 +150,7 @@
                                 document.getElementById('edit-city').value = address.city;
                                 document.getElementById('edit-state').value = address.state;
                                 document.getElementById('edit-zip-code').value = address.zip_code;
+                                document.getElementById('edit-user-id').value = userId; // Add user_id to the form field
 
                                 const editModal = new bootstrap.Modal(document.getElementById('editAddressModal'));
                                 editModal.show();

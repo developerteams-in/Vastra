@@ -8,7 +8,7 @@ class AddressModel extends Model
 {
     protected $table = 'shipping_address';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['full_name', 'phone_number', 'address', 'city', 'state', 'zip_code'];
+    protected $allowedFields = ['full_name', 'phone_number','user_id', 'address', 'city', 'state', 'zip_code'];
     protected $useTimestamps = true;
     protected $validationRules = [
         'full_name'    => 'required|min_length[3]|max_length[255]',
