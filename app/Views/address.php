@@ -88,17 +88,16 @@
         <?php foreach ($addresses as $address): ?>
             <div class="address-item mb-3">
                 <div class="card p-3 custom-card">
-                    <p><strong>Name:</strong> <?= esc($address['full_name']); ?></p>
-                    <p><strong>Phone:</strong> <?= esc($address['phone_number']); ?></p>
-                    <p><strong>Address:</strong> <?= esc($address['address']); ?></p>
-                    <p><strong>City:</strong> <?= esc($address['city']); ?></p>
-                    <p><strong>State:</strong> <?= esc($address['state']); ?></p>
-                    <p><strong>Zip Code:</strong> <?= esc($address['zip_code']); ?></p>
+                    <h6><strong>Name:</strong> <?= esc($address['full_name']); ?></h6>
+                    <h6><strong>Phone:</strong> <?= esc($address['phone_number']); ?></h6>
+                    <h6><strong>Address:</strong> <?= esc($address['address']); ?></h6>
+                    <h6><strong>City:</strong> <?= esc($address['city']); ?></h6>
+                    <h6><strong>State:</strong> <?= esc($address['state']); ?></h6>
+                    <h6><strong>Zip Code:</strong> <?= esc($address['zip_code']); ?></h6>
                     <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-transparent btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editAddressModal" data-id="<?= $address['id'] ?>">EDIT</button>
-    <button class="btn btn-transparent btn-sm remove-address" data-id="<?= $address['id']; ?>">REMOVE</button>
-</div>
-
+                      <button type="button" class="btn btn-transparent btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editAddressModal" data-id="<?= $address['id'] ?>">EDIT</button>
+                      <button class="btn btn-transparent btn-sm remove-address" data-id="<?= $address['id']; ?>">REMOVE</button>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -106,7 +105,6 @@
         <p>No addresses available.</p>
     <?php endif; ?>
 </div>
-
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addressModal">ADD ADDRESS</button>
                 </div>
             </div>
@@ -118,7 +116,7 @@
                         <p style="font-weight: 700;" class="mb-5">PRICE DETAILS</p>
                         <div class="d-flex justify-content-between mb-2">
                             <p>Total MRP</p>
-                            ₹0
+                            ₹<?php echo esc(isset($item['product_price']) ? $item['product_price'] : 0); ?> 
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <p>Coupon Discount</p>
@@ -261,9 +259,9 @@
             }
         });
     });
+   
 </script>
 
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

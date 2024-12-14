@@ -23,74 +23,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
-        #debug-icon{
-    display: none !important;
-}
-        /* Custom background color for the page */
         body {
-            background-color: #f7f7f7; /* Light gray background */
+            background-image: url('path_to_your_image.jpg'); /* Optional Background image */
+            background-size: cover;
+            background-position: center;
             height: 100vh;
         }
-
-        /* Custom form styling */
-        .form-container {
-            background-color: #ffffff; /* White background for the form */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            height: 450px;
-            margin-top: 50px;
+   #btn{
+    background-color: #1a202c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   }
+   #btn:hover{
+    background-color:red;
+   }
+        span {
+            color: red;
         }
 
-        /* Centering the form vertically and horizontally */
-        .row.justify-content-center {
-            height: 100%;
+        /* Hide image on mobile (<= 768px) */
+        @media (max-width: 768px) {
+            #register-img {
+                display: none; /* Hide image on mobile devices */
+            }
         }
 
-        .col-md-6 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
+        
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="form-container">
-                    <h1 class="text-center mb-4 fs-4">Become a Member</h1>
-                    <form method="post" action="/register">
-                        <!-- CSRF Token -->
-                        <?= csrf_field() ?>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= old('name') ?>" placeholder="Enter your name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?= old('email') ?>" placeholder="Enter your email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Register</button>
-                    </form>
-                    <p class="text-center">Already have an account?<a href="/login" class="btn btn-link p-1">SignIn</a></p>
-                </div>
-                    <div class="mt-3 text-center">
+    <div class="container-fluid d-flex flex-column flex-md-row gap-0">
+        <!-- Left side: Image -->
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center position-relative">
+            <h1 class="position-absolute top-40 start-50 translate-middle text-center text-white" style="font-size: 90px;">
+                <span>Vastra</span>
+            </h1>
+            <div class="text-center position-absolute top-50 start-50 translate-middle text-white py-4" style="width: 100%;">
+                "Step into style—sign up to discover the latest trends at <span>Vastra</span>."
+            </div>
+            <img id="register-img" 
+                 src="https://plus.unsplash.com/premium_photo-1676890199183-7594728c3800?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2xvdGgnc3xlbnwwfHwwfHx8MA%3D%3D" 
+                 alt="Vastra Clothing"
+                 class="img-fluid object-cover" 
+                 style="width:100%; height:640px; position:relative; z-index:-1; opacity: 0.7;">
+        </div>
+
+        <!-- Right side: Register form -->
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center bg-white p-4 rounded-end shadow-lg">
+            <div class="form-container">
+                <h2 class="font-bold text-center text-gray-800 mb-4" style="font-size: 22px;">Join Us Today!</h2>
+                <form method="post" action="/register">
+                    <?= csrf_field() ?> <!-- CSRF Token -->
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<?= old('name') ?>" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= old('email') ?>" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" id="btn" class="btn btn-primary  w-100 py-2 px-4">Register</button>
+                </form>
+                
+                <div class="mt-3 text-center">
+                    <p>Already have an account? <a href="/login" class="btn btn-link p-0">Sign In</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 5 JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
 

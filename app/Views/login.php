@@ -22,6 +22,16 @@
             background-position: center;
             height: 100vh;
         }
+        #btn{
+    background-color: #1a202c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   }
+   
         span{
             color:red;
         }
@@ -72,7 +82,7 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-10 mx-auto py-2 px-4 bg-black text-white text-center">Sign In</button>
+                    <button type="submit" id="btn" class="btn btn-primary w-10 mx-auto py-2 px-4 bg-black text-white text-center">Sign In</button>
 
                 </form>
 
