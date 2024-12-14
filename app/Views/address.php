@@ -8,6 +8,34 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+  .custom-card .btn-transparent {
+    background-color: transparent; /* Transparent background */
+    border: 1px solid black; /* 1px solid black border */
+    color: black; /* Black text color */
+    padding: 4px 8px; /* Smaller padding for smaller buttons */
+    font-size: 0.875rem; /* Slightly smaller text */
+}
+
+.custom-card .btn-transparent:hover {
+    background-color: black; /* Black background on hover */
+    color: white; /* White text on hover */
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-end {
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
+.me-2 {
+    margin-right: 0.5rem; /* Margin between the "EDIT" and "REMOVE" buttons */
+}
+
+
+        </style>
+    <style>
         /* Styling the active step */
         .step-link.active {
             color: #28a745;
@@ -55,26 +83,30 @@
                 <div class="card p-4">
                     <h4 class="mb-4">Shipping Address</h4>
                     <div id="address-list">
-                        <!-- Loop to display addresses -->
-                        <?php if (!empty($addresses)): ?>
-                            <?php foreach ($addresses as $address): ?>
-                                <div class="address-item mb-3">
-                                    <div class="card p-3">
-                                        <p><strong>Name:</strong> <?= esc($address['full_name']); ?></p>
-                                        <p><strong>Phone:</strong> <?= esc($address['phone_number']); ?></p>
-                                        <p><strong>Address:</strong> <?= esc($address['address']); ?></p>
-                                        <p><strong>City:</strong> <?= esc($address['city']); ?></p>
-                                        <p><strong>State:</strong> <?= esc($address['state']); ?></p>
-                                        <p><strong>Zip Code:</strong> <?= esc($address['zip_code']); ?></p>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editAddressModal" data-id="<?= $address['id'] ?>">Edit</button>
-                                        <button class="btn btn-danger remove-address" data-id="<?= $address['id']; ?>">Remove</button>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p>No addresses available.</p>
-                        <?php endif; ?>
-                    </div>
+    <!-- Loop to display addresses -->
+    <?php if (!empty($addresses)): ?>
+        <?php foreach ($addresses as $address): ?>
+            <div class="address-item mb-3">
+                <div class="card p-3 custom-card">
+                    <p><strong>Name:</strong> <?= esc($address['full_name']); ?></p>
+                    <p><strong>Phone:</strong> <?= esc($address['phone_number']); ?></p>
+                    <p><strong>Address:</strong> <?= esc($address['address']); ?></p>
+                    <p><strong>City:</strong> <?= esc($address['city']); ?></p>
+                    <p><strong>State:</strong> <?= esc($address['state']); ?></p>
+                    <p><strong>Zip Code:</strong> <?= esc($address['zip_code']); ?></p>
+                    <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-transparent btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editAddressModal" data-id="<?= $address['id'] ?>">EDIT</button>
+    <button class="btn btn-transparent btn-sm remove-address" data-id="<?= $address['id']; ?>">REMOVE</button>
+</div>
+
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No addresses available.</p>
+    <?php endif; ?>
+</div>
+
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addressModal">ADD ADDRESS</button>
                 </div>
             </div>
