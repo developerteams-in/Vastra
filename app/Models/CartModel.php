@@ -2,7 +2,6 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-
 class CartModel extends Model
 {
     protected $table = 'cart_items';

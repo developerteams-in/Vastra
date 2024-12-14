@@ -1,21 +1,18 @@
 <?php
-
 namespace App\Models;
 
 use CodeIgniter\Model;
 
 class AddressModel extends Model
 {
-    protected $table = 'shipping_address';
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['full_name', 'phone_number','user_id', 'address', 'city', 'state', 'zip_code'];
+    protected $table      = 'shipping_address';  // Name of the table
+    protected $primaryKey = 'id';                // Primary key
+    protected $allowedFields = ['full_name', 'phone_number', 'address', 'city', 'state', 'zip_code', 'user_id']; // Columns you want to allow for CRUD
+    
+    // Enable automatic timestamp handling
     protected $useTimestamps = true;
-    protected $validationRules = [
-        'full_name'    => 'required|min_length[3]|max_length[255]',
-        'phone_number' => 'required|min_length[10]|max_length[20]',
-        'address'      => 'required|min_length[10]',
-        'city'         => 'required|min_length[3]|max_length[100]',
-        'state'        => 'required|min_length[3]|max_length[100]',
-        'zip_code'     => 'required|min_length[5]|max_length[20]',
-    ];
+
+    // Set the name of the fields for created_at and updated_at if not following the default names
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 }
