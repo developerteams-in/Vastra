@@ -76,7 +76,6 @@
             <span class="text-muted">100% SECURE</span>
         </div>
     </nav>
-
     <div class="container my-5">
         <div class="row">
             <div class="col-lg-7 col-sm-12 mb-3">
@@ -110,37 +109,38 @@
             </div>
 
             <!-- Price details card -->
-            <div class="col-lg-5 col-sm-12">
-                <div class="card h-90">
-                    <div class="card-body">
-                        <p style="font-weight: 700;" class="mb-5">PRICE DETAILS</p>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p>Total MRP</p>
-                            ₹<?php echo esc(isset($item['product_price']) ? $item['product_price'] : 0); ?> 
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p>Coupon Discount</p>
-                            <button class="btn btn-outline-danger btn-sm" style="width:100px; height:25px; font-size:12px;">Apply Coupon</button>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <p>Platform Fee</p>
-                            <span class="text-success">FREE</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-5">
-                            <p>Shipping Fee</p>
-                            <span class="text-success">FREE</span>
-                        </div>
-                        <p><strong>Total Quantity:</strong> <span id="total-quantity">0</span></p>
-                        <p><strong>Total Price:</strong> ₹<span id="total-price">0</span></p>
-                    </div>
-                </div>
-
-                <div class="text-center mt-4">
-                    <button id="continue-btn" class="btn btn-danger" style="width: 50%;">CONTINUE</button>
-                </div>
+ <!-- Price details card -->
+<div class="col-lg-5 col-sm-12">
+    <div class="card h-90">
+        <div class="card-body">
+            <p style="font-weight: 700;" class="mb-5">PRICE DETAILS</p>
+            <div class="d-flex justify-content-between mb-2">
+                <p>Total MRP</p>
+                ₹ <?= isset($totalPrice) ? $totalPrice : 0; ?>
             </div>
+            <div class="d-flex justify-content-between mb-2">
+                <p>Coupon Discount</p>
+                <button class="btn btn-outline-danger btn-sm" style="width:100px; height:25px; font-size:12px;">Apply Coupon</button>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <p>Platform Fee</p>
+                <span class="text-success">FREE</span>
+            </div>
+            <div class="d-flex justify-content-between mb-5">
+                <p>Shipping Fee</p>
+                <span class="text-success">FREE</span>
+            </div>
+            <p><strong>Total Quantity:</strong> <span id="total-quantity"><?= isset($totalQuantity) ? $totalQuantity : 0; ?></span></p>
+            <p><strong>Total Price:</strong> ₹ <?= isset($totalPrice) ? $totalPrice : 0; ?></span></p>
         </div>
     </div>
+
+    <div class="text-center mt-4">
+        <button id="continue-btn" class="btn btn-danger" style="width: 50%;" onclick="redirectToCheckout()">CONTINUE</button>
+    </div>
+</div>
+
+
 
     <!-- Modal for Add Address -->
     <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
@@ -261,6 +261,12 @@
     });
    
 </script>
+<script>
+  function redirectToCheckout() {
+    window.location.href = '/checkout';
+  }
+</script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
