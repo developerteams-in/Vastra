@@ -95,6 +95,12 @@ $routes->post('/cart/remove', 'CartController::remove');
 
 $routes->get('/cart/count', 'CartController::getCartCount');
 
+$routes->get('/checkout', 'CheckoutController::index');
+$routes->get('/checkout/(:num)', 'CheckoutController::showCheckout/$1');
+$routes->post('/checkout/process/(:num)', 'CheckoutController::processPayment/$1');
+
+
+
 $routes->get('address', 'AddressController::address');  // List of addresses
 $routes->get('address/get/(:num)', 'AddressController::get/$1');
 

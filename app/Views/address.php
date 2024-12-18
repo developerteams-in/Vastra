@@ -20,7 +20,6 @@
     background-color: black; /* Black background on hover */
     color: white; /* White text on hover */
 }
-
 .d-flex {
     display: flex;
 }
@@ -136,7 +135,7 @@
     </div>
 
     <div class="text-center mt-4">
-        <button id="continue-btn" class="btn btn-danger" style="width: 50%;" onclick="redirectToCheckout()">CONTINUE</button>
+        <button id="continue-btn" class="btn btn-danger" type="submit" style="width: 50%;" onclick="redirectToCheckout()">CONTINUE</button>
     </div>
 </div>
 
@@ -264,7 +263,8 @@
 <script>
   function redirectToCheckout() {
     window.location.href = '/checkout';
-  }
+}
+
 </script>
 
 

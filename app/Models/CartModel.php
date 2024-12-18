@@ -22,6 +22,7 @@ class CartModel extends Model
     // Get all cart items for a user without JOIN
     public function getCartByUser($userId)
     {
+        $userId = session()->get('user')['id']; 
         return $this->where('user_id', $userId)->findAll();
     }
 

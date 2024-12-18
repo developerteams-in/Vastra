@@ -1,7 +1,6 @@
 <?php
-    $user = session()->get('user');
+$user = session()->get('user'); // User information from session
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,66 +10,89 @@
     <script src="https://js.stripe.com/v3/"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-    
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom right, #f8f9fc, #e7e9f3);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
-            gap: 20px;
-            flex-direction: column;
+        /* Styling the active step */
+        .step-link.active {
+            color: #28a745;
+            font-weight: bold;
+            position: relative;
         }
-
+        .step-link.active::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #28a745;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+        }
+        .step-link:hover {
+            color: #28a745;
+            text-decoration: underline;
+        }
+        .separator {
+            color: #ccc;
+        }
+    </style>
+    <style>
+   
         .main-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
+            gap: 8px;
             width: 100%;
+            justify-content: space-between;
+            max-width: 1200px;
+            flex-wrap: wrap;
         }
-
-    .payment-container {
-    background-color: #fff; 
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    padding: 32px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-.product-container {
-    border-radius: 16px;
-    padding: 32px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-
+        .product-container {
+            padding:100px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 20px;
+            max-height: 600px; /* Define max height to control overflow */
+            overflow-y: auto; /* Add scroll when content overflows */
+        }
+        .product-container img {
+            width: 40%;
+            border-radius: 12px;
+        }
+        .product-container h5 {
+            font-size: 22px;
+            color: #1a202c;
+            margin: 12px 0;
+        }
+        .product-container p {
+            font-size: 18px;
+            color: #4a5568;
+        }
+        .payment-container {
+            width: 350px; /* Set width */
+            height: 700px; /* Set height */
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            padding: 32px;
+            text-align: center;
+            overflow-y: auto; /* Make payment form scrollable if it exceeds height */
+        }
         .payment-container img {
             width: 80px;
             margin-bottom: 16px;
         }
-
         .payment-container h2 {
             font-size: 22px;
             font-weight: 600;
             color: #1a202c;
             margin: 12px 0;
         }
-
         .payment-container p {
             font-size: 18px;
             color: #4a5568;
             margin-bottom: 24px;
         }
-
         .btn-custom {
             display: flex;
             align-items: center;
@@ -87,16 +109,13 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .btn-custom .bi {
             font-size: 18px;
             color: #fff;
         }
-
         .btn-custom:hover {
             background-color: #1a202c;
         }
-
         .divider {
             display: flex;
             align-items: center;
@@ -104,7 +123,6 @@
             font-size: 14px;
             color: #a0aec0;
         }
-
         .divider::before,
         .divider::after {
             content: "";
@@ -112,20 +130,16 @@
             height: 1px;
             background-color: #e2e8f0;
         }
-
         .divider::before {
             margin-right: 12px;
         }
-
         .divider::after {
             margin-left: 12px;
         }
-
         .form-group {
             margin-bottom: 16px;
             text-align: left;
         }
-
         .form-group label {
             display: block;
             font-size: 14px;
@@ -133,7 +147,6 @@
             margin-bottom: 6px;
             color: #4a5568;
         }
-
         .form-group input, .form-group select {
             width: 100%;
             padding: 10px;
@@ -141,11 +154,9 @@
             border-radius: 8px;
             font-size: 14px;
         }
-
         .form-group input::placeholder {
             color: #a0aec0;
         }
-
         .submit-button {
             width: 100%;
             padding: 12px;
@@ -158,121 +169,69 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .submit-button:hover {
             background-color: #1a202c;
-        }
-
-        .product-container {
-            text-align: center;
-        }
-
-        .product-container img {
-            width: 100%;
-            border-radius: 12px;
-        }
-
-        .product-container h2 {
-            font-size: 22px;
-            color: #1a202c;
-            margin: 12px 0;
-        }
-
-        .product-container p {
-            font-size: 18px;
-            color: #4a5568;
-        }
-
-        /* Responsive Layout */
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            body {
-            height: 200vh;
-            margin: 0;
-            padding: 20px;
-            gap: 20px;
-        }
-            .payment-container,
-            .product-container {
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .payment-container {
-                margin-top: 20px;
-            }
-
-            .product-container {
-                margin-bottom: 20px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .payment-container {
-                padding: 20px;
-            }
-
-            .product-container {
-                padding: 20px;
-            }
-
-            .payment-container h2 {
-                font-size: 18px;
-            }
-
-            .product-container h2 {
-                font-size: 18px;
-            }
-
-            .product-container p,
-            .payment-container p {
-                font-size: 16px;
-            }
         }
     </style>
 </head>
 <body>
-    
+<nav class="d-flex justify-content-between align-items-center p-3 bg-white border-bottom">
+        <div>
+            <a class="navbar-brand text-danger fw-bold fs-4" href="/">Vastra</a>
+        </div>
+        <ul class="list-unstyled d-flex align-items-center mb-0">
+            <li><a href="/cart" class="text-decoration-none step-link text-black">BAG</a></li>
+            <li><span class="mx-3 separator">---------</span><a href="/address" class="text-decoration-none step-link text-black">ADDRESS</a></li>
+            <li><span class="mx-3 separator">---------</span><a href="/checkout" class="text-decoration-none step-link  active">PAYMENT</a></li>
+        </ul>
+        <div class="d-flex align-items-center">
+            <i class="bi bi-shield-check text-success fs-4 me-2"></i>
+            <span class="text-muted">100% SECURE</span>
+        </div>
+    </nav>
     <div class="main-container">
-    <div class="product-container">
-        
-        <img class="card-img-top img-fluid" 
-        src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-        alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-        style="object-fit: cover; height: 20%; width:50%;">
-        <h2 class="product-title"><?= esc($product['productName']) ?></h2>
-                <!-- Display Total Price Based on Quantity -->
-                <h6 class="product-price">Total Price: ₹<span id="total-price"><?= number_format($product['productPrice'], 2) ?></span></h6>
-                <p class="product-description"><?= esc($product['productDescription']) ?></p>
-                 <form action="<?= site_url('checkout/' . esc($product['id'])) ?>" method="post">
-                        <?= csrf_field() ?>
-                        <input type="hidden" name="product_id" value="<?= esc($product['id']) ?>">
-                        <input type="hidden" name="product_name" value="<?= esc($product['productName']) ?>">
-                        <input type="hidden" name="product_price" value="<?= esc($product['productPrice']) ?>">
-                    </form>
-                 </div>
+        <!-- Product Container (left side) -->
+        <div class="product-container">
+            <?php foreach ($cart_items as $cart_item): ?>
+            <img src="<?= base_url('uploads/' . htmlspecialchars($cart_item['product_image'])) ?>" alt="<?= esc($cart_item['product_name']) ?>" />
+            <h5><?= esc($cart_item['product_name']) ?></h5>
+            <p>Price: ₹<?= number_format($cart_item['product_price'], 2) ?></p>
+            <p>Size: <?= esc($cart_item['product_size']) ?></p>
+            <p>Quantity: <?= esc($cart_item['quantity']) ?></p>
+            <?php endforeach; ?>
+        </div>
 
-
+        <!-- Payment Container (right side) -->
         <div class="payment-container">
-            <img src="<?= base_url('images/vastra.png') ?>" style="width: 30%;" alt="Logo">
-            <h2>Abstraction Magazine</h2>
-            <h6 class="product-price">Total Price: ₹<span id="total-price"><?= number_format($product['productPrice'], 2) ?></span></h6>
+            <img src="<?= base_url('images/vastra.png') ?>" alt="Logo" style="width: 30%;">
+            <h2>Payment for your purchase</h2>
+            <h6 class="product-price">Total Price: ₹<span id="total-price">
+                <?php
+                // Calculate total price for cart items
+                $totalPrice = array_reduce($cart_items, function($carry, $item) {
+                    return $carry + ($item['product_price'] * $item['quantity']);
+                }, 0);
+                echo number_format($totalPrice, 2);
+                ?>
+            </span></h6>
+
+            <!-- Payment Options -->
             <button class="btn-custom">
                 <i class="bi bi-apple"></i> Apple Pay
             </button>
+
             <div class="divider">Or pay with card</div>
             <form id="payment-form">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email" required>
                 </div>
+
                 <div class="form-group">
                     <label>Card Information</label>
                     <div id="card-element"></div>
                 </div>
+
                 <div class="form-group">
                     <label for="country">Country or Region</label>
                     <select id="country">
@@ -281,33 +240,25 @@
                         <option>United Kingdom</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="zip">ZIP</label>
                     <input type="text" id="zip" placeholder="Enter ZIP code" required>
                 </div>
-                <button type="submit" class="submit-button">Pay ₹<span id="total-price"><?= number_format($product['productPrice'], 2) ?></span></button>
+
+                <button type="submit" class="submit-button">Pay ₹<span id="total-price"><?= number_format($totalPrice, 2) ?></span></button>
             </form>
         </div>
     </div>
 
     <script>
-        var stripe = Stripe('your-publishable-key'); // Replace with your Stripe publishable key
+        var stripe = Stripe('<?= esc($publishableKey) ?>'); // Stripe publishable key
         var elements = stripe.elements();
-        var card = elements.create('card', {
-            style: {
-                base: {
-                    fontSize: '16px',
-                    color: '#32325d',
-                    '::placeholder': {
-                        color: '#a0aec0',
-                    },
-                },
-            },
-        });
+        var card = elements.create('card');
         card.mount('#card-element');
 
         var form = document.getElementById('payment-form');
-        form.addEventListener('submit', function (event) {
+        form.addEventListener('submit', function(event) {
             event.preventDefault();
 
             stripe.createPaymentMethod({
@@ -316,12 +267,35 @@
                 billing_details: {
                     email: document.getElementById('email').value,
                 },
-            }).then(function (result) {
+            }).then(function(result) {
                 if (result.error) {
                     alert('Error: ' + result.error.message);
                 } else {
-                    alert('Payment Method Created Successfully: ' + result.paymentMethod.id);
-                    // Add further processing here.
+                    // Prepare the data to send with the POST request
+                    var postData = {
+                        payment_method: result.paymentMethod.id,
+                        user_id: '<?= esc($user['id']) ?>', // Send user ID from the session
+                        total_price: '<?= $totalPrice ?>', // Total price for the cart
+                    };
+
+                    // Send the data to your server
+                    fetch('/checkout/process', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(postData), // Sending the data as JSON
+                    })
+                    .then(response => response.json())
+                    .then(function(data) {
+                        if (data.status === 'success') {
+                            alert('Payment successful!');
+                        } else {
+                            alert('Payment failed: ' + data.message);
+                        }
+                    }).catch(function(error) {
+                        alert('Error: ' + error.message);
+                    });
                 }
             });
         });
