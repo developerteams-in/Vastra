@@ -134,7 +134,7 @@
         Add to Cart
     </button>
 <?php else: ?>
-    <a href="<?= site_url('login') ?>" class="btn btn-primary me-3">
+    <a href="<?= site_url('login') ?>" class="btn btn-danger me-3">
         Add to Cart
     </a>
 <?php endif; ?>

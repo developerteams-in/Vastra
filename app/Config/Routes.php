@@ -94,6 +94,8 @@ $routes->post('cart/add', 'CartController::add');
 $routes->post('/cart/remove', 'CartController::remove');
 
 $routes->get('/cart/count', 'CartController::getCartCount');
+$routes->post('checkout/process/(:num)', 'CheckoutController::processPayment/$1');
+$routes->post('checkout/process', 'CheckoutController::processPayment');
 
 $routes->get('/checkout', 'CheckoutController::index');
 $routes->get('/checkout/(:num)', 'CheckoutController::showCheckout/$1');

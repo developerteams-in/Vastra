@@ -253,6 +253,7 @@ $user = session()->get('user'); // User information from session
 
     <script>
         var stripe = Stripe('<?= esc($publishableKey) ?>'); // Stripe publishable key
+        
         var elements = stripe.elements();
         var card = elements.create('card');
         card.mount('#card-element');
@@ -300,5 +301,28 @@ $user = session()->get('user'); // User information from session
             });
         });
     </script>
+    <script>
+    const handlePayment = async (stripeToken) => {
+    const response = await fetch('/checkout/process', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            stripeToken: stripeToken.id // This should be a valid Stripe Token object
+        })
+    });
+
+    const data = await response.json();
+
+    if (data.status === 'success') {
+        // Payment succeeded, you can use the `clientSecret` to confirm the payment on frontend
+        console.log('Payment Successful!', data.clientSecret);
+    } else {
+        // Payment failed
+        alert('Payment failed: ' + data.message);
+    }
+};
+</script>
 </body>
 </html>

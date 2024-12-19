@@ -83,7 +83,6 @@
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <button type="submit" id="btn" class="btn btn-primary w-10 mx-auto py-2 px-4 bg-black text-white text-center">Sign In</button>
-
                 </form>
 
                 <div class="mt-3 text-center">
