@@ -6,7 +6,7 @@ $user = session()->get('user'); // User information from session
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stripe Payment Form</title>
+    <title>Payment</title>
     <script src="https://js.stripe.com/v3/"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -221,7 +221,7 @@ $user = session()->get('user'); // User information from session
             </button>
 
             <div class="divider">Or pay with card</div>
-            <form id="payment-form">
+            <form id="payment-form" {handleSubmit}>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email" required>
@@ -252,55 +252,55 @@ $user = session()->get('user'); // User information from session
     </div>
 
     <script>
-        var stripe = Stripe('<?= esc($publishableKey) ?>'); // Stripe publishable key
-        
-        var elements = stripe.elements();
-        var card = elements.create('card');
-        card.mount('#card-element');
+    var stripe = Stripe('<?= esc($publishableKey) ?>'); // Add your Stripe publishable key here
+    
+    var elements = stripe.elements();
+    var card = elements.create('card');
+    card.mount('#card-element');
 
-        var form = document.getElementById('payment-form');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-            stripe.createPaymentMethod({
-                type: 'card',
-                card: card,
-                billing_details: {
-                    email: document.getElementById('email').value,
-                },
-            }).then(function(result) {
-                if (result.error) {
-                    alert('Error: ' + result.error.message);
-                } else {
-                    // Prepare the data to send with the POST request
-                    var postData = {
-                        payment_method: result.paymentMethod.id,
-                        user_id: '<?= esc($user['id']) ?>', // Send user ID from the session
-                        total_price: '<?= $totalPrice ?>', // Total price for the cart
-                    };
+        stripe.createPaymentMethod({
+            type: 'card',
+            card: card,
+            billing_details: {
+                email: document.getElementById('email').value,
+            },
+        }).then(function(result) {
+            if (result.error) {
+                alert('Error: ' + result.error.message);
+            } else {
+                // Send payment method and user data to server
+                var postData = {
+                    payment_method: result.paymentMethod.id,
+                    user_id: '<?= esc($user['id']) ?>',
+                    total_price: '<?= $totalPrice ?>',
+                };
 
-                    // Send the data to your server
-                    fetch('/checkout/process', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(postData), // Sending the data as JSON
-                    })
-                    .then(response => response.json())
-                    .then(function(data) {
-                        if (data.status === 'success') {
-                            alert('Payment successful!');
-                        } else {
-                            alert('Payment failed: ' + data.message);
-                        }
-                    }).catch(function(error) {
-                        alert('Error: ' + error.message);
-                    });
-                }
-            });
+                // AJAX request to server
+                fetch('/checkout/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(postData),
+                }).then(response => response.json())
+                  .then(function(data) {
+                    if (data.status === 'success') {
+                        alert('Payment successful!');
+                        window.location.href = "/orders";
+                    } else {
+                        alert('Payment failed: ' + data.message);
+                    }
+                  }).catch(function(error) {
+                    alert('Error: ' + error.message);
+                  });
+            }
         });
-    </script>
+    });
+</script>
     <script>
     const handlePayment = async (stripeToken) => {
     const response = await fetch('/checkout/process', {

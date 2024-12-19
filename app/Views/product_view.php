@@ -138,17 +138,21 @@
         Add to Cart
     </a>
 <?php endif; ?>
+<?php if (isset($user) && $user): ?>
+    <button type="button" class="btn btn-danger me-3 add-to-cart" 
+        data-id="<?= esc($product['id']) ?>" 
+        data-name="<?= esc($product['productName']) ?>" 
+        data-price="<?= esc($product['productPrice']) ?>" 
+        data-quantity="1"
+        data-image="<?= esc($product['productImage']) ?>">
+        Buy Now
+    </button>
+<?php else: ?>
+    <a href="<?= site_url('login') ?>" class="btn btn-danger me-3">
+      Buy Now
+    </a>
+<?php endif; ?>
 
-    <!-- Buy Now Form -->
-    <form action="<?= site_url('checkout/' . esc($product['id'])) ?>" method="post">
-        <?= csrf_field() ?>
-        <input type="hidden" name="product_id" value="<?= esc($product['id']) ?>">
-        <input type="hidden" name="product_name" value="<?= esc($product['productName']) ?>">
-        <input type="hidden" name="product_price" value="<?= esc($product['productPrice']) ?>">
-        <input type="hidden" name="quantity" id="hidden-quantity" value="1">
-        <input type="hidden" name="selected_sizes" id="hidden-sizes" value="">
-        <button type="submit" class="btn btn-danger">Buy Now</button>
-    </form>
              </div>
             </div>
         </div>

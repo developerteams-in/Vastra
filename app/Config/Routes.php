@@ -112,3 +112,8 @@ $routes->get('address/edit/(:num)', 'AddressController::edit/$1');  // Edit addr
 $routes->post('address/update/(:segment)', 'AddressController::update/$1');
  // Update address
 $routes->delete('address/remove/(:num)', 'AddressController::removeAddress/$1');  // Remove address
+
+
+// Your order 
+$routes->get('orders', 'OrderController::index');
+
