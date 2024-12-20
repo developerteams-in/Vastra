@@ -116,4 +116,6 @@ $routes->delete('address/remove/(:num)', 'AddressController::removeAddress/$1');
 
 // Your order 
 $routes->get('orders', 'OrderController::index');
+$routes->post('orders/payment', 'OrderController::processPayment');
+$routes->post('orders/stripe', 'OrderController::process');
 

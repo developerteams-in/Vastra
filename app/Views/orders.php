@@ -10,7 +10,7 @@ $user = session()->get('user'); // User information from session
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orders</title>
+  <title>Your Orders</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .order-card {
@@ -38,23 +38,19 @@ $user = session()->get('user'); // User information from session
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Product Name</th> <!-- Removed Order Number -->
-                    <th>Order Data</th>
+                    <th>Product Name</th> 
+                    <th>Order Date</th>
                     <th>Total Price</th>
                     <th>Status</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($orders as $order): ?>
                     <tr>
                         <td><?= esc($order['productName']) ?></td>
-                        <td><?= esc($order['order_data']) ?></td>
+                        <td><?= esc($order['order_date']) ?></td>
                         <td>₹<?= esc($order['total_price']) ?></td>
                         <td><?= esc($order['status']) ?></td>
-                        <td><?= esc($order['created_at']) ?></td>
-                        <td><?= esc($order['updated_at']) ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

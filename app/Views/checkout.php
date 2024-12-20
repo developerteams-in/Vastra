@@ -246,41 +246,55 @@ $user = session()->get('user'); // User information from session
                     <input type="text" id="zip" placeholder="Enter ZIP code" required>
                 </div>
 
-                <button type="submit" class="submit-button">Pay ₹<span id="total-price"><?= number_format($totalPrice, 2) ?></span></button>
+                <button type="submit" id="pay-button" class="submit-button">
+    Pay ₹<span id="total-price"><?= number_format($totalPrice, 2) ?></span>
+</button>
+
             </form>
         </div>
     </div>
-
     <script>
-    var stripe = Stripe('<?= esc($publishableKey) ?>'); // Add your Stripe publishable key here
-    
+    // Initialize Stripe
+    var stripe = Stripe('<?= esc($publishableKey) ?>');  // Add your Stripe publishable key here
     var elements = stripe.elements();
+
+    // Create a card element and mount it
     var card = elements.create('card');
-    card.mount('#card-element');
+    card.mount('#card-element');  // Ensure you have an element with this ID for the card input field
 
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+    // Handle button click
+    var payButton = document.getElementById('pay-button');
+    payButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default form submission
 
+        // Create the payment method using Stripe Elements
         stripe.createPaymentMethod({
             type: 'card',
             card: card,
             billing_details: {
-                email: document.getElementById('email').value,
+                email: document.getElementById('email').value,  // Collect user's email from form input
             },
         }).then(function(result) {
             if (result.error) {
+                // Handle error (e.g., invalid card)
                 alert('Error: ' + result.error.message);
             } else {
-                // Send payment method and user data to server
+                // Collect the product names from the cart
+                var productNames = [];
+                <?php foreach ($cart_items as $cart_item): ?>
+                    productNames.push("<?= esc($cart_item['product_name']) ?>");
+                <?php endforeach; ?>
+
+                // Payment method created successfully, now send data to the server
                 var postData = {
                     payment_method: result.paymentMethod.id,
-                    user_id: '<?= esc($user['id']) ?>',
-                    total_price: '<?= $totalPrice ?>',
+                    user_id: '<?= esc($user['id']) ?>',  // Send the logged-in user's ID
+                    total_price: '<?= $totalPrice ?>',  // Send the total price (could come dynamically from the cart or session)
+                    product_names: productNames,  // Send the product names
                 };
 
-                // AJAX request to server
-                fetch('/checkout/process', {
+                // Send the data to the server with AJAX (POST request)
+                fetch('/orders/payment', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -288,19 +302,23 @@ $user = session()->get('user'); // User information from session
                     body: JSON.stringify(postData),
                 }).then(response => response.json())
                   .then(function(data) {
-                    if (data.status === 'success') {
-                        alert('Payment successful!');
-                        window.location.href = "/orders";
-                    } else {
-                        alert('Payment failed: ' + data.message);
-                    }
+                      if (data.status === 'success') {
+                          // Redirect or inform user of successful payment
+                          alert('Payment successful!');
+                          window.location.href = "/orders";  // Redirect to orders page or relevant page
+                      } else {
+                          // Handle server-side failure (e.g., order issue, payment not processed)
+                          alert('Payment failed: ' + data.message);
+                      }
                   }).catch(function(error) {
-                    alert('Error: ' + error.message);
+                      // Catch and display any AJAX errors
+                      alert('Error: ' + error.message);
                   });
             }
         });
     });
 </script>
+
     <script>
     const handlePayment = async (stripeToken) => {
     const response = await fetch('/checkout/process', {
@@ -309,7 +327,7 @@ $user = session()->get('user'); // User information from session
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            stripeToken: stripeToken.id // This should be a valid Stripe Token object
+            stripeToken: stripeToken.id    token.id, total_price: totalPrice, product_name: // This should be a valid Stripe Token object
         })
     });
 
