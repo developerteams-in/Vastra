@@ -377,10 +377,10 @@ a{
 </div>
 </div>
 </section>
-        <section class="py-4">
-            <h2 class="text-left mb-4">LADIES</h2>
-            <div class="scroll-container py-3">
-                <div class="product-cards d-flex gap-4">
+<section class="py-4">
+<h2 class="text-left mb-4">LADIES</h2>
+<div class="scroll-container py-3">
+<div class="product-cards d-flex gap-4">
                    
            <!-- Product Cards -->
 <?php if (!empty($ladies)): ?>
@@ -411,14 +411,14 @@ a{
     <p>No products found in this category.</p>
 <?php endif; ?>
 
-                </div>
-            </div>
-        </section>
+</div>
+</div>
+</section>
     <section class="py-4">
             <h2 class="text-left mb-4">MEN</h2>
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
- <!-- Product Cards -->
+             <!-- Product Cards -->
                <?php if (!empty($men)): ?>
                     <?php foreach ($men as $product): ?>
                         <a href="<?= site_url('product_view/' . $product['id']) ?>">
