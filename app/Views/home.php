@@ -11,6 +11,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+      .favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.card {
+    position: relative; /* Ensure the icon is positioned relative to the card */
+}
       /* icons set postion   */
       .card {
     position: relative; /* Ensure positioning works for child elements */
@@ -306,147 +316,161 @@ a{
 </header>
     <!-- Featured Products -->
     <div class="container bg-[#D0FFB2]">
-        <section class="py-4">
-            <h2 class="text-left mb-4">NEW ARRIVALS</h2>
-            <div class="scroll-container py-3">
-               <div class="product-cards d-flex gap-4">
-                   <!-- Product Cards -->
-                   <?php if (!empty($newarrivals)): ?>
-                    <?php foreach ($newarrivals as $product): ?>
-                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
-                        <div class="card" style="width: 220px; height: 350px;">
-                           <!-- Favorite Icon -->
-                          <i class="bi bi-heart p-1 favorite-icon"></i>
-                            <img class="card-img-top img-fluid" 
-                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                 style="object-fit: cover; height: 65%; width: 100%;">
-                                 <div class="card-body text-center p-2">
-                                     <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
-                                         <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                                        </h5>
-                                        <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                            <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                                        </h5>
-                                        <p class="card-text" style="font-size: 0.75rem;">
-                                            ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No products found in this category.</p>
-                <?php endif; ?>
-</div>
+    <section class="py-4">
+    <h2 class="text-left mb-4">NEW ARRIVALS</h2>
+    <div class="scroll-container py-3">
+    <div class="product-cards d-flex gap-4">
+        <!-- Product Cards -->
+        <?php if (!empty($newarrivals)): ?>
+            <?php foreach ($newarrivals as $product): ?>
+                <div class="card" style="width: 220px; height: 350px; position: relative;">
+                    <!-- Favorite Icon Positioned Inside the Card -->
+                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
+                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
+
+                    <!-- Product Link -->
+                    <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
+                        <img class="card-img-top img-fluid" 
+                             src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                             alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                             style="object-fit: cover; height: 250px; width: 100%;">
+
+                        <div class="card-body text-center p-2">
+                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <p class="card-text" style="font-size: 0.75rem;">
+                                ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No products found in this category.</p>
+        <?php endif; ?>
+    </div>
 </div>
 </section>
+
 <section class="py-4">
 <h2 class="text-left mb-4">KIDS</h2>
 <div class="scroll-container py-3">
-<div class="product-cards d-flex gap-4">
-<!-- Product Cards -->
-<!-- Product Cards -->
-<?php if (!empty($kids)): ?>
-                    <?php foreach ($kids as $product): ?>
-                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
-                        <div class="card" style="width: 220px; height: 350px;">
-                           <!-- Favorite Icon -->
-                      <i class="bi bi-heart p-1 favorite-icon"></i>
-                            <img class="card-img-top img-fluid" 
-                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                 style="object-fit: cover; height: 65%; width: 100%;">
-                            <div class="card-body text-center p-2">
-                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
-                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <p class="card-text" style="font-size: 0.75rem;">
-                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                                </p>
-                            </div>
+    <div class="product-cards d-flex gap-4">
+        <!-- Product Cards -->
+        <?php if (!empty($kids)): ?>
+          <?php foreach ($kids as $product): ?>
+                <div class="card" style="width: 220px; height: 350px; position: relative;">
+                    <!-- Favorite Icon Positioned Inside the Card -->
+                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
+                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
+
+                    <!-- Product Link -->
+                    <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
+                        <img class="card-img-top img-fluid" 
+                             src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                             alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                             style="object-fit: cover; height: 250px; width: 100%;">
+
+                        <div class="card-body text-center p-2">
+                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <p class="card-text" style="font-size: 0.75rem;">
+                                ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                            </p>
                         </div>
-                        </a>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No products found in this category.</p>
-                <?php endif; ?>
-</div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No products found in this category.</p>
+        <?php endif; ?>
+    </div>
 </div>
 </section>
 <section class="py-4">
 <h2 class="text-left mb-4">LADIES</h2>
 <div class="scroll-container py-3">
-<div class="product-cards d-flex gap-4">
-                   
-           <!-- Product Cards -->
-<?php if (!empty($ladies)): ?>
-    <?php foreach ($ladies as $product): ?>
-        <a href="<?= site_url('product_view/' . $product['id']) ?>">
-            <div class="card" style="width: 220px; height: 350px; position: relative;">
-                <!-- Favorite Icon -->
-                <i class="bi bi-heart p-1 favorite-icon"></i>
-                <img class="card-img-top img-fluid"
-                     src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                     alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                     style="object-fit: cover; height: 65%; width: 100%;">
-                <div class="card-body text-center p-2">
-                    <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
-                        <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                    </h5>
-                    <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                        <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                    </h5>
-                    <p class="card-text" style="font-size: 0.75rem;">
-                        ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                    </p>
-                </div>
-            </div>
-        </a>
-    <?php endforeach; ?>
-<?php else: ?>
-    <p>No products found in this category.</p>
-<?php endif; ?>
+    <div class="product-cards d-flex gap-4">
+        <!-- Product Cards -->
+        <?php if (!empty($ladies)): ?>
+          <?php foreach ($ladies as $product): ?>
+                <div class="card" style="width: 220px; height: 350px; position: relative;">
+                    <!-- Favorite Icon Positioned Inside the Card -->
+                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
+                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
 
-</div>
+                    <!-- Product Link -->
+                    <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
+                        <img class="card-img-top img-fluid" 
+                             src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                             alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                             style="object-fit: cover; height: 250px; width: 100%;">
+
+                        <div class="card-body text-center p-2">
+                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <p class="card-text" style="font-size: 0.75rem;">
+                                ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No products found in this category.</p>
+        <?php endif; ?>
+    </div>
 </div>
 </section>
     <section class="py-4">
             <h2 class="text-left mb-4">MEN</h2>
-            <div class="scroll-container py-3">
-                <div class="product-cards d-flex gap-4">
-             <!-- Product Cards -->
-               <?php if (!empty($men)): ?>
-                    <?php foreach ($men as $product): ?>
-                        <a href="<?= site_url('product_view/' . $product['id']) ?>">
-                        <div class="card" style="width: 220px; height: 350px;">
-                           <!-- Favorite Icon -->
-                         <i class="bi bi-heart p-1 favorite-icon"></i>
-                            <img class="card-img-top img-fluid" 
-                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                                 style="object-fit: cover; height: 65%; width: 100%;">
-                            <div class="card-body text-center p-2">
-                                <h5 class="card-title text-truncate" style="font-size: 0.6rem;">
-                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                                </h5>
-                                <p class="card-text" style="font-size: 0.75rem;">
-                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                                </p>
-                            </div>
+  <div class="scroll-container py-3">
+    <div class="product-cards d-flex gap-4">
+        <!-- Product Cards -->
+        <?php if (!empty($men)): ?>
+          <?php foreach ($men as $product): ?>
+                <div class="card" style="width: 220px; height: 350px; position: relative;">
+                    <!-- Favorite Icon Positioned Inside the Card -->
+                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
+                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
+
+                    <!-- Product Link -->
+                    <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
+                        <img class="card-img-top img-fluid" 
+                             src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                             alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                             style="object-fit: cover; height: 250px; width: 100%;">
+
+                        <div class="card-body text-center p-2">
+                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                            </h5>
+                            <p class="card-text" style="font-size: 0.75rem;">
+                                ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                            </p>
                         </div>
-                        </a>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>No products found in this category.</p>
-                <?php endif; ?>
-             
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No products found in this category.</p>
+        <?php endif; ?>
+    </div>
         </section>
     </div>
 

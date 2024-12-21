@@ -14,6 +14,16 @@ class Favorites extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'user_id' => [
+                'type'       => 'INT',
+                'unsigned'   => true,
+                'null'       => false,
+            ],
+            'product_id' => [
+                'type'       => 'INT',
+                'unsigned'   => true,
+                'null'       => false, // Set null to false if product_id should always be present
+            ],
             'productName' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',

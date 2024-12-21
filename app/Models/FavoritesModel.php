@@ -4,19 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FavoritesModel extends Model
+class FavoriteModel extends Model
 {
-    protected $table      = 'favorites';  // Table name
-    protected $primaryKey = 'id';         // Primary key
+    protected $table = 'favorites';
+    protected $primaryKey = 'id';
+    protected $allowedFields = ['user_id', 'product_id', 'productName', 'productDescription', 'productPrice', 'productCategory', 'productImage'];
 
-    protected $useAutoIncrement = true;
-    protected $returnType       = 'array'; // Change to 'object' or 'App\Entities\EntityName' if using entities
-
-    protected $allowedFields = [
-        'productName',
-        'productDescription',
-        'productPrice',
-        'productCategory',
-        'productImage',
-    ];
+    // Retrieve favorite products for a specific user
+    public function getFavoritesByUser($userId)
+    {
+        return $this->where('user_id', $userId)->findAll();
+    }
 }
