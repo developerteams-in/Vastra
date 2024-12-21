@@ -221,7 +221,7 @@ $user = session()->get('user'); // User information from session
             </button>
 
             <div class="divider">Or pay with card</div>
-            <form id="payment-form" {handleSubmit}>
+            <form id="payment-form">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email" required>
@@ -303,44 +303,35 @@ $user = session()->get('user'); // User information from session
                 }).then(response => response.json())
                   .then(function(data) {
                       if (data.status === 'success') {
-                          // Redirect or inform user of successful payment
-                          alert('Payment successful!');
-                          window.location.href = "/orders";  // Redirect to orders page or relevant page
+                          // Make a request to remove products from the cart
+                          fetch('/cart/clear', {
+                              method: 'POST',
+                              headers: {
+                                  'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify({
+                                  user_id: '<?= esc($user['id']) ?>',  // Send the logged-in user's ID
+                              }),
+                          }).then(response => response.json())
+                            .then(function(cartData) {
+                                if (cartData.status === 'success') {
+                                    // Optionally update the UI to reflect the empty cart
+                                    window.location.href = "/orders";  // Redirect to orders page or relevant page
+                                } else {
+                                    alert('Failed to clear cart: ' + cartData.message);
+                                }
+                            }).catch(function(error) {
+                                alert('Error: ' + error.message);
+                            });
                       } else {
-                          // Handle server-side failure (e.g., order issue, payment not processed)
                           alert('Payment failed: ' + data.message);
                       }
                   }).catch(function(error) {
-                      // Catch and display any AJAX errors
                       alert('Error: ' + error.message);
                   });
             }
         });
     });
-</script>
-
-    <script>
-    const handlePayment = async (stripeToken) => {
-    const response = await fetch('/checkout/process', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            stripeToken: stripeToken.id    token.id, total_price: totalPrice, product_name: // This should be a valid Stripe Token object
-        })
-    });
-
-    const data = await response.json();
-
-    if (data.status === 'success') {
-        // Payment succeeded, you can use the `clientSecret` to confirm the payment on frontend
-        console.log('Payment Successful!', data.clientSecret);
-    } else {
-        // Payment failed
-        alert('Payment failed: ' + data.message);
-    }
-};
 </script>
 </body>
 </html>

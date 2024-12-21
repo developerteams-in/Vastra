@@ -149,7 +149,7 @@ a{
       <!-- Sidebar Toggle Button -->
       <div class="col-12 text-end">
         <button class="filter-btn" onclick="toggleSidebar()">
-          <i class="fa fa-filter float-left"></i> Filter
+          MORE
         </button>
       </div>
 
@@ -158,22 +158,22 @@ a{
           <button class="close-btn bg-black text-white w-4 h-2 border-redius-50 mt-5 pt-2" onclick="toggleSidebar()">&times;</button>
         <h5 class="mt-5 pt-2">Offers</h5>
         <ul>
-          <li>Member Exclusive Prices</li>
-          <li>Shirts: From ₹1499</li>
-          <li>Overshirts: From ₹1999</li>
+          <a href=""><li>Member Exclusive Prices</li></a>
+          <a href=""><li>Shirts: From ₹1499</li></a>
+          <a href=""><li>Overshirts: From ₹1999</li></a>
         </ul>
         <h5 class="mt-4">Shop by Product</h5>
         <ul>
-          <li>T-Shirts & Tops</li>
-          <li>Hoodies & Sweatshirts</li>
-          <li>Basics</li>
-          <li>Blazers & Suits</li>
-          <li>Socks</li>
-          <li>Sportswear</li>
+        <a href=""><li>T-Shirts & Tops</li></a>
+        <a href=""><li>Hoodies & Sweatshirts</li></a>
+        <a href=""><li>Basics</li></a>
+        <a href=""><li>Blazers & Suits</li></a>
+        <a href=""><li>Socks</li></a>
+        <a href=""><li>Sportswear</li></a>
         </ul>
-        <h5 class="mt-4">Vastra Care</h5>
+        <a href=""><h5 class="mt-4">Vastra Care</h5></a>
         <ul>
-          <li>Learn more about sustainability and product care.</li>
+           <a href=""><li>Learn more about sustainability and product care.</li></a>
         </ul>
       </div>
 
@@ -186,7 +186,7 @@ a{
             <div class="scroll-container py-3">
                 <div class="product-cards d-flex gap-4">
                     <!-- Product Cards -->
-<?php if (!empty($kids)): ?>
+                  <?php if (!empty($kids)): ?>
                     <?php foreach ($kids as $product): ?>
                       <a href="<?= site_url('product_view/' . $product['id']) ?>">
                         <div class="card" style="width: 220px; height: 350px;">
@@ -236,7 +236,6 @@ a{
 
      <!-- Footer -->
      <?= $this->include('footer'); ?>
-
   <script>
     function toggleSidebar() {
       const sidebar = document.getElementById("sidebar");

@@ -58,6 +58,11 @@ class CartModel extends Model
     {
         return $this->where('user_id', $userId)->countAllResults();
     }
+    public function clearCartByUserId($userId)
+    {
+        // Delete cart items for the given user ID
+        return $this->where('user_id', $userId)->delete();
+    }
   
 }
 

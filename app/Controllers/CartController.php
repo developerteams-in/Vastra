@@ -104,6 +104,25 @@ public function getCartCount()
     
     return $this->response->setJSON(['cartCount' => $cartCount]);
 }
+public function clearCart()
+{
+    $userId = session()->get('user')['id'];
+    
+    if ($userId) {
+        // Assuming you have a CartModel with a method to clear cart items by user ID
+        $cartModel = new CartModel();
+        $success = $cartModel->clearCartByUserId($userId);
+
+        if ($success) {
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to clear cart']);
+        }
+    } else {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid user ID']);
+    }
+}
+
 
 }
 

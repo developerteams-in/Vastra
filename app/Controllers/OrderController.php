@@ -49,4 +49,8 @@ class OrderController extends Controller
         // Send a response back to the frontend
         return $this->response->setJSON(['status' => 'success']);
     }
+
+    // Controller to handle clearing the cart
+
+
 }

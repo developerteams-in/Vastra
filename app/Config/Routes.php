@@ -118,4 +118,6 @@ $routes->delete('address/remove/(:num)', 'AddressController::removeAddress/$1');
 $routes->get('orders', 'OrderController::index');
 $routes->post('orders/payment', 'OrderController::processPayment');
 $routes->post('orders/stripe', 'OrderController::process');
+$routes->post('cart/clear', 'CartController::clearCart');  // Clear cart after payment
+
 
