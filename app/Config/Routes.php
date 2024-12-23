@@ -121,6 +121,8 @@ $routes->post('orders/stripe', 'OrderController::process');
 $routes->post('cart/clear', 'CartController::clearCart');  // Clear cart after payment
 
 $routes->get('/favorites', 'FavoritesController::showFavorites');
+
+
 // $routes->post('/favorites/add/(:num)', 'FavoritesController::addFavorite/$1');
 $routes->get('/favorites/remove/(:num)', 'FavoritesController::removeFavorite/$1');
 // $routes->post('/add_to_favorites', 'FavoritesController::addToFavorites');

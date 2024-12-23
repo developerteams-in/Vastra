@@ -72,6 +72,7 @@ class FavoritesModel extends Model
                         ->where('product_id', $productId)
                         ->delete();  // Delete the specific product from favorites
         }
+        
     }
     
 

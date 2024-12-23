@@ -233,7 +233,8 @@ if ($user) {
                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="/favorites" onclick="toggleVisibility('favourites-popup')"><i class="bi bi-heart p-1"></i>Favorites</a></li>    
+                        <li class="nav-item"><a class="nav-link" href="/favorites" onclick="toggleVisibility('favourites-popup')">
+                            <i class="bi bi-heart p-1 "></i>Favorites</a></li>    
                         <li class="nav-item position-relative">
     <a class="nav-link text-center" href="/cart" style="display: inline-block;">
         <?php if ($cartCount > 0): ?>
