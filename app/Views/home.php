@@ -511,97 +511,19 @@ a{
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
-// Add event listener for the favorite icon
-// document.addEventListener('DOMContentLoaded', function () {
-//     const favoriteIcons = document.querySelectorAll('.favorite-icon');
-
-//     favoriteIcons.forEach(icon => {
-//         icon.addEventListener('click', function () {
-//             const productId = this.dataset.productId;
-//             const productName = this.dataset.productName;
-//             const productDescription = this.dataset.productDescription;
-//             const productPrice = this.dataset.productPrice;
-//             const productCategory = this.dataset.productCategory;
-//             const productImage = this.dataset.productImage;
-
-//             // Toggle heart icon and its color
-//             if (this.classList.contains('bi-heart')) {
-//                 this.classList.remove('bi-heart');
-//                 this.classList.add('bi-heart-fill');
-//                 this.style.color = 'red';
-
-//                 // You can handle the "add to favorites" logic here, e.g., make an AJAX request to save to the database
-//                 // Example: saveToFavorites(productId, productName, productDescription, productPrice, productCategory, productImage);
-//             } else {
-//                 this.classList.remove('bi-heart-fill');
-//                 this.classList.add('bi-heart');
-//                 this.style.color = '';
-
-//                 // You can handle the "remove from favorites" logic here, e.g., make an AJAX request to remove from the database
-//                 // Example: removeFromFavorites(productId);
-//             }
-//         });
-//     });
-// });
-
-// // Example function to save product to favorites (can be replaced with actual AJAX request)
-// function saveToFavorites(productId, productName, productDescription, productPrice, productCategory, productImage) {
-//     // You can send data to the server here (e.g., using fetch or XMLHttpRequest)
-//     console.log(`Saving product ${productName} to favorites`);
-//     // Example AJAX request (assuming a route for adding to favorites exists)
-//     fetch('/favorites/add', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             productId: productId,
-//             productName: productName,
-//             productDescription: productDescription,
-//             productPrice: productPrice,
-//             productCategory: productCategory,
-//             productImage: productImage
-//         }),
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log('Product saved to favorites:', data);
-//     })
-//     .catch(error => {
-//         console.error('Error saving product to favorites:', error);
-//     });
-// }
-
-// // Example function to remove product from favorites (can be replaced with actual AJAX request)
-// function removeFromFavorites(productId) {
-//     // You can send data to the server here (e.g., using fetch or XMLHttpRequest)
-//     console.log(`Removing product with ID ${productId} from favorites`);
-//     // Example AJAX request (assuming a route for removing from favorites exists)
-//     fetch('/favorites/remove/', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             productId: productId
-//         }),
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log('Product removed from favorites:', data);
-//     })
-//     .catch(error => {
-//         console.error('Error removing product from favorites:', error);
-//     });
-// }
-
-
-
-
 $(document).ready(function() {
-    // Add to Favorites
+    function setFavoriteIcon(productId, isFavorited) {
+        var $icon = $('.favorite-icon[data-product-id="' + productId + '"]');
+        if (isFavorited) {
+            $icon.removeClass('bi-heart').addClass('bi-heart-fill');
+            $icon.addClass('text-danger');
+        } else {
+            $icon.removeClass('bi-heart-fill').addClass('bi-heart');
+            $icon.removeClass('text-danger');
+        }
+    }
+
     $('.favorite-icon').on('click', function() {
         var productId = $(this).data('product-id');
         var productName = $(this).data('product-name');
@@ -610,9 +532,10 @@ $(document).ready(function() {
         var productCategory = $(this).data('product-category');
         var productImage = $(this).data('product-image');
 
-        // Send an AJAX request to the server to add the product to the favorites
+        var isFavorited = $(this).hasClass('bi-heart-fill');
+
         $.ajax({
-            url: '<?= base_url("add_to_favorites") ?>', // Your route to handle this request
+            url: '<?= base_url("add_to_favorites") ?>',
             method: 'POST',
             data: {
                 product_id: productId,
@@ -620,26 +543,25 @@ $(document).ready(function() {
                 product_description: productDescription,
                 product_price: productPrice,
                 product_category: productCategory,
-                product_image: productImage
+                product_image: productImage,
+                action: isFavorited ? 'remove' : 'add'
             },
             success: function(response) {
-                if(response.status == 'success') {
-                    alert('Product added to favorites!');
-                    // Optionally, change the icon to indicate it's favorited
-                    $(this).toggleClass('text-danger'); // Toggle the heart icon color
+                if (response.status === 'success') {
+                    setFavoriteIcon(productId, !isFavorited);
                 } else {
-                    alert('Failed to add product to favorites!');
+                    alert(response.message);
                 }
             },
             error: function(xhr, status, error) {
-                console.log(error);
-                alert('An error occurred!');
+                console.error(error);
+                alert('Something went wrong. Please try again.');
             }
         });
     });
 });
-
 </script>
+
 
     <!-- Footer -->
     <?= $this->include('footer'); ?>

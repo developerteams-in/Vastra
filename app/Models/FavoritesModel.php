@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -8,18 +7,21 @@ class FavoritesModel extends Model
 {
     protected $table = 'favorites';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['user_id', 'product_id'];
+    protected $allowedFields = ['user_id', 'product_id', 'productName', 'productDescription', 'productPrice', 'productCategory', 'productImage', 'created_at', 'updated_at'];
 
-    // Method to add a product to favorites
-    public function addFavorite($userId, $productId)
+    public function addFavorite($userId, $productId, $productData)
     {
-        return $this->insert([
-            'user_id' => $userId,
-            'product_id' => $productId
-        ]);
+        $existingFavorite = $this->where('user_id', $userId)
+                                 ->where('product_id', $productId)
+                                 ->first();
+
+        if ($existingFavorite) {
+            return false;
+        }
+
+        return $this->insert(array_merge(['user_id' => $userId, 'product_id' => $productId], $productData));
     }
 
-    // Method to remove a product from favorites
     public function removeFavorite($userId, $productId)
     {
         return $this->where('user_id', $userId)
@@ -27,12 +29,10 @@ class FavoritesModel extends Model
                     ->delete();
     }
 
-    // Method to get the user's favorite products (move this here)
     public function getFavoritesByUser($userId)
     {
         return $this->db->table('favorites')
-            ->join('products', 'favorites.product_id = products.id')
-            ->where('favorites.user_id', $userId)
-            ->get()->getResultArray();
+                        ->where('user_id', $userId)
+                        ->get()->getResultArray();
     }
 }

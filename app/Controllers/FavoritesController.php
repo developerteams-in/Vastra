@@ -6,6 +6,7 @@ use App\Models\FavoritesModel;
 
 class FavoritesController extends BaseController
 {
+    // Method to show user's favorite products
     public function showFavorites()
     {
         $favoritesModel = new FavoritesModel();
@@ -17,44 +18,43 @@ class FavoritesController extends BaseController
         return view('favorites', ['favorites' => $favorites]);
     }
 
+    // Method to add a product to favorites
     public function add_to_favorites()
-    {
-        // Check if the user is logged in or has a session
-        $user_id = session()->get('user')['id']; // Or get user_id from session
-        if (!$user_id) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'User not logged in']);
-        }
-    
-        // Get product data from the request
-        $product_id = $this->request->getPost('product_id');
-        $product_name = $this->request->getPost('product_name');
-        $product_description = $this->request->getPost('product_description');
-        $product_price = $this->request->getPost('product_price');
-        $product_category = $this->request->getPost('product_category');
-        $product_image = $this->request->getPost('product_image');
-    
-        // Prepare data to insert into the favorites table
-        $data = [
-            'user_id' => $user_id,
-            'product_id' => $product_id,
-            'productName' => $product_name,
-            'productDescription' => $product_description,
-            'productPrice' => $product_price,
-            'productCategory' => $product_category,
-            'productImage' => $product_image,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ];
-    
-        // Insert data into the favorites table
-        $favoriteModel = new \App\Models\FavoritesModel(); // Adjust model name
-        $favoriteModel->save($data);
-    
-        return $this->response->setJSON(['status' => 'success']);
+{
+    $userId = session()->get('user')['id'];
+    if (!$userId) {
+        return $this->response->setJSON(['status' => 'error', 'message' => 'User not logged in']);
     }
-        public function removeFavorite($productId)
+
+    $productId = $this->request->getPost('product_id');
+    $productData = [
+        'productName' => $this->request->getPost('product_name'),
+        'productDescription' => $this->request->getPost('product_description'),
+        'productPrice' => $this->request->getPost('product_price'),
+        'productCategory' => $this->request->getPost('product_category'),
+        'productImage' => $this->request->getPost('product_image')
+    ];
+
+    $favoriteModel = new FavoritesModel();
+
+    if ($this->request->getPost('action') === 'add') {
+        $isAdded = $favoriteModel->addFavorite($userId, $productId, $productData);
+        if (!$isAdded) {
+            return $this->response->setJSON(['status' => 'fail', 'message' => 'Product is already in favorites']);
+        }
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Product added to favorites']);
+    } else {
+        $isRemoved = $favoriteModel->removeFavorite($userId, $productId);
+        if (!$isRemoved) {
+            return $this->response->setJSON(['status' => 'fail', 'message' => 'Failed to remove product from favorites']);
+        }
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Product removed from favorites']);
+    }
+}
+    // Method to remove a product from favorites
+    public function removeFavorite($productId)
     {
-        $userId = session()->get('user')['id']; 
+        $userId = session()->get('user')['id'];
         $favoritesModel = new FavoritesModel();
         $favoritesModel->removeFavorite($userId, $productId);
 
