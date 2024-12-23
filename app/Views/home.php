@@ -295,6 +295,7 @@ a{
 </head>
 
 <body>
+<hr class="border-top border-1 border-success my-4 d-none d-sm-block">
 
     <!-- Hero Section -->
     <header class="text-white text-center py-5 position-relative top-0 " style="height: 60vh; overflow: hidden;">
@@ -319,42 +320,51 @@ a{
     <section class="py-4">
     <h2 class="text-left mb-4">NEW ARRIVALS</h2>
     <div class="scroll-container py-3">
-    <div class="product-cards d-flex gap-4">
-        <!-- Product Cards -->
-        <?php if (!empty($newarrivals)): ?>
-            <?php foreach ($newarrivals as $product): ?>
-                <div class="card" style="width: 220px; height: 350px; position: relative;">
-                    <!-- Favorite Icon Positioned Inside the Card -->
-                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
-                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
+        <div class="product-cards d-flex gap-4">
+            <?php if (!empty($newarrivals)): ?>
+                <?php foreach ($newarrivals as $product): ?>
+                    <div class="card" style="width: 220px; height: 350px; position: relative;">
+                        <!-- Favorite Icon -->
+                    <!-- Assuming you're looping through products -->
+<i class="bi bi-heart p-2 favorite-icon" 
+   data-product-id="<?= $product['id'] ?>" 
+   data-product-name="<?= $product['productName'] ?>"
+   data-product-description="<?= $product['productDescription'] ?>"
+   data-product-price="<?= $product['productPrice'] ?>"
+   data-product-category="<?= $product['productCategory'] ?>"
+   data-product-image="<?= $product['productImage'] ?>"
+   style="position: absolute; top: 10px; right: 10px; cursor: pointer;">
+</i>
 
-                    <!-- Product Link -->
-                    <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
-                        <img class="card-img-top img-fluid" 
-                             src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
-                             alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
-                             style="object-fit: cover; height: 250px; width: 100%;">
 
-                        <div class="card-body text-center p-2">
-                            <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
-                                <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
-                            </h5>
-                            <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
-                                <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
-                            </h5>
-                            <p class="card-text" style="font-size: 0.75rem;">
-                                ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No products found in this category.</p>
-        <?php endif; ?>
+                        <!-- Product Link -->
+                        <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
+                            <img class="card-img-top img-fluid" 
+                                 src="<?= base_url('uploads/' . htmlspecialchars($product['productImage'], ENT_QUOTES, 'UTF-8')) ?>"  
+                                 alt="<?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 style="object-fit: cover; height: 250px; width: 100%;">
+
+                            <div class="card-body text-center p-2">
+                                <h5 class="card-title text-truncate" style="font-size: 0.8rem;">
+                                    <?= htmlspecialchars($product['productName'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <h5 class="card-title text-truncate" style="font-size: 0.5rem;">
+                                    <?= htmlspecialchars($product['productDescription'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text" style="font-size: 0.75rem;">
+                                    ₹<?= htmlspecialchars($product['productPrice'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No products found in this category.</p>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
 </section>
+
 
 <section class="py-4">
 <h2 class="text-left mb-4">KIDS</h2>
@@ -500,8 +510,140 @@ a{
             <a href="#" class="btn bg-black text-white fw-bold">Shop now</a>
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+// Add event listener for the favorite icon
+// document.addEventListener('DOMContentLoaded', function () {
+//     const favoriteIcons = document.querySelectorAll('.favorite-icon');
+
+//     favoriteIcons.forEach(icon => {
+//         icon.addEventListener('click', function () {
+//             const productId = this.dataset.productId;
+//             const productName = this.dataset.productName;
+//             const productDescription = this.dataset.productDescription;
+//             const productPrice = this.dataset.productPrice;
+//             const productCategory = this.dataset.productCategory;
+//             const productImage = this.dataset.productImage;
+
+//             // Toggle heart icon and its color
+//             if (this.classList.contains('bi-heart')) {
+//                 this.classList.remove('bi-heart');
+//                 this.classList.add('bi-heart-fill');
+//                 this.style.color = 'red';
+
+//                 // You can handle the "add to favorites" logic here, e.g., make an AJAX request to save to the database
+//                 // Example: saveToFavorites(productId, productName, productDescription, productPrice, productCategory, productImage);
+//             } else {
+//                 this.classList.remove('bi-heart-fill');
+//                 this.classList.add('bi-heart');
+//                 this.style.color = '';
+
+//                 // You can handle the "remove from favorites" logic here, e.g., make an AJAX request to remove from the database
+//                 // Example: removeFromFavorites(productId);
+//             }
+//         });
+//     });
+// });
+
+// // Example function to save product to favorites (can be replaced with actual AJAX request)
+// function saveToFavorites(productId, productName, productDescription, productPrice, productCategory, productImage) {
+//     // You can send data to the server here (e.g., using fetch or XMLHttpRequest)
+//     console.log(`Saving product ${productName} to favorites`);
+//     // Example AJAX request (assuming a route for adding to favorites exists)
+//     fetch('/favorites/add', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             productId: productId,
+//             productName: productName,
+//             productDescription: productDescription,
+//             productPrice: productPrice,
+//             productCategory: productCategory,
+//             productImage: productImage
+//         }),
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log('Product saved to favorites:', data);
+//     })
+//     .catch(error => {
+//         console.error('Error saving product to favorites:', error);
+//     });
+// }
+
+// // Example function to remove product from favorites (can be replaced with actual AJAX request)
+// function removeFromFavorites(productId) {
+//     // You can send data to the server here (e.g., using fetch or XMLHttpRequest)
+//     console.log(`Removing product with ID ${productId} from favorites`);
+//     // Example AJAX request (assuming a route for removing from favorites exists)
+//     fetch('/favorites/remove/', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//             productId: productId
+//         }),
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log('Product removed from favorites:', data);
+//     })
+//     .catch(error => {
+//         console.error('Error removing product from favorites:', error);
+//     });
+// }
+
+
+
+
+$(document).ready(function() {
+    // Add to Favorites
+    $('.favorite-icon').on('click', function() {
+        var productId = $(this).data('product-id');
+        var productName = $(this).data('product-name');
+        var productDescription = $(this).data('product-description');
+        var productPrice = $(this).data('product-price');
+        var productCategory = $(this).data('product-category');
+        var productImage = $(this).data('product-image');
+
+        // Send an AJAX request to the server to add the product to the favorites
+        $.ajax({
+            url: '<?= base_url("add_to_favorites") ?>', // Your route to handle this request
+            method: 'POST',
+            data: {
+                product_id: productId,
+                product_name: productName,
+                product_description: productDescription,
+                product_price: productPrice,
+                product_category: productCategory,
+                product_image: productImage
+            },
+            success: function(response) {
+                if(response.status == 'success') {
+                    alert('Product added to favorites!');
+                    // Optionally, change the icon to indicate it's favorited
+                    $(this).toggleClass('text-danger'); // Toggle the heart icon color
+                } else {
+                    alert('Failed to add product to favorites!');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+                alert('An error occurred!');
+            }
+        });
+    });
+});
+
+</script>
+
     <!-- Footer -->
     <?= $this->include('footer'); ?>
+
 </body>
 
 </html>
