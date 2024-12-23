@@ -8,9 +8,17 @@ class FavoritesModel extends Model
     protected $table = 'favorites';
     protected $primaryKey = 'id';
     protected $allowedFields = ['user_id', 'product_id', 'productName', 'productDescription', 'productPrice', 'productCategory', 'productImage', 'created_at', 'updated_at'];
+    protected $useTimestamps = true;
 
     public function addFavorite($userId, $productId, $productData)
     {
+        $requiredKeys = ['productName', 'productDescription', 'productPrice', 'productCategory', 'productImage'];
+        foreach ($requiredKeys as $key) {
+            if (!isset($productData[$key])) {
+                throw new \InvalidArgumentException("Missing required key: {$key}");
+            }
+        }
+
         $existingFavorite = $this->where('user_id', $userId)
                                  ->where('product_id', $productId)
                                  ->first();
@@ -18,6 +26,8 @@ class FavoritesModel extends Model
         if ($existingFavorite) {
             return false;
         }
+
+        $productData['productPrice'] = (float) $productData['productPrice'];
 
         return $this->insert(array_merge(['user_id' => $userId, 'product_id' => $productId], $productData));
     }
@@ -31,8 +41,8 @@ class FavoritesModel extends Model
 
     public function getFavoritesByUser($userId)
     {
-        return $this->db->table('favorites')
-                        ->where('user_id', $userId)
-                        ->get()->getResultArray();
+        return $this->select(['product_id', 'productName', 'productImage', 'productPrice'])
+                    ->where('user_id', $userId)
+                    ->findAll();
     }
 }

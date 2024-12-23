@@ -374,10 +374,15 @@ a{
         <?php if (!empty($kids)): ?>
           <?php foreach ($kids as $product): ?>
                 <div class="card" style="width: 220px; height: 350px; position: relative;">
-                    <!-- Favorite Icon Positioned Inside the Card -->
-                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
-                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
-
+                <i class="bi bi-heart p-2 favorite-icon" 
+                   data-product-id="<?= $product['id'] ?>" 
+                    data-product-name="<?= $product['productName'] ?>"
+                    data-product-description="<?= $product['productDescription'] ?>"
+                    data-product-price="<?= $product['productPrice'] ?>"
+                     data-product-category="<?= $product['productCategory'] ?>"
+                     data-product-image="<?= $product['productImage'] ?>"
+                      style="position: absolute; top: 10px; right: 10px; cursor: pointer;">
+                    </i>
                     <!-- Product Link -->
                     <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
                         <img class="card-img-top img-fluid" 
@@ -413,10 +418,15 @@ a{
         <?php if (!empty($ladies)): ?>
           <?php foreach ($ladies as $product): ?>
                 <div class="card" style="width: 220px; height: 350px; position: relative;">
-                    <!-- Favorite Icon Positioned Inside the Card -->
-                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
-                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
-
+                <i class="bi bi-heart p-2 favorite-icon" 
+   data-product-id="<?= $product['id'] ?>" 
+   data-product-name="<?= $product['productName'] ?>"
+   data-product-description="<?= $product['productDescription'] ?>"
+   data-product-price="<?= $product['productPrice'] ?>"
+   data-product-category="<?= $product['productCategory'] ?>"
+   data-product-image="<?= $product['productImage'] ?>"
+   style="position: absolute; top: 10px; right: 10px; cursor: pointer;">
+</i>
                     <!-- Product Link -->
                     <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
                         <img class="card-img-top img-fluid" 
@@ -453,9 +463,15 @@ a{
           <?php foreach ($men as $product): ?>
                 <div class="card" style="width: 220px; height: 350px; position: relative;">
                     <!-- Favorite Icon Positioned Inside the Card -->
-                    <i class="bi bi-heart p-2 favorite-icon" data-product-id="<?= $product['id'] ?>" 
-                        style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
-
+                    <i class="bi bi-heart p-2 favorite-icon" 
+   data-product-id="<?= $product['id'] ?>" 
+   data-product-name="<?= $product['productName'] ?>"
+   data-product-description="<?= $product['productDescription'] ?>"
+   data-product-price="<?= $product['productPrice'] ?>"
+   data-product-category="<?= $product['productCategory'] ?>"
+   data-product-image="<?= $product['productImage'] ?>"
+   style="position: absolute; top: 10px; right: 10px; cursor: pointer;">
+</i>
                     <!-- Product Link -->
                     <a href="<?= site_url('product_view/' . $product['id']) ?>" style="text-decoration: none;">
                         <img class="card-img-top img-fluid" 
@@ -512,7 +528,7 @@ a{
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-$(document).ready(function() {
+$(document).ready(function () {
     function setFavoriteIcon(productId, isFavorited) {
         var $icon = $('.favorite-icon[data-product-id="' + productId + '"]');
         if (isFavorited) {
@@ -524,15 +540,39 @@ $(document).ready(function() {
         }
     }
 
-    $('.favorite-icon').on('click', function() {
-        var productId = $(this).data('product-id');
-        var productName = $(this).data('product-name');
-        var productDescription = $(this).data('product-description');
-        var productPrice = $(this).data('product-price');
-        var productCategory = $(this).data('product-category');
-        var productImage = $(this).data('product-image');
+    // Fetch user's favorite products on page load
+    $.ajax({
+        url: '<?= base_url("get_user_favorites") ?>',
+        method: 'GET',
+        success: function (response) {
+            if (response.status === 'success') {
+                // Mark all favorite products with the filled heart icon
+                response.favorites.forEach(function (productId) {
+                    setFavoriteIcon(productId, true);
+                });
+            } else {
+                console.warn(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
 
-        var isFavorited = $(this).hasClass('bi-heart-fill');
+    // Toggle favorite on icon click
+    $('.favorite-icon').on('click', function () {
+        var $this = $(this);
+        if ($this.data('processing')) return; // Prevent multiple clicks
+        $this.data('processing', true);
+
+        var productId = $this.data('product-id');
+        var productName = $this.data('product-name');
+        var productDescription = $this.data('product-description');
+        var productPrice = $this.data('product-price');
+        var productCategory = $this.data('product-category');
+        var productImage = $this.data('product-image');
+
+        var isFavorited = $this.hasClass('bi-heart-fill');
 
         $.ajax({
             url: '<?= base_url("add_to_favorites") ?>',
@@ -546,20 +586,23 @@ $(document).ready(function() {
                 product_image: productImage,
                 action: isFavorited ? 'remove' : 'add'
             },
-            success: function(response) {
+            success: function (response) {
                 if (response.status === 'success') {
                     setFavoriteIcon(productId, !isFavorited);
                 } else {
                     alert(response.message);
                 }
+                $this.data('processing', false); // Re-enable click
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
                 alert('Something went wrong. Please try again.');
+                $this.data('processing', false); // Re-enable click
             }
         });
     });
 });
+
 </script>
 
 

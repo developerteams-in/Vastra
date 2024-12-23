@@ -35,6 +35,7 @@ class FavoritesController extends BaseController
         'productImage' => $this->request->getPost('product_image')
     ];
 
+   
     $favoriteModel = new FavoritesModel();
 
     if ($this->request->getPost('action') === 'add') {
