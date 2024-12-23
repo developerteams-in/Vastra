@@ -529,6 +529,7 @@ a{
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 $(document).ready(function () {
+    // Set the heart icon based on whether the product is favorited or not
     function setFavoriteIcon(productId, isFavorited) {
         var $icon = $('.favorite-icon[data-product-id="' + productId + '"]');
         if (isFavorited) {
@@ -542,11 +543,11 @@ $(document).ready(function () {
 
     // Fetch user's favorite products on page load
     $.ajax({
-        url: '<?= base_url("get_user_favorites") ?>',
+        url: '<?= base_url("get_user_favorites") ?>', // Endpoint to fetch user's favorites
         method: 'GET',
         success: function (response) {
             if (response.status === 'success') {
-                // Mark all favorite products with the filled heart icon
+                // Mark the products that are already in favorites
                 response.favorites.forEach(function (productId) {
                     setFavoriteIcon(productId, true);
                 });
@@ -555,7 +556,7 @@ $(document).ready(function () {
             }
         },
         error: function (xhr, status, error) {
-            console.error(error);
+            console.error('Error fetching favorites:', error);
         }
     });
 
@@ -572,10 +573,10 @@ $(document).ready(function () {
         var productCategory = $this.data('product-category');
         var productImage = $this.data('product-image');
 
-        var isFavorited = $this.hasClass('bi-heart-fill');
+        var isFavorited = $this.hasClass('bi-heart-fill'); // Check if the product is currently favorited
 
         $.ajax({
-            url: '<?= base_url("add_to_favorites") ?>',
+            url: '<?= base_url("add_to_favorites") ?>',  // Endpoint to add or remove favorites
             method: 'POST',
             data: {
                 product_id: productId,
@@ -584,10 +585,11 @@ $(document).ready(function () {
                 product_price: productPrice,
                 product_category: productCategory,
                 product_image: productImage,
-                action: isFavorited ? 'remove' : 'add'
+                action: isFavorited ? 'remove' : 'add' // Toggle the action based on the current state
             },
             success: function (response) {
                 if (response.status === 'success') {
+                    // Update the heart icon based on the action (add/remove)
                     setFavoriteIcon(productId, !isFavorited);
                 } else {
                     alert(response.message);
@@ -595,13 +597,16 @@ $(document).ready(function () {
                 $this.data('processing', false); // Re-enable click
             },
             error: function (xhr, status, error) {
-                console.error(error);
+                console.error('Error toggling favorite:', error);
                 alert('Something went wrong. Please try again.');
                 $this.data('processing', false); // Re-enable click
             }
         });
     });
 });
+
+
+
 
 </script>
 

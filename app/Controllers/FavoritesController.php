@@ -53,12 +53,61 @@ class FavoritesController extends BaseController
     }
 }
     // Method to remove a product from favorites
-    public function removeFavorite($productId)
-    {
-        $userId = session()->get('user')['id'];
-        $favoritesModel = new FavoritesModel();
-        $favoritesModel->removeFavorite($userId, $productId);
-
-        return redirect()->to('/favorites');
+            public function getUserFavorites()
+        {
+            $favoritesModel = new FavoritesModel();
+            $userId = session()->get('user')['id'];  // Assuming user ID is stored in session
+    
+            // Fetch user's favorite products from the database
+            $favorites = $favoritesModel->getFavoritesByUser($userId);
+    
+            // Return the response as JSON
+            return $this->response->setJSON([
+                'status' => 'success',
+                'favorites' => array_column($favorites, 'product_id') // Just return product IDs
+            ]);
+        }
+    
+        // Method to add or remove product from favorites
+        public function addToFavorites()
+        {
+            $productId = $this->request->getPost('product_id');
+            $action = $this->request->getPost('action');
+            $userId = session()->get('user')['id']; // Assuming user ID is stored in session
+    
+            $favoritesModel = new FavoritesModel();
+            $productData = [
+                'productName' => $this->request->getPost('product_name'),
+                'productDescription' => $this->request->getPost('product_description'),
+                'productPrice' => $this->request->getPost('product_price'),
+                'productCategory' => $this->request->getPost('product_category'),
+                'productImage' => $this->request->getPost('product_image')
+            ];
+    
+            if ($action == 'add') {
+                // Add the product to the user's favorites  
+                $favoritesModel->addFavorite($userId, $productId,$productData);
+            } else {
+                // Remove the product from the user's favorites
+                $favoritesModel->removeFromFavorites($userId, $productId);
+            }
+    
+            return $this->response->setJSON(['status' => 'success']);
+        }
+        public function removeFavorite($productId)
+        {
+            $favoritesModel = new FavoritesModel();
+            $userId = session()->get('user')['id'];  // Assuming user ID is stored in session
+    
+            // Remove the product from the user's favorites
+            $favoritesModel->removeFromFavorites($userId, $productId);
+    
+            // Optionally, you can flash a success message and redirect
+            session()->setFlashdata('success', 'Product removed from favorites');
+    
+            // Redirect to the favorites page or wherever appropriate
+            return redirect()->to('/favorites');
+        }
     }
-}
+    
+    
