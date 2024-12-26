@@ -36,6 +36,9 @@ $routes->get('user_list', 'User_list::showUser_list');
 
 // Routes for user and admin dashboards
 // $routes->get('/home', 'Home::index');
+$routes->post('dashboard/update-order-status', 'DashboardController::updateOrderStatus');
+
+
 $routes->get('/admin/dashboard', 'AdminController::dashboard'); // Admin dashboard route
 $routes->get('/user/dashboard', 'Home::dashboard'); // User dashboard route
 

@@ -38,7 +38,7 @@ class OrderController extends Controller
             'productName' => implode(', ', $productNames), // Combine product names into a single string
             'order_date' => date('Y-m-d H:i:s'),
             'total_price' => $totalPrice,
-            'status' => 'completed', // Default status for the order
+            'status' => 'pending', // Default status for the order
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
