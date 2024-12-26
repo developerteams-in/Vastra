@@ -16,7 +16,7 @@ class OrderController extends Controller
         $orderModel = new OrderModel();
         $orders = $orderModel->where('user_id', session()->get('user')['id'])->findAll();
 
-        return view('orders', ['orders' => $orders]);  // Passing fetched orders to the view
+        return view('orders', ['orders' => $orders]); // Passing fetched orders to the view
     }
 
     // Handle the payment processing and order insertion
@@ -35,10 +35,10 @@ class OrderController extends Controller
         $orderModel = new OrderModel();
         $orderData = [
             'user_id' => $userId,
-            'productName' => implode(', ', $productNames),  // Combine product names into a single string
+            'productName' => implode(', ', $productNames), // Combine product names into a single string
             'order_date' => date('Y-m-d H:i:s'),
             'total_price' => $totalPrice,
-            'status' => 'pending',  // Default status for the order
+            'status' => 'completed', // Default status for the order
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -50,7 +50,23 @@ class OrderController extends Controller
         return $this->response->setJSON(['status' => 'success']);
     }
 
-    // Controller to handle clearing the cart
+    // Handle order cancellation
+    public function cancelOrder($orderId)
+    {
+        $orderModel = new OrderModel();
 
+        // Find the order by ID and verify if it belongs to the logged-in user
+        $order = $orderModel->where('id', $orderId)
+                            ->where('user_id', session()->get('user')['id'])
+                            ->first();
 
+        if ($order) {
+            // Update the order status to 'canceled'
+            $orderModel->update($orderId, ['status' => 'canceled', 'updated_at' => date('Y-m-d H:i:s')]);
+
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Order canceled successfully']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Order not found or unauthorized']);
+        }
+    }
 }

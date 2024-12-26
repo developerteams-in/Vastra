@@ -228,69 +228,82 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        // Add to Cart functionality
-        $('.add-to-cart').click(function () {
-            const productId = $(this).data('id');
-            const productQuantity = $('#product_quantity').val();
-            const productName = $(this).data('name');
-            const productSize = $('#hidden-sizes').val();
-            const productImage = $(this).data('image');
-            const productPrice = $(this).data('price');
+ $(document).ready(function () {
+    // Quantity Decrease Button
+    $('#decrease-quantity').click(function () {
+        let currentQuantity = parseInt($('#product_quantity').val());
+        if (currentQuantity > 1) {
+            $('#product_quantity').val(currentQuantity - 1);
+        }
+    });
 
-            if (!productSize) {
-                // Show custom alert if size is not selected
-                $('#custom-alert').addClass('show');  // Show alert
-                setTimeout(function () {
-                    $('#custom-alert').removeClass('show');  // Hide alert after 3 seconds
-                }, 3000);
-                return;
-            }
+    // Quantity Increase Button
+    $('#increase-quantity').click(function () {
+        let currentQuantity = parseInt($('#product_quantity').val());
+        $('#product_quantity').val(currentQuantity + 1);
+    });
 
-            // Immediate UI feedback
-            $('#cart-alert').addClass('show');  // Show success alert
+    // Add to Cart functionality
+    $('.add-to-cart').click(function () {
+        const productId = $(this).data('id');
+        const productQuantity = $('#product_quantity').val();
+        const productName = $(this).data('name');
+        const productSize = $('#hidden-sizes').val();
+        const productImage = $(this).data('image');
+        const productPrice = $(this).data('price');
+
+        if (!productSize) {
+            // Show custom alert if size is not selected
+            $('#custom-alert').addClass('show');  // Show alert
             setTimeout(function () {
-                $('#cart-alert').removeClass('show');  // Hide after 3 seconds
+                $('#custom-alert').removeClass('show');  // Hide alert after 3 seconds
             }, 3000);
+            return;
+        }
 
-            // Send AJAX request
-            $.ajax({
-                url: '/cart/add',
-                method: 'POST',
-                data: {
-                    product_id: productId,
-                    product_quantity: productQuantity,
-                    product_name: productName,
-                    product_size: productSize,
-                    product_image: productImage,
-                    product_price: productPrice,
-                    csrf_token: "<?= csrf_token() ?>"
-                },
-                success: function (response) {
-                    if (response.status) {
-                        // Redirection after AJAX success
-                        setTimeout(function () {
-                            window.location.href = "<?= site_url('cart') ?>";  // Redirect to cart after 3 seconds
-                        }, 3000);
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function () {
-                    alert('Something went wrong');
+        // Immediate UI feedback
+        $('#cart-alert').addClass('show');  // Show success alert
+        setTimeout(function () {
+            $('#cart-alert').removeClass('show');  // Hide after 3 seconds
+        }, 3000);
+
+        // Send AJAX request
+        $.ajax({
+            url: '/cart/add',
+            method: 'POST',
+            data: {
+                product_id: productId,
+                product_quantity: productQuantity,
+                product_name: productName,
+                product_size: productSize,
+                product_image: productImage,
+                product_price: productPrice,
+                csrf_token: "<?= csrf_token() ?>"
+            },
+            success: function (response) {
+                if (response.status) {
+                    // Redirection after AJAX success
+                    setTimeout(function () {
+                        window.location.href = "<?= site_url('cart') ?>";  // Redirect to cart after 3 seconds
+                    }, 3000);
+                } else {
+                    alert(response.message);
                 }
-            });
-        });
-
-        // Size Selection functionality
-        $('.size-btn').click(function () {
-            $('.size-btn').removeClass('btn-selected');
-            $(this).addClass('btn-selected');
-            const size = $(this).text();
-            $('#hidden-sizes').val(size);
+            },
+            error: function () {
+                alert('Something went wrong');
+            }
         });
     });
-</script>
+
+    // Size Selection functionality
+    $('.size-btn').click(function () {
+        $('.size-btn').removeClass('btn-selected');
+        $(this).addClass('btn-selected');
+        const size = $(this).text();
+        $('#hidden-sizes').val(size);
+    });
+});
 
     </script>
 

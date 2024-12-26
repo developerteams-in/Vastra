@@ -129,6 +129,7 @@ $routes->get('/favorites/remove/(:num)', 'FavoritesController::removeFavorite/$1
 $routes->get('get_user_favorites', 'FavoritesController::getUserFavorites');
 $routes->post('add_to_favorites', 'FavoritesController::addToFavorites');
 
+$routes->post('orders/cancel/(:num)', 'OrderController::cancelOrder/$1');
 
 
 
