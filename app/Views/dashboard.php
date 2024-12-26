@@ -1,5 +1,14 @@
-<?= $this->extend('layout') ?>
-<?= $this->section('content') ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Dashboard</title>
+</head>
+<body>
+    
 
 <div class="container-fluid">
     <div class="row">
@@ -8,8 +17,12 @@
             <h4>Menu</h4>
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
+                <li class="nav-item">
+                        <a class="nav-link active" href="/user_list">User_List</a>
+                    </li>
                 <li class="nav-item"><a class="nav-link" href="/add_products">Add Products</a></li>
                 <li class="nav-item"><a class="nav-link" href="/product_list">Product List</a></li>
+               
                 <li class="nav-item" style="position: fixed; bottom: 0; width:4%; text-align: center;">
                   <a class="nav-link btn btn-danger text-white" href="/logout" style="margin-top: 20px;">Exit</a></li>
             </ul>
@@ -79,7 +92,7 @@
                                 </select>
                             </td>
                             <td>
-                                <button class="btn btn-primary" onclick="updateOrderStatus(<?= esc($order['id']) ?>)">Update</button>
+                                <button class="btn btn-danger" onclick="updateOrderStatus(<?= esc($order['id']) ?>)">Update</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -117,4 +130,7 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<?= $this->endSection() ?>
+
+
+</body>
+</html>
