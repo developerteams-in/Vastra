@@ -44,6 +44,8 @@ $routes->get('/user/dashboard', 'Home::dashboard'); // User dashboard route
 
 
 
+$routes->get('/products/search', 'ProductController::search');
+$routes->get('/product/view/(:num)', 'ProductController::view/$1');
 
 $routes->get('product/(:num)', 'ProductController::details/$1');
 $routes->get('/dashboard', 'DashboardController::dashboard');

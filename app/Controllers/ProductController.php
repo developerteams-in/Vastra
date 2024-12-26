@@ -166,6 +166,31 @@ public function getProduct($id)
         return $this->response->setJSON(['error' => 'Product not found'], 404);
     }
 }
+public function search()
+{
+    $searchTerm = $this->request->getGet('query'); // Retrieve the search term
+    $productModel = new ProductModel();
+
+    $results = $productModel->select('id, productName, productImage')
+                            ->like('productName', $searchTerm)
+                            ->orLike('productCategory', $searchTerm)
+                            ->findAll();
+
+    return $this->response->setJSON($results); // Return results as JSON
+}
+
+public function view($id)
+{
+    $productModel = new ProductModel();
+    $product = $productModel->find($id);
+
+    if (!$product) {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException("Product with ID $id not found.");
+    }
+
+    return view('product_view', ['product' => $product]);
+}
+
 
 
 }

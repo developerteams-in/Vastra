@@ -19,6 +19,40 @@ if ($user) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+   #searchResults {
+    position: absolute;
+    top: 100%;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    width: 40%; /* Adjust the width as needed */
+    max-height: 300px; /* Height of the results container */
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+#searchResults li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#searchResults li:hover {
+    background-color: #f9f9f9;
+}
+
+#searchResults img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
         .badge {
             font-size: 12px;
             position: absolute;
@@ -215,12 +249,14 @@ if ($user) {
                     <li class="nav-item"><a class="nav-link" href="/">Vastra</a></li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <form id="searchForm" action="">
-                            <input id="searchInput" type="search" autofocus required placeholder="search...">
-                            <i class="bi bi-search"></i>
-                        </form>
-                    </li>
+                <li class="nav-item">
+    <form id="searchForm" action="javascript:void(0);">
+        <input id="searchInput" type="search" autofocus required placeholder="Search products...">
+        <i class="bi bi-search"></i>
+    </form>
+</li>
+<ul id="searchResults" style="position: absolute; background: white; list-style: none; padding: 10px; display: none;"></ul>
+
                     <?php if ($user): ?>
                         <!-- Dropdown for logged-in user -->
                         <li class="nav-item dropdown">
@@ -316,6 +352,60 @@ $(document).ready(function() {
 });
 
 </script>
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+    const resultsContainer = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value.trim();
+
+        if (query.length === 0) {
+            resultsContainer.style.display = 'none';
+            resultsContainer.innerHTML = ''; // Clear results
+            return;
+        }
+
+        fetch(`/products/search?query=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                resultsContainer.innerHTML = ''; // Clear previous results
+                if (data.length > 0) {
+                    resultsContainer.style.display = 'block';
+                    data.forEach(product => {
+                        const listItem = document.createElement('li');
+                        listItem.style.borderBottom = '1px solid #ddd';
+                        listItem.style.padding = '8px';
+                        listItem.innerHTML = `
+                            <a href="/product/view/${product.id}" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                                <img src="/uploads/${product.productImage}" alt="${product.productName}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                                <strong>${product.productName}</strong>
+                            </a>
+                        `;
+                        resultsContainer.appendChild(listItem);
+                    });
+                } else {
+                    resultsContainer.style.display = 'block';
+                    resultsContainer.innerHTML = '<li>No results found</li>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching search results:', error);
+                resultsContainer.style.display = 'none';
+            });
+    });
+
+    // Hide results when clicking outside
+    document.addEventListener('click', function (event) {
+        if (!searchForm.contains(event.target)) {
+            resultsContainer.style.display = 'none';
+        }
+    });
+});
+
+
+    </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
