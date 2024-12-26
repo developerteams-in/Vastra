@@ -12,11 +12,11 @@
                 <div class="col-md-2">
                      <h5 class="fs-6">SHOP</h5>
                      <ul class="list-unstyled" style="font-size: 12px;">
-                     <li style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Ladies</a></li>
-                     <li style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Men</a></li>
-                    <li style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Body</a></li>
-                    <li style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Kids</a></li>
-                    <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Sport</a></li>
+                     <li style="margin-bottom: 10px;"><a href="/ladies" class="text-black text-decoration-none">Ladies</a></li>
+                     <li style="margin-bottom: 10px;"><a href="/men" class="text-black text-decoration-none">Men</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/" class="text-black text-decoration-none">Body</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/kids" class="text-black text-decoration-none">Kids</a></li>
+                    <li  style="margin-bottom: 10px;"><a href="/sport" class="text-black text-decoration-none">Sport</a></li>
                    </ul>
                   </div>
 

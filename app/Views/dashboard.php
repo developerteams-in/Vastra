@@ -10,7 +10,8 @@
                 <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="/add_products">Add Products</a></li>
                 <li class="nav-item"><a class="nav-link" href="/product_list">Product List</a></li>
-                <li class="nav-item"><a class="nav-link btn btn-danger text-white mt-5" href="/logout">Logout</a></li>
+                <li class="nav-item" style="position: fixed; bottom: 0; width:4%; text-align: center;">
+                  <a class="nav-link btn btn-danger text-white" href="/logout" style="margin-top: 20px;">Exit</a></li>
             </ul>
         </div>
 
