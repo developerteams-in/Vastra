@@ -1,3 +1,5 @@
+<?= $this->extend('layout') ?>
+<?= $this->section('content') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,12 +120,9 @@
 
 <body>
     <div class="container my-5">
-        <a href="/" class="text-black">
-            <i class="bi bi-house text-black"></i> Vastra
-        </a>
+       
         <h1 class="text-center mb-4">Your Favourites</h1>
         <section class="py-4">
-            <h2 class="text-left mb-4">Your Favorites</h2>
             <div class="scroll-container py-3">
                 <div class="product-cards">
                     <?php if (!empty($favorites)): ?>
@@ -254,6 +253,11 @@
 });
 
         </script>
+
+
+    <!-- Footer -->
+    <?= $this->include('footer'); ?>
 </body>
 
 </html>
+<?= $this->endSection() ?>

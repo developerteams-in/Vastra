@@ -106,17 +106,6 @@
     </div>
 </div>
 
-<!-- Social Media Section -->
-<div class="container text-center py-4">
-    <h6>Connect with Vastra</h6>
-    <div class="d-flex justify-content-center">
-        <a href="#" class="btn btn-white mx-2"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="btn btn-white mx-2"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="btn btn-white mx-2"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="btn btn-white mx-2"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-</div>
-
 <hr class="border-top border-1 border-success my-4 d-none d-sm-block">
 <!-- Footer -->
 <?= $this->include('footer'); ?>

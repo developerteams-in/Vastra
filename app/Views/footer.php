@@ -1,4 +1,6 @@
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Footer -->
     <footer class="bg-white py-4">
         <div class="container">
@@ -44,12 +46,21 @@
                 <div class="col-md-2 "style="font-size: 13px;">
                 <ul class="list-unstyled"style="font-size: 12px;">
                     <p>Sign up now to get exclusive offers, the latest fashion updates, and styling tips. Be the first to discover new trends and discounts. Stay inspired and elevate your wardrobe effortlessly!</p>
-                    <a href="#" class="text-black text-decoration-none">Read More<i class="bi bi-arrow-right-short fs-6"></i></a>
+                    <a href="/magazine" class="text-black text-decoration-none">Read More<i class="bi bi-arrow-right-short fs-6"></i></a>
                 </ul>
                 </div>
             </div>
         </div>
         <footer class="bg-light text-center py-3">
+            <!-- Social Media Section -->
+<div class="container text-center py-4">
+    <div class="d-flex justify-content-center">
+        <a href="#" class="btn btn-white mx-2"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="btn btn-white mx-2"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="btn btn-white mx-2"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="btn btn-white mx-2"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</div>
     <p style="font-size:10px;">&copy; 2024 Vastra. All Rights Reserved.</p>
 </footer>
 
