@@ -160,15 +160,17 @@
                                                 data-size="M"> <!-- Add size data here if required -->
                                             Add to Cart
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-buy add-to-cart" 
-                                                data-id="<?= esc($favorite['product_id']) ?>" 
-                                                data-name="<?= esc($favorite['productName']) ?>" 
-                                                data-price="<?= esc($favorite['productPrice']) ?>" 
-                                                data-quantity="1"
-                                                data-image="<?= esc($favorite['productImage']) ?>"
-                                                data-size="M"> <!-- Add size data here if required -->
-                                            Buy Now
-                                        </button>
+                                        <!-- Update the Buy Now button class to .btn-buy-now -->
+                                       <button type="button" class="btn btn-danger btn-buy-now add-to-cart" 
+                                              data-id="<?= esc($favorite['product_id']) ?>" 
+                                              data-name="<?= esc($favorite['productName']) ?>" 
+                                              data-price="<?= esc($favorite['productPrice']) ?>" 
+                                              data-quantity="1"
+                                              data-image="<?= esc($favorite['productImage']) ?>"
+                                              data-size="M">
+                                               Buy Now
+                                      </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +189,7 @@
     <!-- jQuery and Custom JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    $(document).ready(function () {
+  $(document).ready(function () {
     // Add to Cart functionality
     $('.add-to-cart').click(function () {
         const productId = $(this).data('id');
@@ -243,9 +245,15 @@
             messageBox.alert('close'); // Close the alert
         }, 3000); // 3000ms = 3 seconds
     }
+
+    // Buy Now Button functionality
+    $('.btn-buy-now').click(function () {
+        // Redirect to the address page (replace with your actual address page URL)
+        window.location.href = '/address'; // You can change '/address' to the actual URL of your address page
+    });
 });
 
-    </script>
+        </script>
 </body>
 
 </html>
