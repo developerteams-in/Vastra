@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\FavoritesModel;
+use App\Models\ProductModel;
 
 class FavoritesController extends BaseController
 {
@@ -108,6 +109,7 @@ class FavoritesController extends BaseController
             // Redirect to the favorites page or wherever appropriate
             return redirect()->to('/favorites');
         }
+        
     }
     
     

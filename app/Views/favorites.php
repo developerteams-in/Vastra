@@ -1,4 +1,3 @@
-<!-- favorites.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +7,18 @@
     <title>Your Favourites</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .alert {
+        position: fixed;
+        top: 180px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        width: 80%;
+        max-width: 400px;
+    }
+</style>
+
     <style>
         /* Scroll Container */
         .product-cards {
@@ -20,11 +31,11 @@
 
         /* Hide Scrollbar */
         .product-cards::-webkit-scrollbar {
-            display: none;  /* Chrome, Safari */
+            display: none;
         }
 
         .product-cards {
-            scrollbar-width: none;  /* Firefox */
+            scrollbar-width: none;
         }
 
         .card {
@@ -57,8 +68,8 @@
             top: 10px;
             right: 10px;
             z-index: 1;
-            color:red;
-            font-weight: bold; 
+            color: red;
+            font-weight: bold;
         }
 
         .card-btns {
@@ -71,7 +82,7 @@
         .btn-cart,
         .btn-buy {
             width: 48%;
-            font-size: 0.75rem;  /* Smaller text size */
+            font-size: 0.75rem;
         }
 
         /* Adjust for smaller screens */
@@ -140,8 +151,24 @@
                                     </p>
                                     <!-- Add to Cart and Buy Now Buttons -->
                                     <div class="card-btns">
-                                    <a href="<?= site_url('product_view/' . $favorite['id']) ?>" class="btn btn-danger btn-cart">Add to Cart</a>
-                                        <a href="<?= base_url('checkout/buy/' . $favorite['product_id']) ?>" class="btn btn-danger btn-buy">Buy Now</a>
+                                        <button type="button" class="btn btn-danger btn-cart add-to-cart" 
+                                                data-id="<?= esc($favorite['product_id']) ?>" 
+                                                data-name="<?= esc($favorite['productName']) ?>" 
+                                                data-price="<?= esc($favorite['productPrice']) ?>" 
+                                                data-quantity="1"
+                                                data-image="<?= esc($favorite['productImage']) ?>"
+                                                data-size="M"> <!-- Add size data here if required -->
+                                            Add to Cart
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-buy add-to-cart" 
+                                                data-id="<?= esc($favorite['product_id']) ?>" 
+                                                data-name="<?= esc($favorite['productName']) ?>" 
+                                                data-price="<?= esc($favorite['productPrice']) ?>" 
+                                                data-quantity="1"
+                                                data-image="<?= esc($favorite['productImage']) ?>"
+                                                data-size="M"> <!-- Add size data here if required -->
+                                            Buy Now
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +183,69 @@
 
     <!-- Bootstrap JS for responsive functionality (optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery and Custom JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+    // Add to Cart functionality
+    $('.add-to-cart').click(function () {
+        const productId = $(this).data('id');
+        const productQuantity = $(this).data('quantity');
+        const productName = $(this).data('name');
+        const productImage = $(this).data('image');
+        const productPrice = $(this).data('price');
+        const productSize = $(this).data('size'); // Size data
+        const userId = "<?= session()->get('user')['id']; ?>"; // Get logged-in user's ID
+
+        // Send AJAX request to add product to cart
+        $.ajax({
+            url: '/cart/add', // Make sure this route matches your controller method
+            method: 'POST',
+            data: {
+                product_id: productId,
+                product_quantity: productQuantity,
+                product_name: productName,
+                product_image: productImage,
+                product_price: productPrice,
+                product_size: productSize,
+                user_id: userId,
+                csrf_token: "<?= csrf_token() ?>" // CSRF Token for security
+            },
+            success: function (response) {
+                if (response.status) {
+                    // Show the success message from the response
+                    showMessage(response.message, 'success'); 
+
+                    // Redirect to the cart after 2 seconds
+                    setTimeout(function () {
+                        window.location.href = "<?= site_url('cart') ?>";
+                    }, 2000); // 2000ms = 2 seconds
+                } else {
+                    showMessage(response.message, 'error'); // If not success, show error message
+                }
+            },
+            error: function () {
+                showMessage('Something went wrong', 'error');
+            }
+        });
+    });
+
+    // Function to display the message
+    function showMessage(message, type) {
+        // Create message box
+        const messageBox = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert"></div>');
+        messageBox.text(message);
+        $('body').append(messageBox); // Add message box to body
+
+        // Automatically close the message box after 3 seconds
+        setTimeout(function () {
+            messageBox.alert('close'); // Close the alert
+        }, 3000); // 3000ms = 3 seconds
+    }
+});
+
+    </script>
 </body>
 
 </html>
