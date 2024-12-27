@@ -285,7 +285,7 @@
                     // Redirection after AJAX success
                     setTimeout(function () {
                         window.location.href = "<?= site_url('cart') ?>";  // Redirect to cart after 3 seconds
-                    }, 3000);
+                    }, 1000);
                 } else {
                     alert(response.message);
                 }

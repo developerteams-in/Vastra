@@ -68,7 +68,7 @@
         <ul class="list-unstyled d-flex align-items-center mb-0">
             <li><a href="/cart" class="text-decoration-none step-link text-black">BAG</a></li>
             <li><span class="mx-3 separator">---------</span><a href="/address" class="text-decoration-none step-link active">ADDRESS</a></li>
-            <li><span class="mx-3 separator">---------</span><a href="/checkout" class="text-decoration-none step-link text-black">PAYMENT</a></li>
+            <li><span class="mx-3 separator">---------</span><a href="/address" class="text-decoration-none step-link text-black">PAYMENT</a></li>
         </ul>
         <div class="d-flex align-items-center">
             <i class="bi bi-shield-check text-success fs-4 me-2"></i>

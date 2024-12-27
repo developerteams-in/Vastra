@@ -56,4 +56,5 @@ class Product_view extends BaseController
         // Handle the checkout logic here
         return view('checkout');
     }
+    
 }

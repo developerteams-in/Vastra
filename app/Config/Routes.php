@@ -126,3 +126,5 @@ $routes->get('/magazine', 'FooterController::Magazine');
 $routes->get('/beauty', 'FooterController::Beauty');
 $routes->get('/t_and_c', 'FooterController::T_and_C');
 $routes->get('/faq', 'FooterController::FAQ');
+
+

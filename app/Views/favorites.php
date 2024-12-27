@@ -140,7 +140,7 @@
                                     </p>
                                     <!-- Add to Cart and Buy Now Buttons -->
                                     <div class="card-btns">
-                                        <a href="<?= base_url('cart/add/' . $favorite['product_id']) ?>" class="btn btn-danger btn-cart">Add to Cart</a>
+                                    <a href="<?= site_url('product_view/' . $favorite['id']) ?>" class="btn btn-danger btn-cart">Add to Cart</a>
                                         <a href="<?= base_url('checkout/buy/' . $favorite['product_id']) ?>" class="btn btn-danger btn-buy">Buy Now</a>
                                     </div>
                                 </div>
