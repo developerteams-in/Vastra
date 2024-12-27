@@ -136,5 +136,13 @@ $routes->post('add_to_favorites', 'FavoritesController::addToFavorites');
 
 $routes->post('orders/cancel/(:num)', 'OrderController::cancelOrder/$1');
 
-
-
+// Footer Routes 
+$routes->get('/returns', 'FooterController::index');
+$routes->get('/shipping', 'FooterController::Shipping');
+$routes->get('/privacy-policy', 'FooterController::privacy');
+$routes->get('/customer-service', 'FooterController::CustomerService');
+$routes->get('/careers', 'FooterController::Careers');
+$routes->get('/magazine', 'FooterController::Magazine');
+$routes->get('/beauty', 'FooterController::Beauty');
+$routes->get('/t_and_c', 'FooterController::T_and_C');
+$routes->get('/faq', 'FooterController::FAQ');

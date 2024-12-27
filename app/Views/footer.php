@@ -23,21 +23,22 @@
                 <div class="col-md-2">
                     <h5 class="fs-6">CORPORATE INFO</h5>
                     <ul class="list-unstyled"style="font-size: 12px;">
-                        <li style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Career</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">About</a></li>
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Group</a></li>
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Press</a></li>
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Investor relations</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/careers" class="text-black text-decoration-none">Careers</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="/beauty" class="text-black text-decoration-none">Beauty</a></li>
+                        <li style="margin-bottom: 10px;"><a href="/magazine" class="text-black text-decoration-none">magazine</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="/faq" class="text-black text-decoration-none">FAQ</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="/t_and_c" class="text-black text-decoration-none">T&C</a></li>
+                     
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h5 class="fs-6">HELPS</h5>
                     <ul class="list-unstyled"style="font-size: 12px;gap: 15px;">
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none ">Customer service</a></li>
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Contact</a></li>
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Report a scam</a></li>
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Cookie Notice</a></li>
-                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Cookie Settings</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="/customer-service" class="text-black text-decoration-none ">Customer service</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="#" class="text-black text-decoration-none">Helps</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="/returns" class="text-black text-decoration-none">Return Policy</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="/shipping" class="text-black text-decoration-none">Shipping Policy</a></li>
+                        <li  style="margin-bottom: 10px;"><a href="/privacy-policy" class="text-black text-decoration-none">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 "style="font-size: 13px;">
@@ -48,5 +49,9 @@
                 </div>
             </div>
         </div>
+        <footer class="bg-light text-center py-3">
+    <p style="font-size:10px;">&copy; 2024 Vastra. All Rights Reserved.</p>
+</footer>
+
     </footer>
    
