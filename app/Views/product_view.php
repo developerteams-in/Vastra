@@ -14,55 +14,53 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* Center the custom alert message */
-.custom-alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    padding: 20px;
-    background-color: #dc3545;  /* Red for error messages */
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    text-align: center;
-    display: none;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #dc3545;  /* Red for error messages */
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
 
-.custom-alert.show {
-    display: block;
-    opacity: 1;
-}
+        .custom-alert.show {
+            display: block;
+            opacity: 1;
+        }
 
-.custom-alert.fade-out {
-    opacity: 0;
-    transition: opacity 1s ease-out;
-}
+        .custom-alert.fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
 
-        </style>
-    <style>
         /* Alert Styling */
         .alert {
             position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    padding: 20px;
-    background-color: #28a745; /* Red for error messages */
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    text-align: center;
-    display: none;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #28a745; /* Green for success messages */
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
         .alert.show {
@@ -203,12 +201,13 @@
                     </a>
                     <?php endif; ?>
                     <?php if (isset($user) && $user): ?>
-                    <button type="button" class="btn btn-danger me-3 add-to-cart" 
+                    <button type="button" class="btn btn-danger btn-buy-now add-to-cart" 
                         data-id="<?= esc($product['id']) ?>" 
                         data-name="<?= esc($product['productName']) ?>" 
                         data-price="<?= esc($product['productPrice']) ?>" 
                         data-quantity="1"
-                        data-image="<?= esc($product['productImage']) ?>">
+                        data-image="<?= esc($product['productImage']) ?>"
+                        data-size="M">
                         Buy Now
                     </button>
                     <?php else: ?>
@@ -290,9 +289,6 @@
                     alert(response.message);
                 }
             },
-            error: function () {
-                alert('Something went wrong');
-            }
         });
     });
 
@@ -303,9 +299,25 @@
         const size = $(this).text();
         $('#hidden-sizes').val(size);
     });
+
+    // Buy Now Button functionality
+    $('.btn-buy-now').click(function () {
+        const productSize = $('#hidden-sizes').val();  // Get selected size
+        if (!productSize) {
+            // Show alert if size is not selected
+            $('#custom-alert').addClass('show');
+            setTimeout(function () {
+                $('#custom-alert').removeClass('show');
+            }, 3000);
+            return;  // Prevent redirect if no size is selected
+        }
+
+        // Redirect to the address page if size is selected
+        window.location.href = '/address';  // Change '/address' to your actual address page URL
+    });
 });
 
-    </script>
+</script>
 
 </body>
 </html>

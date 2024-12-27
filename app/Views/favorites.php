@@ -80,7 +80,7 @@
         }
 
         .btn-cart,
-        .btn-buy {
+        .btn-buy-now {
             width: 48%;
             font-size: 0.75rem;
         }
@@ -228,7 +228,7 @@
                 }
             },
             error: function () {
-                showMessage('Something went wrong', 'error');
+                showMessage('');
             }
         });
     });
