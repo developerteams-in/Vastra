@@ -5,17 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-// $routes->get('/', 'Home::index'); 
 $routes->get('/register', 'Home::register');
 $routes->post('/register', 'Home::registerSubmit');
 $routes->get('/login', 'Home::login'); 
 $routes->post('/login', 'Home::loginSubmit');
-// $routes->get('/dashboard', 'Home::dashboard');
+
 $routes->get('/logout', 'Home::logout');
-// $routes->get('/home', 'Home::index'); // If your homepage is '/home'
 
-
-// $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/users/create', 'UserController::create');
 $routes->post('/users/store', 'UserController::store');
 $routes->get('/users/edit/(:num)', 'UserController::edit_user/$1');
@@ -28,14 +24,13 @@ $routes->get('/admin', 'Home::admin');
 // File: app/Config/Routes.php
 $routes->get('ladies', 'Ladies::showLadies');
 $routes->get('men', 'Men::showMen');
-// $routes->get('kids', 'Kids::showKids');
+
 $routes->get('sport', 'Sport::showSport');
 $routes->get('user_list', 'User_list::showUser_list');
-// $routes->get('add_products', 'Add_products::showAdd_products');
+
 
 
 // Routes for user and admin dashboards
-// $routes->get('/home', 'Home::index');
 $routes->post('dashboard/update-order-status', 'DashboardController::updateOrderStatus');
 
 
@@ -75,19 +70,9 @@ $routes->get('product_view', 'Product_view::showProduct_view/$1');
 $routes->get('/cart/remove/(:num)', 'CartController::remove/$1');  // Remove item from cart
 $routes->post('/cart/updateQuantity', 'CartController::updateQuantity'); // Update cart item quantity
 
-
-
 // payment routes 
 $routes->post('checkout/(:num)', 'CheckoutController::Showcheckout/$1');
-
-// $routes->get('checkout', 'CheckoutController::Showcheckout'); 
 $routes->post('checkoutcontroller/processPayment', 'CheckoutController::processPayment');
-
-
-// $routes->group('cart', function ($routes) {
-//     $routes->get('', 'CartController::index');
-//     $routes->post('add', 'CartController::add');
-// });
 $routes->group('cart', function ($routes) {
     $routes->get('', 'CartController::index'); // Load the main cart view
     $routes->post('add', 'CartController::add'); // Add items to cart
@@ -110,15 +95,12 @@ $routes->post('/checkout/process/(:num)', 'CheckoutController::processPayment/$1
 
 $routes->get('address', 'AddressController::address');  // List of addresses
 $routes->get('address/get/(:num)', 'AddressController::get/$1');
-
 $routes->get('address/create', 'AddressController::create');  // Create a new address form
 $routes->post('address/store', 'AddressController::store');  // Store a new address
 $routes->get('address/edit/(:num)', 'AddressController::edit/$1');  // Edit address
 $routes->post('address/update/(:segment)', 'AddressController::update/$1');
  // Update address
 $routes->delete('address/remove/(:num)', 'AddressController::removeAddress/$1');  // Remove address
-
-
 // Your order 
 $routes->get('orders', 'OrderController::index');
 $routes->post('orders/payment', 'OrderController::processPayment');
@@ -128,9 +110,7 @@ $routes->post('cart/clear', 'CartController::clearCart');  // Clear cart after p
 $routes->get('/favorites', 'FavoritesController::showFavorites');
 
 
-// $routes->post('/favorites/add/(:num)', 'FavoritesController::addFavorite/$1');
 $routes->get('/favorites/remove/(:num)', 'FavoritesController::removeFavorite/$1');
-// $routes->post('/add_to_favorites', 'FavoritesController::addToFavorites');
 $routes->get('get_user_favorites', 'FavoritesController::getUserFavorites');
 $routes->post('add_to_favorites', 'FavoritesController::addToFavorites');
 
